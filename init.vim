@@ -11,6 +11,7 @@ Plug 'fatih/vim-go'
 Plug 'deoplete-plugins/deoplete-go', {'do': 'make'}
 
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
+Plug 'mattn/emmet-vim'
 
 Plug '~/.fzf'
 
@@ -30,6 +31,7 @@ set number
 set cursorline
 set colorcolumn=80
 let g:loaded_matchparen=1
+let mapleader=" "
 
 " searching
 set incsearch
@@ -45,6 +47,12 @@ set autoindent
 set smartindent
 
 " plugin specifics
+" fzf
+let g:fzf_nvim_statusline = 0
+nnoremap <silent> <C-p> :FZF<CR>
+
+" emmet
+let g:user_emmet_leader_key=','
 
 " deoplete 
 let g:deoplete#enable_at_startup = 1
