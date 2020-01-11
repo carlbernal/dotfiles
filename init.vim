@@ -2,16 +2,22 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'bling/vim-airline'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'tomasr/molokai'
 
+Plug 'mattn/emmet-vim' " html css shortcuts
+
+" go 
 Plug 'fatih/vim-go'
 Plug 'deoplete-plugins/deoplete-go', {'do': 'make'}
 
-Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
-Plug 'mattn/emmet-vim'
+" js
+Plug 'dense-analysis/ale'
+Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'} " js autocmp
+Plug 'pangloss/vim-javascript' " js syntax highlight
 
 Plug '~/.fzf'
 
@@ -30,6 +36,7 @@ set laststatus=2
 set number
 set cursorline
 set colorcolumn=80
+set mouse=a " mouses scroll support 
 let g:loaded_matchparen=1
 let mapleader=" "
 
@@ -56,6 +63,7 @@ let g:user_emmet_leader_key=','
 
 " deoplete 
 let g:deoplete#enable_at_startup = 1
+" use tab for completion cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
@@ -71,3 +79,7 @@ let g:deoplete#sources#ternjs#depths=1
 let g:deoplete#sources#ternjs#case_insensitive=1
 let g:deoplete#sources#ternjs#include_keywords=1
 
+" ale settings
+let b:ale_fixers = ['eslint']
+let g:ale_fix_on_save = 1
+let g:airline#extensions#ale#enabled = 1
