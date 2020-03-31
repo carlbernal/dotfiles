@@ -24,6 +24,7 @@ Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'terryma/vim-smooth-scroll'
+Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
 Plug 'dense-analysis/ale' " linting engine
 Plug 'tpope/vim-fugitive' " git plugin
@@ -89,7 +90,9 @@ noremap <silent><S-k> :call smooth_scroll#up(&scroll/2, 12, 1)<CR>
 let g:user_emmet_leader_key=','
 
 " ale settings
-let b:ale_fixers = ['eslint']
+let b:ale_fixers = {
+\	'javascript': ['prettier', 'eslint'] 
+\}
 
 let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
