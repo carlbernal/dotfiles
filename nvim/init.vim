@@ -28,6 +28,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
 Plug 'dense-analysis/ale' " linting engine
 Plug 'tpope/vim-fugitive' " git plugin
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " js
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
@@ -100,9 +102,13 @@ let g:airline#extensions#ale#enabled = 1
 " deoplete 
 let g:deoplete#enable_at_startup = 1
 
-" use tab for completion cycle for deoplete
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+
+" ultisnips
+let g:UltiSnipsExpandTrigger='<Leader><tab>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>' " next
+let g:UltiSnipsJumpBackwardTrigger='<C-k>' " prev
 
 " js ternjs settings
 let g:deoplete#sources#ternjs#tern_bin = '/home/carlbernal/.nvm/versions/node/v13.3.0/lib/node_modules'
