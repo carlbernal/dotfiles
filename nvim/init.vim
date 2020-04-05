@@ -51,7 +51,7 @@ set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 "" basics
-let mapleader = "\<space>"
+" let mapleader = "\<space>"
 let g:loaded_matchparen=1 " ignore paired paren highlight
 set nowrap
 set number relativenumber
