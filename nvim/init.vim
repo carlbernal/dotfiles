@@ -35,6 +35,12 @@ Plug 'honza/vim-snippets'
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'pangloss/vim-javascript'
 
+" python
+Plug 'davidhalter/jedi-vim'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'vim-python/python-syntax'
+Plug 'Vimjas/vim-python-pep8-indent'
+
 call plug#end()
 
 "" looks
@@ -57,7 +63,7 @@ set nowrap
 set number relativenumber
 
 set hidden
-set mouse=a 
+set mouse=a
 set clipboard+=unnamedplus
 
 " searching
@@ -92,15 +98,21 @@ noremap <silent><S-k> :call smooth_scroll#up(&scroll/2, 12, 1)<CR>
 let g:user_emmet_leader_key=','
 
 " ale settings
-let b:ale_fixers = {
-\	'javascript': ['prettier', 'eslint'] 
-\}
+" let g:ale_fixers = {
+" \	'*': ['remove_trailing_lines', 'trim_whitespace'],
+" \}
 
-let g:ale_fix_on_save = 1
+" let g:ale_fixers = {
+" \	'python': ['black', 'isort'],
+" \}
+"
+" let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
 
-" deoplete 
+" deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay=0
+let g:deoplete#auto_refresh_delay=0
 
 inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
@@ -117,3 +129,7 @@ let g:deoplete#sources#ternjs#types=1
 let g:deoplete#sources#ternjs#depths=1
 let g:deoplete#sources#ternjs#case_insensitive=1
 let g:deoplete#sources#ternjs#include_keywords=1
+
+" python
+let g:python_highlight_all = 1
+let g:jedi#completions_enabled = 0
