@@ -4,6 +4,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " dependency
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kana/vim-textobj-user'
+Plug 'dense-analysis/ale'
+Plug 'mattn/emmet-vim'
+Plug 'psliwka/vim-smoothie'
 
 " visual plugins
 Plug 'tomasr/molokai'
@@ -14,20 +17,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
-
 " custom text objects
 Plug 'kana/vim-textobj-entire'
 Plug 'michaeljsmith/vim-indent-object'
 
-" custom functions
+" searching
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'terryma/vim-smooth-scroll'
-Plug 'tpope/vim-unimpaired'
-Plug 'mattn/emmet-vim'
-Plug 'dense-analysis/ale' " linting engine
-Plug 'tpope/vim-fugitive' " git plugin
+
+" code snippet
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -36,8 +34,8 @@ Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 Plug 'pangloss/vim-javascript'
 
 " python
-Plug 'davidhalter/jedi-vim'
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 
@@ -47,21 +45,20 @@ call plug#end()
 filetype plugin indent on
 syntax on
 colorscheme molokai
-let g:molokai_original = 1
+let g:molokai_original=1
 set termguicolors
 set laststatus=2
 set cursorline
 set colorcolumn=80
 
+" visualize whitespace
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 "" basics
-" let mapleader = "\<space>"
 let g:loaded_matchparen=1 " ignore paired paren highlight
 set nowrap
 set number relativenumber
-
 set hidden
 set mouse=a
 set clipboard+=unnamedplus
@@ -76,7 +73,6 @@ set smartcase
 set smarttab
 set autoindent
 set smartindent
-
 set shiftwidth=4
 set tabstop=4
 
@@ -90,30 +86,21 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:fzf_nvim_statusline=0
 nnoremap <silent><C-p> :FZF<CR>
 
-" ctrl + j/k as smooth scroll
-noremap <silent><S-j> :call smooth_scroll#down(&scroll/2, 12, 1)<CR>
-noremap <silent><S-k> :call smooth_scroll#up(&scroll/2, 12, 1)<CR>
-
 " emmet
 let g:user_emmet_leader_key=','
 
-" ale settings
-" let g:ale_fixers = {
-" \	'*': ['remove_trailing_lines', 'trim_whitespace'],
-" \}
+" smoothie
+let g:smoothie_no_default_mappings=1
+silent! nmap <unique> <S-j> <Plug>(SmoothieDownwards)
+silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
 
-" let g:ale_fixers = {
-" \	'python': ['black', 'isort'],
-" \}
-"
-" let g:ale_fix_on_save = 1
+" ale
 let g:airline#extensions#ale#enabled = 1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay=0
 let g:deoplete#auto_refresh_delay=0
-
 inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
