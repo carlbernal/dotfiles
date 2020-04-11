@@ -1,3 +1,4 @@
 alias v=nvim
 alias c=clear
 alias t=tmux
+alias ct='ctags -R -f ./.git/tags .'
