@@ -22,6 +22,29 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
+" code snippet
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" language supports
+Plug 'vim-python/python-syntax'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'fatih/vim-go'
+
+" autocomplete client
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" linting client
+Plug 'dense-analysis/ale'
+
+" language server
+Plug 'autozimu/LanguageClient-neovim', {
+			\ 'branch': 'next',
+			\ 'do': 'bash install.sh',
+			\ }
+
 call plug#end()
 
 "" looks
@@ -61,9 +84,16 @@ set tabstop=4
 
 "" plugin settings
 
+" python
+let g:python_highlight_all = 1
+
+" emmet
+let g:user_emmet_leader_key=','
+
 " vim airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#ale#enabled = 1
 
 " fzf
 let g:fzf_nvim_statusline = 0
@@ -74,5 +104,39 @@ let g:smoothie_no_default_mappings = 1
 silent! nmap <unique> <S-j> <Plug>(SmoothieDownwards)
 silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
 
-" emmet
-let g:user_emmet_leader_key=','
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay=0
+let g:deoplete#auto_refresh_delay=0
+inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+
+" ultisnips
+let g:UltiSnipsExpandTrigger='<Leader><tab>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>' " next
+let g:UltiSnipsJumpBackwardTrigger='<C-k>' " prev
+
+" ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_tsserver_autoimport = 1
+let g:ale_linters = {
+			\ 'javascript': ['eslint'],
+			\ 'typescript': ['tsserver'],
+			\ 'python': ['pylint'],
+			\ 'go': ['golangci-lint'],
+			\}
+let g:ale_fixers = {
+			\ 'javascript': ['eslint'],
+			\ 'typescript': ['prettier'],
+			\ 'python': ['autopep8', 'isort'],
+			\ 'go': ['gofmt', 'goimports'],
+			\}
+let g:ale_fix_on_save = 1
+
+" language server
+let g:LanguageClient_serverCommands = {
+			\ 'go': ['gopls'],
+			\ 'python': ['pyls'],
+			\ 'typescript': ['tsserver'],
+			\ }
+let g:LanguageClient_diagnosticsEnable = 0
