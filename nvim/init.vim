@@ -1,8 +1,7 @@
-"" plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
-" dependency
 Plug 'psliwka/vim-smoothie'
+Plug 'mattn/emmet-vim'
 
 " visual plugins
 Plug 'tomasr/molokai'
@@ -60,17 +59,20 @@ set smartindent
 set shiftwidth=4
 set tabstop=4
 
-"" plugin specifics
+"" plugin settings
 
 " vim airline
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " fzf
-let g:fzf_nvim_statusline=0
+let g:fzf_nvim_statusline = 0
 nnoremap <silent><C-p> :FZF<CR>
 
 " smoothie
-let g:smoothie_no_default_mappings=1
+let g:smoothie_no_default_mappings = 1
 silent! nmap <unique> <S-j> <Plug>(SmoothieDownwards)
 silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
+
+" emmet
+let g:user_emmet_leader_key=','
