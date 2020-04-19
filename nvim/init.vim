@@ -32,6 +32,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go'
+Plug 'elzr/vim-json'
 
 " autocomplete client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -44,6 +45,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 			\ 'branch': 'next',
 			\ 'do': 'bash install.sh',
 			\ }
+Plug 'Shougo/echodoc.vim'
 
 call plug#end()
 
@@ -68,6 +70,9 @@ set number relativenumber
 set hidden
 set mouse=a
 set clipboard+=unnamedplus
+set completeopt-=preview
+set cmdheight=2
+set signcolumn=yes
 
 " searching
 set incsearch
@@ -140,3 +145,7 @@ let g:LanguageClient_serverCommands = {
 			\ 'typescript': ['tsserver'],
 			\ }
 let g:LanguageClient_diagnosticsEnable = 0
+
+" echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'signature'
