@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'psliwka/vim-smoothie'
 Plug 'mattn/emmet-vim'
+Plug 'preservim/nerdtree'
 
 " visual plugins
 Plug 'tomasr/molokai'
@@ -108,6 +109,9 @@ nnoremap <silent><C-p> :FZF<CR>
 let g:smoothie_no_default_mappings = 1
 silent! nmap <unique> <S-j> <Plug>(SmoothieDownwards)
 silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
+
+" nerdtree
+nmap <leader>f :NERDTreeToggle<cr>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
