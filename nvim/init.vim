@@ -112,6 +112,7 @@ silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
 
 " nerdtree
 nmap <leader>f :NERDTreeToggle<cr>
+let NERDTreeMinimalUI=1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -134,6 +135,7 @@ let g:ale_linters = {
 			\ 'python': ['pylint'],
 			\ 'go': ['golangci-lint'],
 			\}
+
 let g:ale_fixers = {
 			\ 'javascript': ['eslint'],
 			\ 'typescript': ['prettier'],
@@ -147,9 +149,21 @@ let g:LanguageClient_serverCommands = {
 			\ 'go': ['gopls'],
 			\ 'python': ['pyls'],
 			\ 'typescript': ['tsserver'],
+			\ 'javascript': ['javascript-typescript-stdio'],
 			\ }
+
+" \ 'typescript': ['tsconfig.json'],
+let g:LanguageClient_rootMarkers = {
+			\ 'javascript': ['jsconfig.json'],
+			\ }
+
 let g:LanguageClient_diagnosticsEnable = 0
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
+
+" custom shorutcuts
+nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>] :bn<CR>
+nnoremap <leader>[ :bp<CR>
