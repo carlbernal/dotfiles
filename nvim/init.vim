@@ -3,6 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'psliwka/vim-smoothie'
 Plug 'mattn/emmet-vim'
 Plug 'preservim/nerdtree'
+Plug 'jiangmiao/auto-pairs'
 
 " visual plugins
 Plug 'tomasr/molokai'
@@ -32,8 +33,9 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go',
 Plug 'elzr/vim-json'
+Plug 'MaxMEllon/vim-jsx-pretty'
 
 " autocomplete client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -87,6 +89,9 @@ set autoindent
 set smartindent
 set shiftwidth=4
 set tabstop=4
+
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 
 "" plugin settings
 
@@ -150,6 +155,8 @@ let g:LanguageClient_serverCommands = {
 			\ 'python': ['pyls'],
 			\ 'typescript': ['tsserver'],
 			\ 'javascript': ['javascript-typescript-stdio'],
+			\ 'javascript.jsx': ['javascript-typescript-stdio'],
+			\ 'javascript.tsx': ['javascript-typescript-stdio'],
 			\ }
 
 " \ 'typescript': ['tsconfig.json'],
