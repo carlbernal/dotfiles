@@ -8,6 +8,8 @@ Plug 'jiangmiao/auto-pairs'
 " visual plugins
 Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 
 " custom verbs
 Plug 'tpope/vim-repeat'
@@ -29,13 +31,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " language supports
-Plug 'vim-python/python-syntax'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot',
 Plug 'fatih/vim-go',
-Plug 'elzr/vim-json'
-Plug 'MaxMEllon/vim-jsx-pretty'
 
 " autocomplete client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -105,6 +102,8 @@ let g:user_emmet_leader_key=','
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#ale#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='luna'
 
 " fzf
 let g:fzf_nvim_statusline = 0
