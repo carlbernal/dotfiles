@@ -34,10 +34,12 @@ Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot',
 Plug 'fatih/vim-go',
 
-" autocomplete client
+Plug 'calviken/vim-gdscript3'
+
+" autocomplete engine
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" linting client
+" linting engine
 Plug 'dense-analysis/ale'
 
 " language server
@@ -46,6 +48,10 @@ Plug 'autozimu/LanguageClient-neovim', {
 			\ 'do': 'bash install.sh',
 			\ }
 Plug 'Shougo/echodoc.vim'
+
+" git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -89,6 +95,7 @@ set tabstop=4
 
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 
 "" plugin settings
 
@@ -110,25 +117,26 @@ let g:fzf_nvim_statusline = 0
 nnoremap <silent><C-p> :FZF<CR>
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+" create floating window for fzf
 function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, '&signcolumn', 'no')
- 
-  let height = float2nr(15)
-  let width = float2nr(80)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = float2nr(height / 2)
- 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
- 
-  call nvim_open_win(buf, v:true, opts)
+	let buf = nvim_create_buf(v:false, v:true)
+	call setbufvar(buf, '&signcolumn', 'no')
+
+	let height = float2nr(15)
+	let width = float2nr(80)
+	let horizontal = float2nr((&columns - width) / 2)
+	let vertical = float2nr(height / 2)
+
+	let opts = {
+				\ 'relative': 'editor',
+				\ 'row': vertical,
+				\ 'col': horizontal,
+				\ 'width': width,
+				\ 'height': height,
+				\ 'style': 'minimal'
+				\ }
+
+	call nvim_open_win(buf, v:true, opts)
 endfunction
 
 " smoothie
@@ -193,5 +201,5 @@ let g:echodoc#type = 'signature'
 
 " custom shorutcuts
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <leader>] :bn<CR>
-nnoremap <leader>[ :bp<CR>
+nnoremap <C-k> :bn<CR>
+nnoremap <C-j> :bp<CR>
