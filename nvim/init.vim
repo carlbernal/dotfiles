@@ -10,6 +10,7 @@ Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Yggdroot/indentLine'
 
 " custom verbs
 Plug 'tpope/vim-repeat'
@@ -29,25 +30,17 @@ Plug 'junegunn/fzf.vim'
 " code snippet
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'justinmk/vim-sneak'
 
 " language supports
 Plug 'sheerun/vim-polyglot',
 Plug 'fatih/vim-go',
-
-Plug 'calviken/vim-gdscript3'
 
 " autocomplete engine
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " linting engine
 Plug 'dense-analysis/ale'
-
-" language server
-Plug 'autozimu/LanguageClient-neovim', {
-			\ 'branch': 'next',
-			\ 'do': 'bash install.sh',
-			\ }
-Plug 'Shougo/echodoc.vim'
 
 " git
 Plug 'airblade/vim-gitgutter'
@@ -68,6 +61,7 @@ set colorcolumn=80
 " visualize whitespace
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+let g:indentLine_char_list = ['⎸']
 
 "" basics
 let g:loaded_matchparen=1 " ignore paired paren highlight
@@ -77,6 +71,7 @@ set hidden
 set mouse=a
 set clipboard+=unnamedplus
 set completeopt-=preview
+set completeopt=noinsert,menuone,noselect
 set cmdheight=2
 set signcolumn=yes
 
@@ -96,6 +91,7 @@ set tabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 
 "" plugin settings
 
@@ -141,8 +137,11 @@ endfunction
 
 " smoothie
 let g:smoothie_no_default_mappings = 1
-silent! nmap <unique> <S-j> <Plug>(SmoothieDownwards)
-silent! nmap <unique> <S-k> <Plug>(SmoothieUpwards)
+silent! nmap <unique> <C-j> <Plug>(SmoothieDownwards)
+silent! nmap <unique> <C-k> <Plug>(SmoothieUpwards)
+
+" sneak kana mode
+" let g:sneak#label = 1
 
 " nerdtree
 nmap <leader>f :NERDTreeToggle<cr>
@@ -152,13 +151,18 @@ let NERDTreeMinimalUI=1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay=0
 let g:deoplete#auto_refresh_delay=0
+call deoplete#custom#option({
+			\ "min_pattern_length": 0,
+			\ "smartcase": 1,
+			\ })
+
 inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " ultisnips
 let g:UltiSnipsExpandTrigger='<Leader><tab>'
-let g:UltiSnipsJumpForwardTrigger='<C-j>' " next
-let g:UltiSnipsJumpBackwardTrigger='<C-k>' " prev
+let g:UltiSnipsJumpForwardTrigger='<Leader>j' " next
+let g:UltiSnipsJumpBackwardTrigger='<Leader>k' " prev
 
 " ale
 let g:airline#extensions#ale#enabled = 1
@@ -178,28 +182,8 @@ let g:ale_fixers = {
 			\}
 let g:ale_fix_on_save = 1
 
-" language server
-let g:LanguageClient_serverCommands = {
-			\ 'go': ['gopls'],
-			\ 'python': ['pyls'],
-			\ 'typescript': ['tsserver'],
-			\ 'javascript': ['javascript-typescript-stdio'],
-			\ 'javascript.jsx': ['javascript-typescript-stdio'],
-			\ 'javascript.tsx': ['javascript-typescript-stdio'],
-			\ }
-
-" \ 'typescript': ['tsconfig.json'],
-let g:LanguageClient_rootMarkers = {
-			\ 'javascript': ['jsconfig.json'],
-			\ }
-
-let g:LanguageClient_diagnosticsEnable = 0
-
-" echodoc
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
-
 " custom shorutcuts
+nnoremap <silent><C-S> :update<CR>
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <C-k> :bn<CR>
-nnoremap <C-j> :bp<CR>
+nnoremap <C-l> :bn<CR>
+nnoremap <C-h> :bp<CR>

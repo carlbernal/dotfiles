@@ -1,0 +1,33 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "tab",
+        "command": "selectNextQuickFix",
+        "when": "editorFocus && quickFixWidgetVisible"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevQuickFix",
+        "when": "editorFocus && quickFixWidgetVisible"
+    },
+    {
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorTextFocus"
+    },
+]

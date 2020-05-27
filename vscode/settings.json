@@ -1,0 +1,45 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "window.zoomLevel": 1,
+    "editor.lineNumbers": "relative",
+    "vim.replaceWithRegister": true,
+    "keyboard.dispatch": "keyCode",
+    "editor.fontSize": 13,
+    "editor.smoothScrolling": true,
+    "vim.statusBarColorControl": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "vim.sneak": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "$HOME/.vimrc",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.editor.enablePreview": false,
+    "vim.scroll": 15,
+    "editor.fontFamily": "'Cousine Nerd Font'",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "editor.rulers": [
+        80
+    ],
+    "vim.useSystemClipboard": true,
+    "java.semanticHighlighting.enabled": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "editor.minimap.maxColumn": 80,
+    "editor.minimap.scale": 2,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Dracula At Night",
+    "editor.autoClosingBrackets": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "python.jediEnabled": false,
+}

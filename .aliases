@@ -2,5 +2,5 @@ alias v=nvim
 alias c=clear
 alias t=tmux
 alias ct='ctags -R -f ./.git/tags .'
-alias l='ls -1a'
-alias ll='ls -R'
+alias l='ls -1'
+alias ll='tree -L 2'
