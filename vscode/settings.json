@@ -9,9 +9,9 @@
     "editor.smoothScrolling": true,
     "vim.statusBarColorControl": true,
     "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+      "statusBar.background": "#005f5f",
+      "statusBar.noFolderBackground": "#005f5f",
+      "statusBar.debuggingBackground": "#005f5f"
     },
     "vim.sneak": true,
     "vim.sneakUseIgnorecaseAndSmartcase": true,
@@ -42,4 +42,6 @@
     "editor.autoClosingBrackets": "always",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "python.jediEnabled": false,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
 }
