@@ -1,0 +1,17 @@
+
+" settings
+set showmode
+set number
+set relativenumber
+
+" emulated plugins
+set surround
+set commentary
+set ReplaceWithRegister
+set textobj-entire
+
+" remaps
+nnoremap <C-k> <C-u>
+nnoremap <C-j> <C-d>
+nnoremap <silent><C-s> :update<CR>
+map =G :action ReformatCode<CR>
