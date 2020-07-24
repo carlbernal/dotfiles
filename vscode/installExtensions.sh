@@ -1,31 +1,13 @@
 #!/bin/bash
 
-code --install-extension Angular.ng-template
-code --install-extension bceskavich.theme-dracula-at-night
 code --install-extension christian-kohler.npm-intellisense
 code --install-extension christian-kohler.path-intellisense
-code --install-extension Dart-Code.dart-code
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
-code --install-extension dracula-theme.theme-dracula
-code --install-extension dsznajder.es7-react-js-snippets
 code --install-extension eamodio.gitlens
-code --install-extension geequlim.godot-tools
+code --install-extension esbenp.prettier-vscode
 code --install-extension mgmcdermott.vscode-language-babel
-code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-python.python
-code --install-extension ms-vscode.Go
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension PKief.material-icon-theme
-code --install-extension redhat.java
-code --install-extension ritwickdey.LiveServer
-code --install-extension syler.sass-indented
-code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension vscjava.vscode-java-debug
-code --install-extension vscjava.vscode-java-dependency
-code --install-extension vscjava.vscode-java-pack
-code --install-extension vscjava.vscode-java-test
-code --install-extension vscjava.vscode-maven
 code --install-extension vscodevim.vim
-code --install-extension xabikos.JavaScriptSnippets
