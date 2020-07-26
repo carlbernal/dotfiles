@@ -10,4 +10,5 @@ code --install-extension mgmcdermott.vscode-language-babel
 code --install-extension ms-python.python
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension PKief.material-icon-theme
+code --install-extension trixnz.vscode-lua
 code --install-extension vscodevim.vim
