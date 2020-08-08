@@ -1,46 +1,59 @@
 {
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 1.4,
+  "keyboard.dispatch": "keyCode",
+  "window.titleBarStyle": "custom",
   "update.mode": "start",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
+  "extensions.ignoreRecommendations": true,
   "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
+  "editor.autoClosingBrackets": "always",
   "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "'Cousine Nerd Font Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "editor.fontSize": 13,
   "terminal.integrated.fontSize": 13,
-  "editor.tabSize": 2,
   "editor.rulers": [80],
+  "editor.tabSize": 2,
   "eslint.format.enable": true,
   "editor.formatOnSave": true,
+  // hidden files and folders
   "files.exclude": {
+    // ide settings
     "**/.classpath": true,
     "**/.factorypath": true,
     "**/.idea": true,
     "**/.project": true,
     "**/.settings": true,
     "**/.tmp": true,
-    "**/node_modules": true
+    // node
+    "**/node_modules": true,
+    // python
+    "**/__pycache__": true,
+    "**/.venv": true
   },
-  "editor.autoClosingBrackets": "always",
+  // vim
+  "editor.lineNumbers": "relative",
   "editor.smoothScrolling": true,
   "editor.cursorBlinking": "solid",
   "editor.minimap.enabled": false,
-  "editor.lineNumbers": "relative",
   "vim.replaceWithRegister": true,
   "vim.useSystemClipboard": true,
   "vim.foldfix": true,
   "vim.handleKeys": {
     "<C-w>": false
   },
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "extensions.ignoreRecommendations": true,
-  "keyboard.dispatch": "keyCode",
-  "python.defaultInterpreterPath": "/usr/bin/python",
-  "editor.fontFamily": "'Cousine Nerd Font Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  // prettier
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  // emmet
+  "emmet.includeLanguages": {
+    // jsx
+    "javascript": "javascriptreact"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }

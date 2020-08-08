@@ -1,8 +1,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
+"" essentials"
+
 " misc
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'psliwka/vim-smoothie'
 
 " visual
 Plug 'vim-airline/vim-airline'
@@ -23,6 +26,8 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " language support
 Plug 'sheerun/vim-polyglot'
+
+"" optionals"
 
 " linting engine
 Plug 'dense-analysis/ale'
@@ -52,6 +57,7 @@ set termguicolors
 set guicursor= 
 set colorcolumn=80
 set cursorline
+set cmdheight=2
 
 " searching
 set incsearch
@@ -85,19 +91,17 @@ let g:airline_theme='luna'
 
 " fzf
 let g:fzf_nvim_statusline=0
+
+" fzf window
 nnoremap <silent><C-p> :FZF<CR>
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-" fzf window implementation
 function! FloatingFZF()
 	let buf = nvim_create_buf(v:false, v:true)
 	call setbufvar(buf, '&signcolumn', 'no')
-
 	let height = float2nr(15)
 	let width = float2nr(80)
 	let horizontal = float2nr((&columns - width) / 2)
 	let vertical = float2nr(height / 2)
-
 	let opts = {
 				\ 'relative': 'editor',
 				\ 'row': vertical,
@@ -106,24 +110,24 @@ function! FloatingFZF()
 				\ 'height': height,
 				\ 'style': 'minimal'
 				\ }
-
 	call nvim_open_win(buf, v:true, opts)
 endfunction
 
 " ale
 let g:ale_linters = {
-			\ 'python': ['pylint'],
+			\ 'python': ['flake8'],
 			\ 'sh': ['shellcheck'],
 			\ 'json': ['jq'],
 			\ 'javascript': ['tsserver'],
 			\ 'typescript': ['tsserver'],
 			\}
 let g:ale_fixers = {
+			\ 'python': ['autopep8', 'isort'],
 			\ 'javascript': ['prettier'],
 			\ 'typescript': ['prettier'],
-			\ 'python': ['autopep8', 'isort'],
 			\}
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
+nmap == :ALEFix<CR>
 let g:ale_python_auto_pipenv = 1
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
@@ -154,7 +158,6 @@ endif
 
 " use preview window for documentation
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
 	if (index(['vim','help'], &filetype) >= 0)
 		execute 'h '.expand('<cword>')
@@ -164,9 +167,10 @@ function! s:show_documentation()
 endfunction
 
 " coc shortcuts
-nmap <leader>rn <Plug>(coc-rename)
+nmap R <Plug>(coc-rename)
 
 """ Custom shortcuts
-nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <C-s> :update<CR>
+nnoremap <C-w> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>

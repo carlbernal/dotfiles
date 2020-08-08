@@ -1,5 +1,4 @@
-
-# Path to your oh-my-zsh installation.
+# path to oh-my-zsh installation.
 export ZSH="/home/carl/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
@@ -8,10 +7,10 @@ plugins=(git colored-man-pages zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-# Aliases
+# aliases
 source ~/Dotfiles/.aliases
 
-# Python3 bin
+# python3 --user bin
 export PATH=$HOME/.local/bin:$PATH
 
 # personal bin

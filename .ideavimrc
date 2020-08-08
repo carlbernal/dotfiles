@@ -1,17 +1,49 @@
-
-" settings
-set showmode
-set number
-set relativenumber
-
 " emulated plugins
 set surround
 set commentary
 set ReplaceWithRegister
 set textobj-entire
 
-" remaps
-nnoremap <C-k> <C-u>
-nnoremap <C-j> <C-d>
-nnoremap <silent><C-s> :update<CR>
-map =G :action ReformatCode<CR>
+" basics
+set number
+set relativenumber
+set clipboard+=unnamed
+
+" search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" intellij setting
+set ideajoin
+set visualbell
+set noerrorbells
+
+" intellij keymaps
+nmap == :action ReformatCode<cr>
+nmap <c-w> :action CloseContent<cr>
+nmap <c-l> :action NextTab<cr>
+nmap <c-h> :action PreviousTab<cr>
+nmap <c-p> :action RecentFiles<cr>
+
+nmap gd :action GotoDeclaration<cr>
+nmap gf :action GotoFile<cr>
+nmap gs :action GotoSymbol<cr>
+nmap gc :action GotoClass<cr>
+nmap gt :action GotoTest<cr>
+nmap gi :action GotoImplementation<cr>
+
+nmap <s-m> :action GotoNextError<cr>
+nmap <s-n> :action GotoPreviousError<cr>
+
+nmap R :action RenameElement<cr>
+nmap U :action FindUsages<cr>
+
+nmap <leader>r :action Run<cr>
+nmap <leader>d :action Debug<cr>
+nmap <leader>b :action ToggleLineBreakpoint<cr>
+nmap <leader>s :action Stop<cr>
+
+nmap <leader>rc :action RunClass<cr>
+nmap <leader>dc :action DebugClass<cr>
