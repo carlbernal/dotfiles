@@ -34,13 +34,15 @@ nmap gs :action GotoSymbol<cr>
 nmap gt :action GotoTest<cr>
 nmap gi :action GotoImplementation<cr>
 
-nmap <s-m> :action GotoNextError<cr>
-nmap <s-n> :action GotoPreviousError<cr>
+nmap M :action GotoNextError<cr>
+nmap N :action GotoPreviousError<cr>
 
 nmap R :action RenameElement<cr>
 nmap U :action FindUsages<cr>
 
-nmap <s-b> :action ToggleLineBreakpoint<cr>
-nmap <s-1> :action Run<cr>
-nmap <s-2> :action Debug<cr>
-nmap <s-s> :action Stop<cr>
+nmap ! :action Run<cr>
+nmap @ :action Debug<cr>
+nmap S :action Stop<cr>
+nmap B :action ToggleLineBreakpoint<cr>
+
+nmap <c-s-t> :action ReopenClosedTab<cr>
