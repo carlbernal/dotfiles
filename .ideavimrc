@@ -19,6 +19,7 @@ set smartcase
 set ideajoin
 set visualbell
 set noerrorbells
+set showmode
 
 " intellij keymaps
 nmap == :action ReformatCode<cr>
@@ -30,7 +31,6 @@ nmap <c-p> :action RecentFiles<cr>
 nmap gd :action GotoDeclaration<cr>
 nmap gf :action GotoFile<cr>
 nmap gs :action GotoSymbol<cr>
-nmap gc :action GotoClass<cr>
 nmap gt :action GotoTest<cr>
 nmap gi :action GotoImplementation<cr>
 
@@ -40,10 +40,7 @@ nmap <s-n> :action GotoPreviousError<cr>
 nmap R :action RenameElement<cr>
 nmap U :action FindUsages<cr>
 
-nmap <leader>r :action Run<cr>
-nmap <leader>d :action Debug<cr>
-nmap <leader>b :action ToggleLineBreakpoint<cr>
-nmap <leader>s :action Stop<cr>
-
-nmap <leader>rc :action RunClass<cr>
-nmap <leader>dc :action DebugClass<cr>
+nmap <s-b> :action ToggleLineBreakpoint<cr>
+nmap <s-1> :action Run<cr>
+nmap <s-2> :action Debug<cr>
+nmap <s-s> :action Stop<cr>

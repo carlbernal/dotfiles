@@ -126,7 +126,6 @@ let g:ale_fixers = {
 			\ 'javascript': ['prettier'],
 			\ 'typescript': ['prettier'],
 			\}
-" let g:ale_fix_on_save = 1
 nmap == :ALEFix<CR>
 let g:ale_python_auto_pipenv = 1
 nmap <silent> <C-m> <Plug>(ale_next_wrap)

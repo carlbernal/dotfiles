@@ -3,7 +3,7 @@ export ZSH="/home/carl/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git colored-man-pages zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git colored-man-pages zsh-syntax-highlighting zsh-autosuggestions vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
