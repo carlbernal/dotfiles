@@ -3,6 +3,7 @@ set surround
 set commentary
 set ReplaceWithRegister
 set textobj-entire
+set highlightedyank
 
 " basics
 set number
@@ -22,27 +23,27 @@ set noerrorbells
 set showmode
 
 " intellij keymaps
-nmap == :action ReformatCode<cr>
-nmap <c-w> :action CloseContent<cr>
-nmap <c-l> :action NextTab<cr>
-nmap <c-h> :action PreviousTab<cr>
-nmap <c-p> :action RecentFiles<cr>
+nnoremap == :action ReformatCode<cr>
+nnoremap <c-w> :action CloseContent<cr>
+nnoremap <c-l> :action NextTab<cr>
+nnoremap <c-h> :action PreviousTab<cr>
+nnoremap <c-p> :action SearchEverywhere<cr>
 
-nmap gd :action GotoDeclaration<cr>
-nmap gf :action GotoFile<cr>
-nmap gs :action GotoSymbol<cr>
-nmap gt :action GotoTest<cr>
-nmap gi :action GotoImplementation<cr>
+nnoremap gd :action GotoDeclaration<cr>
+nnoremap gf :action GotoFile<cr>
+nnoremap gs :action GotoSymbol<cr>
+nnoremap gt :action GotoTest<cr>
+nnoremap gi :action GotoImplementation<cr>
 
-nmap M :action GotoNextError<cr>
-nmap N :action GotoPreviousError<cr>
+nnoremap M :action GotoNextError<cr>
+nnoremap N :action GotoPreviousError<cr>
 
-nmap R :action RenameElement<cr>
-nmap U :action FindUsages<cr>
+nnoremap R :action RenameElement<cr>
+nnoremap U :action FindUsages<cr>
 
-nmap ! :action Run<cr>
-nmap @ :action Debug<cr>
-nmap S :action Stop<cr>
-nmap B :action ToggleLineBreakpoint<cr>
+nnoremap ! :action Run<cr>
+nnoremap @ :action Debug<cr>
+nnoremap S :action Stop<cr>
+nnoremap B :action ToggleLineBreakpoint<cr>
 
-nmap <c-s-t> :action ReopenClosedTab<cr>
+nnoremap <c-s-t> :action ReopenClosedTab<cr>
