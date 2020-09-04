@@ -8,10 +8,11 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'psliwka/vim-smoothie'
 
 " visual
-Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tomasr/molokai'
 Plug 'doums/darcula'
+Plug 'joshdick/onedark.vim'
 
 " custom verbs
 Plug 'tpope/vim-repeat'
@@ -62,7 +63,11 @@ set ruler
 " visual
 filetype plugin indent on
 syntax on
-colorscheme darcula
+" colorscheme darcula
+" colorscheme molokai
+" let g:molokai_original=1
+colorscheme onedark
+set cursorline
 set termguicolors
 set colorcolumn=80
 set guicursor= 
@@ -92,11 +97,9 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css,javascript EmmetInstall
 let g:user_emmet_leader_key=','
 
-" indentLine
-let g:indentLine_char_list = ['⎸']
-
 " lightline
-let g:lightline = { 'colorscheme': 'darculaOriginal' }
+" let g:lightline = { 'colorscheme': 'darculaOriginal' }
+let g:lightline = { 'colorscheme': 'onedark' }
 let g:lightline#bufferline#enable_devicons=1
 
 " fzf
@@ -213,7 +216,7 @@ nnoremap <C-s> :update<CR>
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
 
-""" Darcula helper groups
+""" color theme helper groups
 
 " coc
 hi! link CocErrorSign ErrorSign
@@ -244,4 +247,4 @@ hi! link ALEInfoSign InfoSign
 hi! link GitGutterAdd GitAddStripe
 hi! link GitGutterChange GitChangeStripe
 hi! link GitGutterDelete GitDeleteStripe
-let g:gitgutter_sign_removed = '▶'
+" let g:gitgutter_sign_removed = '▶' " Darcula theme specific
