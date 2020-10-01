@@ -21,6 +21,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tomasr/molokai'
 Plug 'doums/darcula'
 Plug 'joshdick/onedark.vim'
+Plug 'srcery-colors/srcery-vim'
 
 " custom verbs
 Plug 'tpope/vim-repeat'
@@ -65,9 +66,10 @@ set hidden
 set mouse=a
 set clipboard+=unnamedplus
 set ruler
-set updatetime=300 
+set updatetime=100 
 
 "TODO make curosr hi only variable, class, function/method name 	
+"TODO if the window is type NERDTree, disable
 autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 			\ escape(expand('<cword>'), '/\'))
 
@@ -75,9 +77,10 @@ autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 filetype plugin indent on
 syntax on
 " colorscheme darcula
+" colorscheme onedark
 " colorscheme molokai
 " let g:molokai_original=1
-colorscheme onedark
+colorscheme srcery
 set cursorline
 set termguicolors
 set colorcolumn=80
@@ -105,9 +108,10 @@ set foldlevelstart=20
 """ shortcuts
 nnoremap <silent><space><space> :noh<cr>
 nnoremap <silent><esc> <c-w>p
+
 nnoremap <space>s :update<cr>
-nnoremap <silent><space>p :FZF<cr>
-nnoremap <silent><space>l :Buffers<cr>
+nnoremap <silent><c-p> :FZF<cr>
+nnoremap <silent><c-l> :Buffers<cr>
 
 " go to next lint error
 nmap <silent>M <Plug>(ale_next_wrap)
@@ -152,7 +156,7 @@ let g:tagbar_sort=0
 
 " lightline
 " let g:lightline = { 'colorscheme': 'darculaOriginal' }
-let g:lightline = { 'colorscheme': 'onedark' }
+" let g:lightline = { 'colorscheme': 'onedark' }
 let g:lightline#bufferline#enable_devicons=1
 
 " ale
@@ -224,6 +228,7 @@ let g:fzf_nvim_statusline=0
 
 " fzf window
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+"TODO make width flexible
 function! FloatingFZF()
 	" position
 	let height = float2nr(30)
@@ -290,7 +295,7 @@ hi! link GitGutterChange GitChangeStripe
 hi! link GitGutterDelete GitDeleteStripe
 " let g:gitgutter_sign_removed = '▶' " Darcula theme specific
 
-" hi Search guibg=peru guifg=wheat
+"TODO configure to use theme color instead of hard coded color
 hi Search guibg=#343945 guifg=none
-" hi HiUnderCursor guibg=#383e4a guifg=none
 hi HiUnderCursor guibg=#3b424f guifg=none
+hi QuickFixLine guibg=#3b424f guifg=none
