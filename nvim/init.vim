@@ -1,11 +1,19 @@
+"TODO make auto install flexible between neovim and vim
+if empty(glob('~/.local/share/nvim/plugged'))
+  silent !curl -fLo ~/.local/share/nvim/plugged --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
-
-"" essentials"
-
+  
 " misc
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'psliwka/vim-smoothie'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/tagbar'
 
 " visual
 Plug 'itchyny/lightline.vim'
@@ -27,10 +35,9 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " language support
 Plug 'sheerun/vim-polyglot'
+Plug 'tmhedberg/SimpylFold' " better python folding
 
-"" optionals"
-
-" async dispatcher
+" async task runner
 Plug 'tpope/vim-dispatch' 
 
 " linting engine
@@ -55,10 +62,14 @@ call plug#end()
 let g:loaded_matchparen=1
 set number relativenumber
 set hidden
-" set mouse=n
 set mouse=a
 set clipboard+=unnamedplus
 set ruler
+set updatetime=300 
+
+"TODO make curosr hi only variable, class, function/method name 	
+autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
+			\ escape(expand('<cword>'), '/\'))
 
 " visual
 filetype plugin indent on
@@ -87,12 +98,25 @@ set smartindent
 set shiftwidth=4
 set tabstop=4
 
-""" Custom shortcuts
-nnoremap <C-s> :update<CR>
-nnoremap <C-l> :bn<CR>
-nnoremap <C-h> :bp<CR>
+" folds
+set nofoldenable
+set foldlevelstart=20
 
-""" Plugins settings
+""" shortcuts
+nnoremap <silent><space><space> :noh<cr>
+nnoremap <silent><esc> <c-w>p
+nnoremap <space>s :update<cr>
+nnoremap <silent><space>p :FZF<cr>
+nnoremap <silent><space>l :Buffers<cr>
+
+" go to next lint error
+nmap <silent>M <Plug>(ale_next_wrap)
+
+" window shortcuts
+nmap <silent><m-1> :NERDTreeToggle<cr>
+nmap <silent><m-2> :TagbarToggle<cr>
+
+""" plugins settings
 
 " python
 let g:python_highlight_all = 1
@@ -102,16 +126,34 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css,javascript EmmetInstall
 let g:user_emmet_leader_key=','
 
-" lightline
-" let g:lightline = { 'colorscheme': 'darculaOriginal' }
-let g:lightline = { 'colorscheme': 'onedark' }
-let g:lightline#bufferline#enable_devicons=1
-
 " dispatcher
 autocmd FileType python let b:dispatch = 'python3 %'
 autocmd FileType sh let b:dispatch = 'sh %'
 autocmd FileType javascript let b:dispatch = 'node %'
-" autocmd FileType cpp let b:dispatch = 'cd build && make'
+
+" nerdtree
+let NERDTreeMinimalUI=1
+let g:NERDTreeGitStatusUseNerdFonts=1 
+let g:NERDTreeWinSize=45
+let NERDTreeIgnore = [
+			\ 'node_modules',
+			\ 'dist',
+			\ 'target',
+			\ 'build',
+			\ '__pycache__',
+			\ ]
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+			\ b:NERDTree.isTabTree()) | q | endif
+
+" tagbar
+let g:tagbar_compact=1
+let g:tagbar_show_balloon=0
+let g:tagbar_sort=0
+
+" lightline
+" let g:lightline = { 'colorscheme': 'darculaOriginal' }
+let g:lightline = { 'colorscheme': 'onedark' }
+let g:lightline#bufferline#enable_devicons=1
 
 " ale
 let g:ale_sign_error = '✘'
@@ -141,7 +183,6 @@ let g:ale_fixers = {
 			\ 'json': ['jq'],
 			\}
 nmap == :ALEFix<CR>
-nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
 " coc
 
@@ -163,13 +204,13 @@ inoremap <silent><expr> <C-space> coc#refresh()
 " use enter to confirm completion
 if exists('*complete_info')
 	inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : 
-				\ "\<C-g>u\<CR>"
+				\ "\<C-g>u\<cr>"
 else
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 endif
 
 " use preview window for documentation
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<cr>
 function! s:show_documentation()
 	if (index(['vim','help'], &filetype) >= 0)
 		execute 'h '.expand('<cword>')
@@ -182,7 +223,6 @@ endfunction
 let g:fzf_nvim_statusline=0
 
 " fzf window
-nnoremap <silent><C-p> :FZF<CR>
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 function! FloatingFZF()
 	" position
@@ -249,3 +289,8 @@ hi! link GitGutterAdd GitAddStripe
 hi! link GitGutterChange GitChangeStripe
 hi! link GitGutterDelete GitDeleteStripe
 " let g:gitgutter_sign_removed = '▶' " Darcula theme specific
+
+" hi Search guibg=peru guifg=wheat
+hi Search guibg=#343945 guifg=none
+" hi HiUnderCursor guibg=#383e4a guifg=none
+hi HiUnderCursor guibg=#3b424f guifg=none
