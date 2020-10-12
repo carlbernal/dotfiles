@@ -34,6 +34,10 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'michaeljsmith/vim-indent-object'
 
+" custom commands
+Plug 'AndrewRadev/linediff.vim' " for diffing in same file :Linediff
+Plug 'vim-scripts/a.vim' " alternate between .c .h files using :A
+
 " language support
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold' " better python folding
@@ -54,13 +58,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " show git status in gutter
 Plug 'airblade/vim-gitgutter'
 
-" alternate between .c .h files using :A
-Plug 'vim-scripts/a.vim' 
-
 call plug#end()
 
 """ settings
-let g:loaded_matchparen=1
+" let g:loaded_matchparen=1
 set number relativenumber
 set hidden
 set mouse=a
