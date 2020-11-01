@@ -71,6 +71,7 @@ set updatetime=100
 
 "TODO make curosr hi only variable, class, function/method name 	
 "TODO if the window is type NERDTree, disable
+"FIX this only works in neovim
 autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 			\ escape(expand('<cword>'), '/\'))
 
@@ -112,7 +113,8 @@ nnoremap <silent><esc> <c-w>p
 
 nnoremap <space>s :update<cr>
 nnoremap <silent><c-p> :FZF<cr>
-nnoremap <silent><c-l> :Buffers<cr>
+nnoremap <silent><c-h> :bp<cr>
+nnoremap <silent><c-l> :bn<cr>
 
 " go to next lint error
 nmap <silent>M <Plug>(ale_next_wrap)
@@ -132,6 +134,7 @@ autocmd FileType html,css,javascript EmmetInstall
 let g:user_emmet_leader_key=','
 
 " dispatcher
+cnoremap D Dispatch
 autocmd FileType python let b:dispatch = 'python3 %'
 autocmd FileType sh let b:dispatch = 'sh %'
 autocmd FileType javascript let b:dispatch = 'node %'
