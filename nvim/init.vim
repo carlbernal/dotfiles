@@ -11,9 +11,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'psliwka/vim-smoothie'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/tagbar'
+" Plug 'preservim/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'preservim/tagbar'
 
 " visual
 Plug 'itchyny/lightline.vim'
@@ -42,9 +42,6 @@ Plug 'vim-scripts/a.vim' " alternate between .c .h files using :A
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/SimpylFold' " better python folding
 
-" async task runner
-Plug 'tpope/vim-dispatch' 
-
 " linting engine
 Plug 'dense-analysis/ale'
 
@@ -69,8 +66,6 @@ set clipboard+=unnamedplus
 set ruler
 set updatetime=100 
 
-"TODO make curosr hi only variable, class, function/method name 	
-"TODO if the window is type NERDTree, disable
 "FIX this only works in neovim
 autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 			\ escape(expand('<cword>'), '/\'))
@@ -120,8 +115,8 @@ nnoremap <silent><c-l> :bn<cr>
 nmap <silent>M <Plug>(ale_next_wrap)
 
 " window shortcuts
-nmap <silent><m-1> :NERDTreeToggle<cr>
-nmap <silent><m-2> :TagbarToggle<cr>
+" nmap <silent><m-1> :NERDTreeToggle<cr>
+" nmap <silent><m-2> :TagbarToggle<cr>
 
 """ plugins settings
 
@@ -133,30 +128,24 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css,javascript EmmetInstall
 let g:user_emmet_leader_key=','
 
-" dispatcher
-cnoremap D Dispatch
-autocmd FileType python let b:dispatch = 'python3 %'
-autocmd FileType sh let b:dispatch = 'sh %'
-autocmd FileType javascript let b:dispatch = 'node %'
+" " nerdtree
+" let NERDTreeMinimalUI=1
+" let g:NERDTreeGitStatusUseNerdFonts=1 
+" let g:NERDTreeWinSize=45
+" let NERDTreeIgnore = [
+" 			\ 'node_modules',
+" 			\ 'dist',
+" 			\ 'target',
+" 			\ 'build',
+" 			\ '__pycache__',
+" 			\ ]
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+" 			\ b:NERDTree.isTabTree()) | q | endif
 
-" nerdtree
-let NERDTreeMinimalUI=1
-let g:NERDTreeGitStatusUseNerdFonts=1 
-let g:NERDTreeWinSize=45
-let NERDTreeIgnore = [
-			\ 'node_modules',
-			\ 'dist',
-			\ 'target',
-			\ 'build',
-			\ '__pycache__',
-			\ ]
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
-			\ b:NERDTree.isTabTree()) | q | endif
-
-" tagbar
-let g:tagbar_compact=1
-let g:tagbar_show_balloon=0
-let g:tagbar_sort=0
+" " tagbar
+" let g:tagbar_compact=1
+" let g:tagbar_show_balloon=0
+" let g:tagbar_sort=0
 
 " lightline
 " let g:lightline = { 'colorscheme': 'darculaOriginal' }
