@@ -53,10 +53,4 @@
     "key": "alt+1",
     "command": "workbench.action.toggleSidebarVisibility"
   },
-  // Press escape to bring focus back to code editor
-  {
-    "key": "escape",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus"
-  }
 ]

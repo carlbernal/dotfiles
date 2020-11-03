@@ -18,9 +18,6 @@ Plug 'psliwka/vim-smoothie'
 " visual
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tomasr/molokai'
-Plug 'doums/darcula'
-Plug 'joshdick/onedark.vim'
 Plug 'srcery-colors/srcery-vim'
 
 " custom verbs
@@ -58,7 +55,6 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 """ settings
-" let g:loaded_matchparen=1
 set number relativenumber
 set hidden
 set mouse=a
@@ -66,17 +62,13 @@ set clipboard+=unnamedplus
 set ruler
 set updatetime=100 
 
-"FIX this only works in neovim
+"TODO fix CursorMoved command not working on vim
 autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 			\ escape(expand('<cword>'), '/\'))
 
 " visual
 filetype plugin indent on
 syntax on
-" colorscheme darcula
-" colorscheme onedark
-" colorscheme molokai
-" let g:molokai_original=1
 colorscheme srcery
 set cursorline
 set termguicolors
@@ -106,7 +98,7 @@ set foldlevelstart=20
 nnoremap <silent><space><space> :noh<cr>
 nnoremap <silent><esc> <c-w>p
 
-nnoremap <space>s :update<cr>
+nnoremap <silent><c-s> :update<cr>
 nnoremap <silent><c-p> :FZF<cr>
 nnoremap <silent><c-h> :bp<cr>
 nnoremap <silent><c-l> :bn<cr>
@@ -148,8 +140,6 @@ let g:user_emmet_leader_key=','
 " let g:tagbar_sort=0
 
 " lightline
-" let g:lightline = { 'colorscheme': 'darculaOriginal' }
-" let g:lightline = { 'colorscheme': 'onedark' }
 let g:lightline#bufferline#enable_devicons=1
 
 " ale

@@ -1,5 +1,4 @@
 {
-  // Remove evil stuffs
   "update.mode": "start",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
@@ -7,37 +6,47 @@
   "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
 
-  // gui looks
+  // gui
   "window.zoomLevel": 1.3,
   "window.titleBarStyle": "custom",
   "breadcrumbs.enabled": true,
   "editor.autoClosingBrackets": "always",
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontFamily": "'Cousine Nerd Font Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "workbench.activityBar.visible": false,
+  "editor.fontFamily": "'RobotoMono Nerd Font', 'Cousine Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "editor.minimap.enabled": false,
+  "workbench.activityBar.visible": true,
 
   // editor
   "keyboard.dispatch": "keyCode",
   "editor.rulers": [80],
   "editor.fontSize": 13,
+  "editor.detectIndentation": true,
+  "editor.links": false, // remove underline in link but keep link clickable
   "terminal.integrated.fontSize": 13,
-  "editor.tabSize": 2,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2000,
 
   // vim
   "vim.history": 1,
   "editor.smoothScrolling": true,
   "editor.lineNumbers": "relative",
   "editor.cursorBlinking": "solid",
-  "vim.replaceWithRegister": true,
   "vim.useSystemClipboard": true,
-  "vim.foldfix": true,
+  "vim.replaceWithRegister": true,
   "vim.hlsearch": true,
   "vim.handleKeys": {
     "<C-w>": false,
+    "<S-k>": false
   },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // Remap quick documentation to shift + k
+    {
+      "before": ["K"],
+      "after": ["g", "h"]
+    }
+  ],
 
-  // hidden files and folders
+  // hide files and folders
   "files.exclude": {
     "**/.classpath": true,
     "**/.factorypath": true,
@@ -46,39 +55,30 @@
     "**/.settings": true,
     "**/.tmp": true,
     "**/.cache": true,
-
-    // node
+    "**/dist": true,
+    "**/target": true,
+    "**/build": true,
     "**/node_modules": true,
-
-    // python
     "**/__pycache__": true,
     "**/.venv": true
   },
 
-  // emmet
-  "emmet.includeLanguages": {
-    // jsx
-    "javascript": "javascriptreact"
-  },
-
-  // prettier 
+  // formatters
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "javascript.updateImportsOnFileMove.enabled": "always",
 
-  // eslint
-  "eslint.format.enable": true,
-  "workbench.colorTheme": "Visual Studio Dark",
+  // javascript
+  "javascript.updateImportsOnFileMove.enabled": "always",
 
   // python
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true
+  "python.linting.enabled": true,
+
+  // cpp
+  "clangd.arguments": ["-log=verbose", "-pretty", "--background-index"],
 }
