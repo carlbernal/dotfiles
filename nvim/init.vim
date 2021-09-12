@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 " misc
+Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'psliwka/vim-smoothie'
 
@@ -30,6 +31,8 @@ Plug 'wellle/targets.vim'
 
 " language support
 Plug 'sheerun/vim-polyglot'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
 
 call plug#end()
 
@@ -89,6 +92,7 @@ nnoremap <silent><space><space> :noh<cr>
 nnoremap <silent><c-s> :update<cr>
 nnoremap <silent><c-h> :bp<cr>
 nnoremap <silent><c-l> :bn<cr>
+nnoremap == :FormatCode<cr>
 
 " fuzzy
 nmap <silent><c-p> <Plug>(PickerEdit)
@@ -96,10 +100,19 @@ nmap <silent><c-o> <Plug>(PickerBuffer)
 
 """ plugins settings
 
+" python
+let g:python_highlight_all = 1
+let g:python3_host_prog = "/usr/bin/python3"
+
 " markdown
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
+
+" emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,jinja,javascript EmmetInstall
+let g:user_emmet_leader_key=','
 
 " fuzzy
 let g:picker_custom_find_executable = 'ag'
