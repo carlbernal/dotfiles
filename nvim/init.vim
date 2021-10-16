@@ -8,6 +8,7 @@ Plug 'psliwka/vim-smoothie'
 " vim improvements
 Plug 'tpope/vim-vinegar'
 Plug 'srstevenson/vim-picker'
+Plug 'junegunn/goyo.vim'
 
 " visual improvements
 Plug 'airblade/vim-gitgutter'
@@ -88,6 +89,7 @@ let g:netrw_fastbrowse = 0
 
 """ shortcuts
 nnoremap <silent>\ :bd<cr>
+nnoremap <silent>` :Goyo<cr>
 nnoremap <silent><space><space> :noh<cr>
 nnoremap <silent><c-s> :update<cr>
 nnoremap <silent><c-h> :bp<cr>

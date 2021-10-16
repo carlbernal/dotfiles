@@ -1,8 +1,9 @@
 {
   "update.mode": "start",
   "workbench.editor.untitled.hint": "hidden",
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
+  // "telemetry.enableCrashReporter": false,
+  // "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
   "extensions.ignoreRecommendations": true,
   "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
@@ -20,7 +21,7 @@
   "editor.rulers": [80, 120],
   "editor.fontSize": 13,
   "editor.detectIndentation": true,
-  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontSize": 14,
   // "files.autoSave": "afterDelay",
   // "files.autoSaveDelay": 2000,
   "editor.formatOnSave": false,
@@ -67,19 +68,16 @@
     "**/.settings": true,
     "**/.tmp": true,
     "**/.cache": true,
-    "**/target": true,
-    "**/dist": true,
-    "**/build": true,
     "**/node_modules": true,
     "**/__pycache__": true,
     "**/.pyenv": true,
-    "**/.venv": true
+    "**/.venv": true,
+    "**/package-lock.json": true,
   },
 
   // emmet
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "njk": "html",
+    "javascript": "javascriptreact"
   },
 
   // json
@@ -110,20 +108,18 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
 
   // python
   "python.insidersChannel": "off",
-  "pylance.insidersChannel": "off",
   "python.experiments.enabled": false,
   "python.venvFolders": [".venv"],
-  "python.languageServer": "Pylance",
+  "python.languageServer": "Default",
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "~/.local/bin/flake8",
   "python.linting.maxNumberOfProblems": 50,
   "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Path": "~/.local/bin/autopep8",
 
   // java
   "java.completion.maxResults": 20,
@@ -133,7 +129,16 @@
   "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "java.recommendations.dependency.analytics.show": false,
 
+  // cpp
+  "clangd.arguments": ["-log=verbose", "-pretty", "--background-index"],
+  "[cpp]": {
+    "editor.links": false
+  },
+  "[c]": {
+    "editor.links": false
+  },
+
   // extra intellisense
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }
