@@ -1,65 +1,47 @@
 call plug#begin('~/.vim/plugged')
 
-" misc
-Plug 'mattn/emmet-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'psliwka/vim-smoothie'
-
-" vim improvements
-Plug 'tpope/vim-vinegar'
-Plug 'srstevenson/vim-picker'
-Plug 'junegunn/goyo.vim'
-
-" visual improvements
-Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
-
-" colorschemes
-Plug 'w0ng/vim-hybrid'
-
-" custom verbs
+" verbs plugins
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
 
-" custom text objects
+" objects plugins
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 
-" language support
+" visual plugins
+Plug 'sainnhe/sonokai'
+Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
+
+" general plugins
+Plug 'tpope/vim-vinegar'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
-""" settings
+" general settings
 set number relativenumber
 set hidden
 set mouse=a
-set clipboard+=unnamedplus
-set ruler
-set updatetime=300 
-set autowrite
+set clipboard=unnamedplus
+set noswapfile
 let mapleader = "<nop>"
 
-" visual
+" visual settings
+colorscheme sonokai
 filetype plugin indent on
 syntax on
-colorscheme hybrid
-set cursorline
 set termguicolors
-set colorcolumn=80
-set guicursor= 
-set cmdheight=2
-set signcolumn=yes
 set noshowmode
+set colorcolumn=80
+set cursorline
+set laststatus=2
 
-" searching
+" search settings
 set incsearch
 set hlsearch
 set ignorecase
@@ -67,7 +49,7 @@ set smartcase
 set wildmenu
 set grepprg=ag\ --vimgrep\ $*
 
-" default tabs and indent
+" spacing settings
 set smarttab
 set autoindent
 set smartindent
@@ -83,67 +65,24 @@ set shortmess+=c
 autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 			\ escape(expand('<cword>'), '/\'))
 
-" netrw
+" plugin settings
 autocmd FileType netrw setl bufhidden=wipe
 let g:netrw_fastbrowse = 0
 
-""" shortcuts
-nnoremap <silent>\ :bd<cr>
-nnoremap <silent>` :Goyo<cr>
-nnoremap <silent><space><space> :noh<cr>
-nnoremap <silent><c-s> :update<cr>
-nnoremap <silent><c-h> :bp<cr>
-nnoremap <silent><c-l> :bn<cr>
-nnoremap == :FormatCode<cr>
-
-" fuzzy
-nmap <silent><c-p> <Plug>(PickerEdit)
-nmap <silent><c-o> <Plug>(PickerBuffer)
-
-""" plugins settings
-
-" python
 let g:python_highlight_all = 1
 let g:python3_host_prog = "/usr/bin/python3"
 
-" markdown
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 
-" emmet
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,jinja,javascript EmmetInstall
-let g:user_emmet_leader_key=','
+" shortcuts
+nnoremap <silent>\ :bd<cr>
+nnoremap <silent>` :Goyo<cr>
+nnoremap <silent><space><space> :noh<cr>
+nnoremap <silent><c-s> :update<cr>
 
-" fuzzy
-let g:picker_custom_find_executable = 'ag'
-let g:picker_custom_find_flags = 'ag . --silent -l 
-            \ --ignore node_modules 
-            \ --ignore .git 
-            \ --ignore dist 
-            \ --ignore target 
-            \ --ignore __pycache__ 
-            \ --ignore build 
-            \ -g ""'
-
-" lightline
-let g:lightline = {
-            \ 'active': {
-            \   'left': [
-            \       ['mode', 'paste'],
-            \       ['gitbranch', 'readonly', 'filename', 'modified'],
-            \   ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'gitbranch#name'
-            \ },
-            \ }
-
-""" color theme helper groups
-
-" search highlighting
-hi Search guibg=#343945 guifg=none
-hi QuickFixLine guibg=#3b424f guifg=none
-hi HiUnderCursor guibg=#3b424f guifg=none
-hi! MatchParen guifg=none
+" color helper groups
+hi Search guibg=#343945 guifg=NONE
+hi HiUnderCursor guibg=#3b424f guifg=NONE
+hi! MatchParen guifg=NONE

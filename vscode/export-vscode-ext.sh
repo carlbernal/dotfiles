@@ -4,7 +4,7 @@ INSTALLER_NAME="install-vscode-ext.sh"
 
 if [[ -z "$1" ]]; then
     # default the path to my usual config location
-    VSC_CONFIG_PATH="/home/carlb/Dotfiles/vscode"
+    VSC_CONFIG_PATH="/home/carlbernal/dotfiles/vscode"
 else
     VSC_CONFIG_PATH=$1
 fi
@@ -22,4 +22,4 @@ code --list-extensions | xargs -L 1 echo code --install-extension \
 
 sed -i '1s/^/#!\/bin\/bash\n\n/' $VSC_CONFIG_PATH/$INSTALLER_NAME
 
-echo "VSC extensions saved"
+echo "VSC extensions saved!"
