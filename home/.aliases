@@ -1,8 +1,7 @@
-alias v=nvim
+alias v=vim
+alias nvim=nvim.appimage
 alias clipboard='xclip -sel clip'
 alias c=clear
-alias t=tmux
-alias py=python3
 alias open=xdg-open
 alias word=docx2txt
 
@@ -18,6 +17,3 @@ alias gc="git commit"
 alias gd="git diff"
 alias gl="git log --oneline | head -20 | cat"
 alias gss="git status -s"
-
-# podman
-alias p=podman

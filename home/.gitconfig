@@ -2,7 +2,7 @@
 	name = carlbernal
 	email = carlbernal24@gmail.com
 [core]
-	editor = nvim
+	editor = vim
 [diff]
 	tool = vimdiff
 	prompt = false

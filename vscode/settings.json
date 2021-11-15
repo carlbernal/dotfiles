@@ -1,144 +1,135 @@
 {
-  "update.mode": "start",
-  "workbench.editor.untitled.hint": "hidden",
-  // "telemetry.enableCrashReporter": false,
-  // "telemetry.enableTelemetry": false,
-  "telemetry.telemetryLevel": "off",
-  "extensions.ignoreRecommendations": true,
-  "workbench.enableExperiments": false,
-  "workbench.settings.enableNaturalLanguageSearch": false,
-  "window.titleBarStyle": "custom",
-  "breadcrumbs.enabled": true,
-  "editor.autoClosingBrackets": "always",
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.fontFamily": "RobotoMono Nerd Font",
-  "editor.minimap.enabled": false,
-  "workbench.activityBar.visible": true,
+	// general settings
+	"workbench.startupEditor": "none",
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.enableExperiments": false,
+	"workbench.editor.untitled.hint": "hidden",
+	"workbench.activityBar.visible": true,
+	"window.zoomLevel": 1.2,
+	"update.mode": "start",
+	"terminal.integrated.fontSize": 13,
+	"telemetry.telemetryLevel": "off",
+	"keyboard.dispatch": "keyCode",
+	"extensions.ignoreRecommendations": true,
+	"explorer.confirmDragAndDrop": false,
+	"editor.rulers": [80, 120],
+	"editor.minimap.enabled": false,
+	"editor.links": false,
+	"editor.fontSize": 14,
+	"editor.fontFamily": "RobotoMono Nerd Font",
+	"editor.detectIndentation": true,
+	"editor.codeLens": false,
+	"editor.autoClosingBrackets": "always",
+	"breadcrumbs.enabled": true,
 
-  // editor
-  "window.zoomLevel": 1.2,
-  "keyboard.dispatch": "keyCode",
-  "editor.rulers": [80, 120],
-  "editor.fontSize": 13,
-  "editor.detectIndentation": true,
-  "terminal.integrated.fontSize": 14,
-  // "files.autoSave": "afterDelay",
-  // "files.autoSaveDelay": 2000,
-  "editor.formatOnSave": false,
-  "explorer.confirmDragAndDrop": false,
-  "workbench.startupEditor": "none",
-  "editor.codeLens": false,
+	// spacing
+	"editor.tabSize": 4,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
 
-  // vim
-  "vim.history": 10,
-  "editor.smoothScrolling": true,
-  "editor.lineNumbers": "relative",
-  "editor.cursorBlinking": "solid",
-  "vim.useSystemClipboard": true,
-  "vim.replaceWithRegister": true,
-  "vim.hlsearch": true,
-  "vim.vimrc.enable": true,
-  "vim.vimrc.path": "~/.vscodevimrc",
-  "vim.handleKeys": {
-    "<C-w>": false,
-    "<S-k>": false
-  },
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      // Remap quick documentation to shift + k
-      "before": ["K"],
-      "after": ["g", "h"]
-    },
-    {
-      "before": ["R"],
-      "commands": ["editor.action.rename"]
-    },
-    {
-      "before": ["=", "="],
-      "commands": ["editor.action.formatDocument"]
-    }
-  ],
+	// formatting
+	"editor.formatOnSave": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[njk]": {
+		"editor.defaultFormatter": "eseom.nunjucks-template"
+	},
 
-  // hide files and folders
-  "files.exclude": {
-    "**/.classpath": true,
-    "**/.factorypath": true,
-    "**/.idea": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.tmp": true,
-    "**/.cache": true,
-    "**/node_modules": true,
-    "**/__pycache__": true,
-    "**/.pyenv": true,
-    "**/.venv": true,
-    "**/package-lock.json": true,
-  },
+	// italic comments
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "comment",
+				"settings": {
+					"fontStyle": "italic"
+				}
+			}
+		]
+	},
 
-  // emmet
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  },
+	// vim settings
+	"vim.history": 10,
+	"editor.smoothScrolling": true,
+	"editor.lineNumbers": "relative",
+	"editor.cursorBlinking": "solid",
+	"vim.useSystemClipboard": true,
+	"vim.replaceWithRegister": true,
+	"vim.hlsearch": true,
+	"vim.vimrc.enable": true,
+	"vim.vimrc.path": "~/.vscodevimrc",
+	"vim.handleKeys": {
+		"<C-w>": false,
+		"<S-k>": false
+	},
+	"vim.normalModeKeyBindingsNonRecursive": [
+		{
+			// Remap quick documentation to shift + k
+			"before": ["K"],
+			"after": ["g", "h"]
+		},
+		{
+			"before": ["R"],
+			"commands": ["editor.action.rename"]
+		},
+		{
+			"before": ["=", "="],
+			"commands": ["editor.action.formatDocument"]
+		}
+	],
 
-  // json
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
+	// hide files and folders
+	"files.exclude": {
+		"**/__pycache__": true,
+		"**/.cache": true,
+		"**/.classpath": true,
+		"**/.factorypath": true,
+		"**/.idea": true,
+		"**/.next": true,
+		"**/.project": true,
+		"**/.pyenv": true,
+		"**/.settings": true,
+		"**/.tmp": true,
+		"**/.venv": true,
+		"**/node_modules": true,
+		"**/package-lock.json": true
+	},
 
-  // html
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+	// emmet
+	"emmet.includeLanguages": {
+		"njk": "html",
+		"javascript": "javascriptreact"
+	},
 
-  // css
-  "editor.colorDecorators": false,
-  "[css]": {
-    "editor.tabSize": 2
-  },
-  "[scss]": {
-    "editor.tabSize": 2
-  },
+	// css
+	"editor.colorDecorators": false,
 
-  // javascript
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2
-  },
+	// javascript
+	"javascript.updateImportsOnFileMove.enabled": "always",
 
-  // python
-  "python.insidersChannel": "off",
-  "python.experiments.enabled": false,
-  "python.venvFolders": [".venv"],
-  "python.languageServer": "Default",
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "~/.local/bin/flake8",
-  "python.linting.maxNumberOfProblems": 50,
-  "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Path": "~/.local/bin/autopep8",
+	// python
+	"python.insidersChannel": "off",
+	"python.experiments.enabled": false,
+	"python.venvFolders": [".venv"],
+	"python.languageServer": "Default",
+	"python.linting.pylintEnabled": false,
+	"python.linting.flake8Enabled": true,
+	"python.linting.flake8Path": "~/.local/bin/flake8",
+	"python.linting.maxNumberOfProblems": 50,
+	"python.formatting.provider": "autopep8",
+	"python.formatting.autopep8Path": "~/.local/bin/autopep8",
 
-  // java
-  "java.completion.maxResults": 20,
-  "java.server.launchMode": "Hybrid",
-  "java.project.importOnFirstTimeStartup": "interactive",
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-  "java.recommendations.dependency.analytics.show": false,
+	// java
+	"java.completion.maxResults": 20,
+	"java.server.launchMode": "Hybrid",
+	"java.project.importOnFirstTimeStartup": "interactive",
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+	"java.recommendations.dependency.analytics.show": false,
 
-  // cpp
-  "clangd.arguments": ["-log=verbose", "-pretty", "--background-index"],
-  "[cpp]": {
-    "editor.links": false
-  },
-  "[c]": {
-    "editor.links": false
-  },
+	// cpp
+	"clangd.arguments": ["-log=verbose", "-pretty", "--background-index"],
 
-  // extra intellisense
-  "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	// extra intellisense
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
