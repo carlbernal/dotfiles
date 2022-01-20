@@ -3,7 +3,6 @@ alias nvim=nvim.appimage
 alias clipboard='xclip -sel clip'
 alias c=clear
 alias open=xdg-open
-alias word=docx2txt
 
 alias l='ls -1X \
 -I "__pycache__" \

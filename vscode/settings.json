@@ -1,135 +1,139 @@
 {
-	// general settings
-	"workbench.startupEditor": "none",
-	"workbench.settings.enableNaturalLanguageSearch": false,
-	"workbench.iconTheme": "material-icon-theme",
-	"workbench.enableExperiments": false,
-	"workbench.editor.untitled.hint": "hidden",
-	"workbench.activityBar.visible": true,
-	"window.zoomLevel": 1.2,
-	"update.mode": "start",
-	"terminal.integrated.fontSize": 13,
-	"telemetry.telemetryLevel": "off",
-	"keyboard.dispatch": "keyCode",
-	"extensions.ignoreRecommendations": true,
-	"explorer.confirmDragAndDrop": false,
-	"editor.rulers": [80, 120],
-	"editor.minimap.enabled": false,
-	"editor.links": false,
-	"editor.fontSize": 14,
-	"editor.fontFamily": "RobotoMono Nerd Font",
-	"editor.detectIndentation": true,
-	"editor.codeLens": false,
-	"editor.autoClosingBrackets": "always",
-	"breadcrumbs.enabled": true,
+    // general settings
+    "workbench.startupEditor": "none",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.enableExperiments": false,
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.activityBar.visible": true,
+    "window.zoomLevel": 1.2,
+    "update.mode": "start",
+    "terminal.integrated.fontSize": 13,
+    "telemetry.telemetryLevel": "off",
+    "keyboard.dispatch": "keyCode",
+    "extensions.ignoreRecommendations": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.rulers": [80, 120],
+    "editor.minimap.enabled": false,
+    "editor.links": false,
+    "editor.fontSize": 14,
+    "editor.fontFamily": "RobotoMono Nerd Font",
+    "editor.detectIndentation": true,
+    "editor.codeLens": false,
+    "editor.autoClosingBrackets": "always",
+    "breadcrumbs.enabled": true,
 
-	// spacing
-	"editor.tabSize": 4,
-	"prettier.tabWidth": 4,
-	"prettier.useTabs": true,
+    // spacing
+    "editor.tabSize": 4,
+    "prettier.tabWidth": 4,
 
-	// formatting
-	"editor.formatOnSave": false,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"[njk]": {
-		"editor.defaultFormatter": "eseom.nunjucks-template"
-	},
+    // formatting
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-	// italic comments
-	"editor.tokenColorCustomizations": {
-		"textMateRules": [
-			{
-				"scope": "comment",
-				"settings": {
-					"fontStyle": "italic"
-				}
-			}
-		]
-	},
+    // italic comments
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
 
-	// vim settings
-	"vim.history": 10,
-	"editor.smoothScrolling": true,
-	"editor.lineNumbers": "relative",
-	"editor.cursorBlinking": "solid",
-	"vim.useSystemClipboard": true,
-	"vim.replaceWithRegister": true,
-	"vim.hlsearch": true,
-	"vim.vimrc.enable": true,
-	"vim.vimrc.path": "~/.vscodevimrc",
-	"vim.handleKeys": {
-		"<C-w>": false,
-		"<S-k>": false
-	},
-	"vim.normalModeKeyBindingsNonRecursive": [
-		{
-			// Remap quick documentation to shift + k
-			"before": ["K"],
-			"after": ["g", "h"]
-		},
-		{
-			"before": ["R"],
-			"commands": ["editor.action.rename"]
-		},
-		{
-			"before": ["=", "="],
-			"commands": ["editor.action.formatDocument"]
-		}
-	],
+    // vim settings
+    "vim.history": 10,
+    "editor.smoothScrolling": true,
+    "editor.lineNumbers": "relative",
+    "editor.cursorBlinking": "solid",
+    "vim.useSystemClipboard": true,
+    "vim.replaceWithRegister": true,
+    "vim.hlsearch": true,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.vscodevimrc",
+    "vim.handleKeys": {
+        "<C-w>": false,
+        "<S-k>": false
+    },
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            // Remap quick documentation to shift + k
+            "before": ["K"],
+            "after": ["g", "h"]
+        },
+        {
+            "before": ["R"],
+            "commands": ["editor.action.rename"]
+        },
+        {
+            "before": ["=", "="],
+            "commands": ["editor.action.formatDocument"]
+        }
+    ],
 
-	// hide files and folders
-	"files.exclude": {
-		"**/__pycache__": true,
-		"**/.cache": true,
-		"**/.classpath": true,
-		"**/.factorypath": true,
-		"**/.idea": true,
-		"**/.next": true,
-		"**/.project": true,
-		"**/.pyenv": true,
-		"**/.settings": true,
-		"**/.tmp": true,
-		"**/.venv": true,
-		"**/node_modules": true,
-		"**/package-lock.json": true
-	},
+    // hide files and folders
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.cache": true,
+        "**/.classpath": true,
+        "**/.dart_tool": true,
+        "**/.factorypath": true,
+        "**/.idea": true,
+        "**/.next": true,
+        "**/.project": true,
+        "**/.pyenv": true,
+        "**/.settings": true,
+        "**/.tmp": true,
+        "**/.venv": true,
+        "**/node_modules": true,
+        "**/package-lock.json": true
+    },
 
-	// emmet
-	"emmet.includeLanguages": {
-		"njk": "html",
-		"javascript": "javascriptreact"
-	},
+    // emmet
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
 
-	// css
-	"editor.colorDecorators": false,
+    // css
+    "editor.colorDecorators": false,
 
-	// javascript
-	"javascript.updateImportsOnFileMove.enabled": "always",
+    // javascript
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
 
-	// python
-	"python.insidersChannel": "off",
-	"python.experiments.enabled": false,
-	"python.venvFolders": [".venv"],
-	"python.languageServer": "Default",
-	"python.linting.pylintEnabled": false,
-	"python.linting.flake8Enabled": true,
-	"python.linting.flake8Path": "~/.local/bin/flake8",
-	"python.linting.maxNumberOfProblems": 50,
-	"python.formatting.provider": "autopep8",
-	"python.formatting.autopep8Path": "~/.local/bin/autopep8",
+    // python
+    "python.insidersChannel": "off",
+    "python.experiments.enabled": false,
+    "python.venvFolders": [".venv"],
+    "python.languageServer": "Default",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "~/.local/bin/flake8",
+    "python.linting.maxNumberOfProblems": 50,
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Path": "~/.local/bin/autopep8",
 
-	// java
-	"java.completion.maxResults": 20,
-	"java.server.launchMode": "Hybrid",
-	"java.project.importOnFirstTimeStartup": "interactive",
-	"java.configuration.updateBuildConfiguration": "automatic",
-	"java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-	"java.recommendations.dependency.analytics.show": false,
+    // java
+    "java.completion.maxResults": 20,
+    "java.server.launchMode": "Hybrid",
+    "java.project.importOnFirstTimeStartup": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.recommendations.dependency.analytics.show": false,
 
-	// cpp
-	"clangd.arguments": ["-log=verbose", "-pretty", "--background-index"],
+    // flutter
+    "dart.openDevTools": "flutter",
+    "[dart]": {
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
 
-	// extra intellisense
-	"editor.suggestSelection": "first",
-	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    // extra intellisense
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }
