@@ -21,6 +21,11 @@ source ~/.aliases
 # python3
 export PATH=$HOME/.local/bin:$PATH
 
+# android
+export PATH=$HOME/flutter/bin:$PATH
+export PATH=$HOME/Android/cmdline-tools/latest/bin:$PATH
+export ANDROID_SDK_ROOT=$HOME/Android
+
 # personal bin
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/scripts:$PATH
@@ -28,7 +33,3 @@ export PATH=$HOME/scripts:$PATH
 # node
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
