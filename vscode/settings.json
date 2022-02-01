@@ -6,7 +6,8 @@
     "workbench.enableExperiments": false,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.activityBar.visible": true,
-    "window.zoomLevel": 1.2,
+    "window.zoomLevel": 1.3,
+    "window.titleBarStyle": "custom",
     "update.mode": "start",
     "terminal.integrated.fontSize": 13,
     "telemetry.telemetryLevel": "off",
@@ -115,25 +116,7 @@
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "~/.local/bin/autopep8",
 
-    // java
-    "java.completion.maxResults": 20,
-    "java.server.launchMode": "Hybrid",
-    "java.project.importOnFirstTimeStartup": "interactive",
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-    "java.recommendations.dependency.analytics.show": false,
-
-    // flutter
-    "dart.openDevTools": "flutter",
-    "[dart]": {
-        "editor.selectionHighlight": false,
-        "editor.suggest.snippetsPreventQuickSuggestions": false,
-        "editor.suggestSelection": "first",
-        "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false
-    },
-
     // extra intellisense
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
