@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# check if system is ubuntu based
-if [[ ! "$(cat /etc/issue)" =~ "Ubuntu" ]]; then
-    echo "Install script only works on ubuntu based systems."
+# check if system is debian or ubuntu based
+if [[ ! "$(cat /etc/issue)" =~ "Ubuntu" || ! "$(cat /etc/issue)" =~ "Debian" ]]; then
+    echo "Install script only works on debian or ubuntu based systems."
     echo "Aborting..."
     exit 1
 fi
@@ -37,15 +37,16 @@ echo "Installing snap packages..."
 xargs -a ~/Dotfiles/scripts/snap.txt sudo snap install
 
 # podman
-echo "Installing podman..."
-. /etc/os-release
-echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y upgrade 
-sudo apt-get -y install podman
+# echo "Installing podman..."
+# . /etc/os-release
+# echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+# curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
+# sudo apt-get update
+# sudo apt-get -y upgrade 
+sudo apt -y install podman
 
 # setup dotfiles
+# TODO: remove stow and use manual links
 echo "Setting up dotfiles..."
 stow ~/Dotfiles/home ~/Dotfiles/vscode ~/Dotfiles/nvim
 
@@ -58,10 +59,17 @@ sudo apt update
 sudo apt install \
 tlp tlp-rdw \
 powertop \
+thermald \
 ufw
 
-sudo tlp start
+# sudo tlp start
 sudo ufw enable
-systemctl disable bluetooth.service
+# systemctl disable bluetooth.service
+
+# # Use auto-cpufreq instead of tlp and powertop
+# # https://github.com/AdnanHodzic/auto-cpufreq
+# git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+# cd auto-cpufreq && sudo ./auto-cpufreq-installer
+# sudo auto-cpufreq --install
 
 echo "Done!"

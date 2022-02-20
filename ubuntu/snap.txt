@@ -1,3 +1,4 @@
 insomnia
 spotify
 teams-for-linux
+foliate
