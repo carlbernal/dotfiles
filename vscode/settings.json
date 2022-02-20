@@ -2,16 +2,17 @@
     // general settings
     "workbench.startupEditor": "none",
     "workbench.settings.enableNaturalLanguageSearch": false,
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.enableExperiments": false,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.activityBar.visible": true,
-    "window.zoomLevel": 1.3,
+    "window.zoomLevel": 1.15,
     "window.titleBarStyle": "custom",
     "update.mode": "start",
     "terminal.integrated.fontSize": 13,
+    "terminal.integrated.enablePersistentSessions": false,
     "telemetry.telemetryLevel": "off",
     "keyboard.dispatch": "keyCode",
+    "files.autoSave": "afterDelay",
     "extensions.ignoreRecommendations": true,
     "explorer.confirmDragAndDrop": false,
     "editor.rulers": [80, 120],
@@ -105,6 +106,9 @@
     "js/ts.implicitProjectConfig.experimentalDecorators": true,
 
     // python
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
     "python.insidersChannel": "off",
     "python.experiments.enabled": false,
     "python.venvFolders": [".venv"],
@@ -115,6 +119,13 @@
     "python.linting.maxNumberOfProblems": 50,
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "~/.local/bin/autopep8",
+
+    // golang
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "golang.go"
+    },
 
     // extra intellisense
     "editor.suggestSelection": "first",
