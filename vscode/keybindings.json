@@ -53,9 +53,14 @@
         "key": "alt+1",
         "command": "workbench.action.toggleSidebarVisibility"
     },
-    // Open command pallete
+    // Extra shortcut
     {
         "key": "ctrl+i",
+        "command": "workbench.action.showCommands"
+    },
+    // Open command pallete
+    {
+        "key": "ctrl+o",
         "command": "workbench.action.showCommands"
     },
     // Remove all zoom keybindings

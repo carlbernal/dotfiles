@@ -4,7 +4,7 @@ INSTALLER_NAME="install-vscode-ext.sh"
 
 if [[ -z "$1" ]]; then
     # default the path to my usual config location
-    VSC_CONFIG_PATH="/home/carlbernal/Dotfiles/vscode"
+    VSC_CONFIG_PATH="/home/carlbernal/dotfiles/vscode"
 else
     VSC_CONFIG_PATH=$1
 fi

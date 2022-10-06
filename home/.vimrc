@@ -15,7 +15,6 @@ Plug 'wellle/targets.vim'
 " visual plugins
 Plug 'sainnhe/sonokai'
 Plug 'itchyny/lightline.vim'
-Plug 'sheerun/vim-polyglot'
 
 " general plugins
 Plug 'tpope/vim-vinegar'

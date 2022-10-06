@@ -5,7 +5,6 @@
     "workbench.layoutControl.enabled": false,
     "workbench.enableExperiments": false,
     "workbench.editor.untitled.hint": "hidden",
-    "workbench.editor.enablePreview": false,
     "workbench.activityBar.visible": true,
     "window.zoomLevel": 1.2,
     "window.titleBarStyle": "native",
@@ -36,6 +35,18 @@
     // formatting
     "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    // italic comments
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
 
     // vim settings
     "vim.history": 10,
@@ -85,54 +96,43 @@
         "**/package-lock.json": true
     },
 
-    // web
+    // emmet
     "emmet.includeLanguages": {
-        "javascript": "javascriptreact",
-        "jinja-html": "html"
+        "javascript": "javascriptreact"
     },
+
+    // css
     "editor.colorDecorators": false,
+
+    // javascript
     "javascript.updateImportsOnFileMove.enabled": "always",
     "js/ts.implicitProjectConfig.experimentalDecorators": true,
-    "html.format.wrapAttributes": "force-aligned",
-    "html.format.indentInnerHtml": true,
+
+    // python
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.experiments.enabled": false,
+    "python.venvFolders": [".venv"],
+    "python.languageServer": "Default",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "~/.local/bin/flake8",
+    "python.linting.maxNumberOfProblems": 50,
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Path": "~/.local/bin/autopep8",
 
     // golang
     "[go]": {
         "editor.insertSpaces": false,
         "editor.suggest.snippetsPreventQuickSuggestions": false,
         "editor.defaultFormatter": "golang.go",
-        "editor.formatOnSave": false,
-        "editor.codeActionsOnSave": {
-            "source.fixAll": false,
-            "source.organizeImports": false
-        }
-    },
-    "gopls": { "ui.semanticTokens": true },
-    "go.toolsManagement.autoUpdate": true,
-    "go.lintOnSave": "package",
-
-    // // java
-    // "java.completion.maxResults": 20,
-    // "java.server.launchMode": "Hybrid",
-    // "java.project.importOnFirstTimeStartup": "interactive",
-    // "java.configuration.updateBuildConfiguration": "automatic",
-    // "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-    // "java.format.onType.enabled": false,
-    // "java.recommendations.dependency.analytics.show": false,
-
-    // python
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.python",
         "editor.formatOnSave": false
     },
-    "python.experiments.enabled": false,
-    "python.venvFolders": [".venv"],
-    "python.languageServer": "Jedi",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "~/.local/bin/flake8",
-    "python.linting.flake8Args": ["--max-line-length=80"],
-    "python.linting.maxNumberOfProblems": 50,
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Path": "~/.local/bin/autopep8"
+    "gopls": { "ui.semanticTokens": true },
+    "go.lintOnSave": "file",
+
+    // extra intellisense
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
