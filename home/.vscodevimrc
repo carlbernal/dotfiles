@@ -1,2 +1,0 @@
-" vscode-vim shortcut remaps
-nnoremap <silent><space><space> :noh<cr>
