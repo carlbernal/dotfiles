@@ -1,0 +1,8 @@
+alias v=vim
+alias c=clear
+alias l='gls -1X \
+--color=auto \
+-I "__pycache__" \
+-I "node_modules" \
+'
+

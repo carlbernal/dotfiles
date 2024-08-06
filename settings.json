@@ -1,0 +1,46 @@
+{
+    // Editor Settings
+    "editor.cursorBlinking": "solid",
+    "editor.fontSize": 13,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80
+    ],
+    "extensions.ignoreRecommendations": true,
+    "material-icon-theme.folders.theme": "classic",
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.fontSize": 14,
+    "workbench.enableExperiments": false,
+
+    // Vim Settings
+    "vim.hlsearch": true,
+    "vim.replaceWithRegister": true,
+    "vim.useSystemClipboard": true,
+    "vim.handleKeys": {
+        "<C-t>": true,
+    },
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "<space>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+    ],
+
+    // Language Settings
+    "gopls": {
+        "ui.semanticTokens": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "html.format.indentInnerHtml": true,
+    "html.format.wrapAttributes": "force-aligned",
+    "python.venvFolders": [
+        ".venv"
+    ],
+    "workbench.iconTheme": "material-icon-theme"
+}

@@ -1,4 +1,0 @@
-prettier
-eslint
-typescript
-firebase
