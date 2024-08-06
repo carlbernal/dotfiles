@@ -1,9 +1,0 @@
-[Unit]
-Description=powertop tunings
-
-[Service]
-Type=oneshot
-ExecStart=/home/carlbernal/scripts/powertop-autotnue
-
-[Install]
-WantedBy=multi-user.target
