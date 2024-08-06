@@ -12,13 +12,14 @@
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.fontSize": 14,
     "workbench.enableExperiments": false,
+    "workbench.iconTheme": "material-icon-theme",
 
     // Vim Settings
     "vim.hlsearch": true,
     "vim.replaceWithRegister": true,
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
-        "<C-t>": true,
+        "<C-t>": true
     },
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -29,7 +30,7 @@
             "commands": [
                 ":nohl"
             ]
-        },
+        }
     ],
 
     // Language Settings
@@ -41,6 +42,5 @@
     "html.format.wrapAttributes": "force-aligned",
     "python.venvFolders": [
         ".venv"
-    ],
-    "workbench.iconTheme": "material-icon-theme"
+    ]
 }
