@@ -5,4 +5,3 @@ alias l='gls -1X \
 -I "__pycache__" \
 -I "node_modules" \
 '
-

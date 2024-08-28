@@ -20,8 +20,8 @@ call plug#end()
 set number relativenumber
 set hidden
 set mouse=nvi
-set clipboard=unnamed
 set ttymouse=sgr
+set clipboard=unnamed
 set noswapfile
 set autoread
 set noesckeys
@@ -39,6 +39,7 @@ set cursorline
 set laststatus=2
 colorscheme codedark
 let g:codedark_conservative=1
+let g:netrw_banner = 0
 
 " search
 set incsearch
@@ -46,7 +47,6 @@ set hlsearch
 set ignorecase
 set smartcase
 set wildmenu
-set grepprg=rg\ --vimgrep\ $*
 
 " spacing
 set smarttab
@@ -56,9 +56,6 @@ set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-autocmd FileType html setlocal ts=2 sts=2 sw=2
-autocmd FileType css setlocal ts=2 sts=2 sw=2
-autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 
 " omni complete
 set omnifunc=syntaxcomplete#Complete
@@ -76,4 +73,5 @@ autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
             \ escape(expand('<cword>'), '/\'))
 
 " shortcuts
+let mapleader = " "
 nnoremap <leader><space> :nohl<cr>
