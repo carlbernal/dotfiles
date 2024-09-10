@@ -50,6 +50,7 @@ set scrolloff=4
 set colorcolumn=80
 set cursorline
 set laststatus=2
+set shortmess+=WcC
 set fillchars+=eob:\ 
 colorscheme codedark
 let g:codedark_conservative=1
@@ -76,7 +77,6 @@ set complete-=i
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,noinsert
 set pumheight=6
-set shortmess+=c
 
 " helper color groups
 hi! MatchParen guifg=NONE
