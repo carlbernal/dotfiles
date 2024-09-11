@@ -11,16 +11,14 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 
 " visuals
-Plug 'markonm/traces.vim'
-Plug 'romainl/vim-qf'
 Plug 'itchyny/lightline.vim'
 Plug 'tomasiser/vim-code-dark'
 
 " tools
 Plug 'vim-scripts/AutoComplPop'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-dispatch'
+Plug 'markonm/traces.vim'
+Plug 'romainl/vim-qf'
 
 call plug#end()
 
