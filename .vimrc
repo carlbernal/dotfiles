@@ -48,6 +48,7 @@ set scrolloff=4
 set colorcolumn=80
 set cursorline
 set laststatus=2
+set signcolumn=no
 set shortmess+=WcC
 set fillchars+=eob:\ 
 colorscheme codedark
@@ -59,7 +60,6 @@ set hlsearch
 set ignorecase
 set smartcase
 set wildmenu
-set grepprg=rg\ --vimgrep\ $*
 
 " spacing
 set smarttab
@@ -75,6 +75,10 @@ set complete-=i
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,noinsert
 set pumheight=6
+
+" mappings
+let mapleader = " "
+nnoremap <leader><space> :nohl<cr>
 
 " helper color groups
 hi! MatchParen guifg=NONE
@@ -97,9 +101,3 @@ let g:gutentags_project_root = [
             \ 'go.mod',
             \ 'CMakeLists.txt',
             \ ]
-
-" mappings
-let mapleader = " "
-nnoremap <leader><space> :nohl<cr>
-nnoremap <leader>q :bd<cr>
-nnoremap <leader>w :b#<bar>bd#<cr>

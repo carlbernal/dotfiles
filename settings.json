@@ -6,10 +6,8 @@
     "editor.minimap.enabled": false,
     "editor.rulers": [80],
     "extensions.ignoreRecommendations": true,
-    "material-icon-theme.folders.theme": "classic",
     "telemetry.telemetryLevel": "off",
     "workbench.enableExperiments": false,
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
 
     // Scrolling
@@ -20,9 +18,10 @@
     "editor.stickyScroll.enabled": false,
 
     // Font
-    "editor.fontSize": 13,
     "editor.fontFamily": "JetBrains Mono",
-    "terminal.integrated.fontSize": 13,
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
     
     // Spacing
     "editor.detectIndentation": false,
@@ -49,10 +48,28 @@
         }
     ],
 
-    // Language
+    // Extension
+    "material-icon-theme.folders.theme": "classic",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    // Web
     "javascript.updateImportsOnFileMove.enabled": "always",
     "html.format.indentInnerHtml": true,
     "html.format.wrapAttributes": "force-aligned",
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.tabSize": 2
+    },
+
+    // Python
     "python.venvFolders": [".venv"],
-    "gopls": {"ui.semanticTokens": true}
+
+    // Golang
+    "gopls": {"ui.semanticTokens": true},
 }
