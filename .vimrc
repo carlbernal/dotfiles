@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'vim-scripts/ReplaceWithRegister'
 
 " objects
@@ -16,7 +17,6 @@ Plug 'tomasiser/vim-code-dark'
 
 " tools
 Plug 'vim-scripts/AutoComplPop'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'markonm/traces.vim'
 Plug 'romainl/vim-qf'
 
@@ -60,6 +60,10 @@ set hlsearch
 set ignorecase
 set smartcase
 set wildmenu
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
+endif
 
 " spacing
 set smarttab
@@ -92,12 +96,3 @@ autocmd CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 " vim-qf
 let g:qf_shorten_path = 3 
 
-" gutentags
-let g:gutentags_cache_dir = expand('~/.ctags')
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = [
-            \ 'package.json',
-            \ 'requirements.txt',
-            \ 'go.mod',
-            \ 'CMakeLists.txt',
-            \ ]
