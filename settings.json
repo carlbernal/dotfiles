@@ -27,7 +27,6 @@
     // Spacing
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
-    "editor.tabSize": 4,
 
     // Vim
     "vim.hlsearch": true,
@@ -53,7 +52,7 @@
             "commands": ["editor.action.showHover"]
         }
     ],
-
+    
     // Extension
     "material-icon-theme.folders.theme": "classic",
     "workbench.iconTheme": "material-icon-theme",
@@ -64,15 +63,6 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "html.format.indentInnerHtml": true,
     "html.format.wrapAttributes": "force-aligned",
-    "[javascript]": {
-        "editor.tabSize": 2
-    },
-    "[html]": {
-        "editor.tabSize": 2
-    },
-    "[css]": {
-        "editor.tabSize": 2
-    },
 
     // Python
     "python.venvFolders": [".venv"],
