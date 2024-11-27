@@ -23,6 +23,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'markonm/traces.vim'
+Plug 'preservim/tagbar'
 Plug 'romainl/vim-qf'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/AutoComplPop'
@@ -90,8 +91,36 @@ colorscheme codedark
 let g:codedark_conservative=1
 let g:netrw_banner = 0
 let g:gutentags_cache_dir = expand('~/.ctags')
+
 let g:qf_max_height = 8
 let g:qf_shorten_path = 3
+
+" Customize tagbar behaviour
+let g:tagbar_position = 'topleft'
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_show_balloon = 0
+let g:tagbar_indent = 1
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_foldlevel = 2
+let g:tagbar_autoshowtag = 1
+let g:tagbar_silent = 1
+let g:tagbar_wrap = 1
+let g:tagbar_ignore_anonymous = 1
+
+" Show all metadata about tags
+let g:tagbar_show_data_type = 1
+let g:tagbar_show_visibility = 1
+let g:tagbar_show_prefix = 1
+let g:tagbar_show_suffix = 1
+let g:tagbar_show_tag_linenumbers = 2
+let g:tagbar_show_tag_count = 1
+
+" Remove tagbar mappings for folding
+let g:tagbar_map_openfold = ""
+let g:tagbar_map_closefold = ""
 
 " Remove LSP completion and LSP tags integration
 let g:ale_completion_enabled = 0
@@ -111,6 +140,7 @@ let g:ale_set_highlights = 0
 let g:ale_set_signs = 0
 let g:ale_virtualtext_cursor = 0
 
+" Automatically open location list if there are something to display
 let g:ale_open_list = 1
 let g:ale_list_window_size = 8
 
@@ -141,4 +171,5 @@ let mapleader = " "
 nnoremap q: <nop>
 nnoremap Q <nop>
 nnoremap == :ALEFix<cr>
+nnoremap -- :TagbarToggle<cr>
 nnoremap <leader><space> :nohl<cr>
