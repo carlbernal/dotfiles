@@ -5,29 +5,30 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Verbs
+"" Verbs
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
 
-" Objects
+"" Objects
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 
-" Visuals
+"" Visuals
 Plug 'itchyny/lightline.vim'
 Plug 'tomasiser/vim-code-dark'
 
-" Utilities
-Plug 'vim-scripts/AutoComplPop'
+"" Utilities
+Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'markonm/traces.vim'
 Plug 'romainl/vim-qf'
-Plug 'dense-analysis/ale'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/AutoComplPop'
 call plug#end()
 
-" Platform Settings
+"" Platform Settings
 set mouse=nvi
 set ttymouse=sgr
 set clipboard=unnamed
@@ -36,16 +37,17 @@ set noesckeys
 set timeoutlen=300
 set ttimeoutlen=50
 
-" File Management
+"" File Management
 set hidden
 set autoread
 set autowriteall
 set backupdir^=$TMPDIR//
 set directory^=$TMPDIR//
 
-" Visuals
+"" Visuals
 filetype plugin indent on
 syntax on
+set background=dark
 set termguicolors
 set noshowmode
 set number relativenumber
@@ -58,7 +60,7 @@ set pumheight=6
 set shortmess+=WcCI
 set fillchars+=eob:\ 
 
-" Search
+"" Search
 set hlsearch
 set incsearch
 set ignorecase
@@ -69,7 +71,7 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m
 endif
 
-" Indent
+"" Indent
 set smarttab
 set expandtab
 set autoindent
@@ -78,62 +80,63 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" Completion
+"" Completion
 set complete-=i
 set completeopt=menuone,noinsert
 set omnifunc=syntaxcomplete#Complete
 
-" Plugin Settings
+"" Plugin Settings
 colorscheme codedark
-let g:codedark_conservative = 1
+let g:codedark_conservative=1
 let g:netrw_banner = 0
 let g:gutentags_cache_dir = expand('~/.ctags')
+let g:qf_max_height = 8
+let g:qf_shorten_path = 3
 
-let g:ale_disable_lsp = 1
-let g:ale_echo_cursor = 0
+" Remove LSP completion and LSP tags integration
+let g:ale_completion_enabled = 0
+let g:ale_update_tagstack = 0
+
+" Don't run lint when buffer is changed
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+
+" Disable messages besides location list
 let g:ale_history_enabled = 0
 let g:ale_hover_cursor = 0
+let g:ale_echo_cursor = 0
 let g:ale_popup_menu_enabled = 0
 let g:ale_set_ballons = 0
 let g:ale_set_highlights = 0
 let g:ale_set_signs = 0
-let g:ale_update_tagstack = 0
 let g:ale_virtualtext_cursor = 0
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 0
 
 let g:ale_open_list = 1
-let g:ale_list_window_size = 5
+let g:ale_list_window_size = 8
+
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   "javascript": ["prettier"],
+    \   "typescript": ["prettier"],
     \   "html": ["prettier"],
     \   "css": ["prettier"],
-    \   "json": ["prettier"],
+    \   "json": ["jq"],
     \   "python": ["black"],
     \}
 
-let g:qf_max_height = 5
-let g:qf_shorten_path = 3
-
-" Color Groups
+"" Color Groups
 hi! MatchParen guifg=NONE
 hi Search guibg=#343945 guifg=NONE
 hi HiUnderCursor guibg=#3b424f guifg=NONE
 hi QuickFixLine ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 
-" Auto Commands
+"" Auto Commands
 au FileType qf setlocal cc= wrap linebreak
+" Highlight all occurance of the word under cursor
 au CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
     \ escape(expand('<cword>'), '/\'))
 
-" Commands
-com! -range B echo join(
-\ systemlist("git -C " . shellescape(expand('%:p:h')) . 
-\ " blame -L <line1>,<line2> " . expand('%:t')), "\n"
-\ )
-
-" Mappings
+"" Mappings
 let mapleader = " "
 nnoremap q: <nop>
 nnoremap Q <nop>

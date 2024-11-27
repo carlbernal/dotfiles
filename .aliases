@@ -1,3 +1,3 @@
 alias v=vim
 alias c=clear
-alias l='gls -xXF --color=auto'
+alias l='eza --color=auto --icons=auto --sort=type'
