@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 
 export GOPATH=$HOME/.go
+export PATH=$PATH:$HOME/.bin
 
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"

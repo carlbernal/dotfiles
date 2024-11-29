@@ -21,12 +21,12 @@ Plug 'tomasiser/vim-code-dark'
 
 "" Utilities
 Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'markonm/traces.vim'
 Plug 'preservim/tagbar'
 Plug 'romainl/vim-qf'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/AutoComplPop'
 call plug#end()
 
 "" Platform Settings
@@ -76,8 +76,7 @@ endif
 set smarttab
 set expandtab
 set autoindent
-set smartindent
-set tabstop=4
+set tabstop=8
 set softtabstop=4
 set shiftwidth=4
 
@@ -92,7 +91,11 @@ let g:codedark_conservative=1
 let g:netrw_banner = 0
 let g:gutentags_cache_dir = expand('~/.ctags')
 
-let g:qf_max_height = 8
+let g:fzf_action = {'ctrl-x': 'split', 'ctrl-v': 'vsplit'}
+let g:fzf_layout = {"down": "30%"}
+let g:fzf_colors = {'gutter': ['bg', 'Normal']}
+
+let g:qf_max_height = 5
 let g:qf_shorten_path = 3
 
 " Customize tagbar behaviour
@@ -102,7 +105,7 @@ let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 let g:tagbar_show_balloon = 0
-let g:tagbar_indent = 1
+let g:tagbar_indent = 2
 let g:tagbar_show_linenumbers = 1
 let g:tagbar_foldlevel = 2
 let g:tagbar_autoshowtag = 1
@@ -140,18 +143,22 @@ let g:ale_set_highlights = 0
 let g:ale_set_signs = 0
 let g:ale_virtualtext_cursor = 0
 
-" Automatically open location list if there are something to display
+" Automatically open the location list if there is something to display
 let g:ale_open_list = 1
-let g:ale_list_window_size = 8
+let g:ale_list_window_size = 5
 
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   "sql": ["sqlfluff"],
     \   "javascript": ["prettier"],
     \   "typescript": ["prettier"],
     \   "html": ["prettier"],
     \   "css": ["prettier"],
     \   "json": ["jq"],
     \   "python": ["black"],
+    \   "go": ["gofmt"],
+    \   "cpp": ["clang-format"],
+    \   "c": ["clang-format"]
     \}
 
 "" Color Groups
@@ -170,6 +177,7 @@ au CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
 let mapleader = " "
 nnoremap q: <nop>
 nnoremap Q <nop>
+nnoremap <leader><space> :nohl<cr>
 nnoremap == :ALEFix<cr>
 nnoremap -- :TagbarToggle<cr>
-nnoremap <leader><space> :nohl<cr>
+nnoremap <c-p> :FZF<cr>
