@@ -96,7 +96,7 @@ let g:fzf_layout = {"down": "30%"}
 let g:fzf_colors = {'gutter': ['bg', 'Normal']}
 
 let g:qf_max_height = 5
-let g:qf_shorten_path = 3
+" let g:qf_shorten_path = 3
 
 " Customize tagbar behaviour
 let g:tagbar_position = 'topleft'
@@ -184,4 +184,4 @@ nnoremap -- :TagbarToggle<cr>
 nnoremap <c-p> :FZF<cr>
 
 "" Commands
-command! T cexpr system("todo")
+command T cgetexpr system("todo")
