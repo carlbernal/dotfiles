@@ -59,7 +59,7 @@ set signcolumn=no
 set laststatus=2
 set pumheight=6
 set shortmess+=WcCI
-set fillchars+=eob:\ 
+set fillchars+=eob:\ ,vert:\ 
 
 "" Search
 set hlsearch
@@ -157,6 +157,7 @@ let g:ale_fixers = {
     \   "json": ["jq"],
     \   "python": ["black"],
     \   "go": ["gofmt"],
+    \   "lua": ["stylua"],
     \   "cpp": ["clang-format"],
     \   "c": ["clang-format"]
     \}
@@ -181,3 +182,6 @@ nnoremap <leader><space> :nohl<cr>
 nnoremap == :ALEFix<cr>
 nnoremap -- :TagbarToggle<cr>
 nnoremap <c-p> :FZF<cr>
+
+"" Commands
+command! T cexpr system("todo")

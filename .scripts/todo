@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Wrapper script to display TODO, FIXME, BUG or other tags in source code
+#
+# Adapt features from vscode todo tree as needed
+#   https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+
+TAGS="TODO|FIXME|BUG|\[ \]|\[x\]"
+
+# The regex matches a tag if the string preceeding it is a comment syntax, a
+# tab, a space, a list or if it's in start of the line
+#
+# List of comment syntax in the regex:
+#   // /* */ (C Style)
+#   # (Bash, Python)
+#   <!-- (HTML)
+#   -- (Lua)
+#   ; (Lisp)
+REGEX="(//|#|<\!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+rg --ignore-case --vimgrep "$@" "$REGEX" "$GIT_ROOT"
