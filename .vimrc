@@ -52,7 +52,7 @@ set background=dark
 set termguicolors
 set noshowmode
 set number relativenumber
-set scrolloff=3
+set scrolloff=4
 set colorcolumn=80
 set cursorline
 set signcolumn=no
@@ -81,8 +81,9 @@ set softtabstop=4
 set shiftwidth=4
 
 "" Completion
-" set complete-=i
+" Only get matches from current file
 set complete=.
+" set complete-=i
 set completeopt=menuone,noinsert
 set omnifunc=syntaxcomplete#Complete
 
@@ -126,6 +127,8 @@ let g:tagbar_show_tag_count = 1
 let g:tagbar_map_openfold = ""
 let g:tagbar_map_closefold = ""
 
+let g:ale_echo_msg_format = '%linter%: %s'
+
 " Remove LSP completion and LSP tags integration
 let g:ale_completion_enabled = 0
 let g:ale_update_tagstack = 0
@@ -147,6 +150,13 @@ let g:ale_virtualtext_cursor = 0
 " Automatically open the location list if there is something to display
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
+
+" ALE settings for file name pattern matched
+let g:ale_pattern_options = {
+    \   "\.css$" : {"ale_enabled": 0},
+    \   "\.html$" : {"ale_enabled": 0},
+    \   "\.jsdoc$" : {"ale_enabled": 0},
+    \}
 
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -174,9 +184,14 @@ au FileType qf setlocal cc= wrap linebreak
 " Highlight all occurance of the word under cursor
 au CursorMoved * exe printf('match HiUnderCursor /\V\<%s\>/',
     \ escape(expand('<cword>'), '/\'))
+au BufRead,BufNewFile *.jsdoc set filetype=javascript
+au FileType javascript setlocal ts=8 sts=2 sw=2
+au FileType html setlocal ts=8 sts=2 sw=2
+au FileType css setlocal ts=8 sts=2 sw=2
 
 "" Mappings
 let mapleader = " "
+nnoremap Y y$
 nnoremap q: <nop>
 nnoremap Q <nop>
 nnoremap <leader><space> :nohl<cr>
