@@ -5,10 +5,10 @@
 # Adapt features from vscode todo tree as needed
 #   https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
 
-TAGS="TODO|FIXME|BUG|\[ \]|\[x\]"
+TAGS="TODO|FIXME|BUG|\[ \]"
 
 # The regex matches a tag if the string preceeding it is a comment syntax, a
-# tab, a space, a list or if it's in start of the line
+# tab, a space, a list or if it's at start of the line
 #
 # List of comment syntax in the regex:
 #   // /* */ (C Style)
