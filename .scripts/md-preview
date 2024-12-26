@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Lightweight CLI version of vscode markdown preview
+#
+# Takes a path to a markdown file as argument, transform it to html and
+# re-transform it everytime the file is updated
+
 # Check if dependencies are installed
 dependencies=("pandoc" "fswatch")
 for i in "${dependencies[@]}"; do
@@ -28,6 +33,10 @@ if  [[ ! -f "$1" || ! "$1" =~ \.md$ ]]; then
     exit 1
 fi
 
+# https://github.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS
+# Replace with own css if needed
+gfm_css_file="https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
+
 # Use temporary file for output html and delete it after the script exits
 input_file="$1"
 tempdir=$(mktemp -d)
@@ -35,17 +44,25 @@ trap 'rm -rf "$tempdir"' EXIT
 output_file="$tempdir/output.html"
 
 convertToHtml() {
-    # TODO think of a way to store gfm css
-    # https://github.com/sindresorhus/github-markdown-css
-    pandoc -f gfm -t html -o "$output_file" "$input_file"
+    # Removed pandoc stderr checks for performance
+    pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
+    --embed-resources --standalone --css="$gfm_css_file"
 }
 
+# Initial trasnform
 convertToHtml
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    open "$tempdir/output.html"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    xdg-open "$tempdir/output.html"
+else
+    echo "Unsupported OS for opening the file."
+    exit 1
+fi
 
-# Open output file in macOS. TODO make opening work in linux
-open "$tempdir/output.html"
-
+# Transform everytime the markdown file is updated
 fswatch -o --event Updated --latency=0.5 "$input_file"| while read -r;
 do
+    echo "File updated. Rebuilding HTML..."
     convertToHtml
 done
