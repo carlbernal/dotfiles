@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Check if dependencies are installed
+dependencies=("pandoc" "fswatch")
+for i in "${dependencies[@]}"; do
+    if ! command -v "$i" &> /dev/null; then
+        echo "$i needs to be in path!"
+        exit 1
+    fi
+done
+
+invalid_command_msg="Invalid command: md-preview $*"
+usage_msg="Usage: md-preview file.md"
+
+# Check if correct argument supplied
+if [ $# -ne 1 ]; then
+    echo "$invalid_command_msg"
+    echo "Error: wrong argument supplied"
+    echo "$usage_msg"
+    exit 1
+fi
+
+# Check if argument is a markdown file
+if  [[ ! -f "$1" || ! "$1" =~ \.md$ ]]; then
+    echo "$invalid_command_msg"
+    echo "Error: $1 is not a markdown file"
+    echo "$usage_msg"
+    exit 1
+fi
+
+# Use temporary file for output html and delete it after the script exits
+input_file="$1"
+tempdir=$(mktemp -d)
+trap 'rm -rf "$tempdir"' EXIT
+output_file="$tempdir/output.html"
+
+convertToHtml() {
+    # TODO think of a way to store gfm css
+    # https://github.com/sindresorhus/github-markdown-css
+    pandoc -f gfm -t html -o "$output_file" "$input_file"
+}
+
+convertToHtml
+
+# Open output file in macOS. TODO make opening work in linux
+open "$tempdir/output.html"
+
+fswatch -o --event Updated --latency=0.5 "$input_file"| while read -r;
+do
+    convertToHtml
+done
