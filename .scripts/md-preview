@@ -51,14 +51,8 @@ convertToHtml() {
 
 # Initial trasnform
 convertToHtml
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    open "$tempdir/output.html"
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    xdg-open "$tempdir/output.html"
-else
-    echo "Unsupported OS for opening the file."
-    exit 1
-fi
+open "$tempdir/output.html"
+echo "Built html in $output_file"
 
 # Transform everytime the markdown file is updated
 fswatch -o --event Updated --latency=0.5 "$input_file"| while read -r;
