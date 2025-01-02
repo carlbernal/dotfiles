@@ -1,12 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
--- Colors
-config.color_scheme = "Monokai Remastered"
-
 -- Window
 config.window_close_confirmation = "NeverPrompt"
-config.window_background_opacity = 0.97
+config.window_background_opacity = 0.85
 config.window_padding = {
 	left = "0",
 	right = "0",
@@ -16,7 +13,7 @@ config.window_padding = {
 
 -- Font
 config.font = wezterm.font("Hack", { weight = 450 })
-config.font_size = 14
+config.font_size = 12
 config.line_height = 1.3
 
 -- Misc

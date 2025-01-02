@@ -35,6 +35,7 @@ fi
 
 # https://github.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS
 # Replace with own css if needed
+# FIXME not working in linux
 gfm_css_file="https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
 
 # Use temporary file for output html and delete it after the script exits

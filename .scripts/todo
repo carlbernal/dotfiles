@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # Wrapper script to display TODO, FIXME, BUG or other tags in source code
-#
-# Adapt features from vscode todo tree as needed
-#   https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+# Note: rg skips hidden files and ignored files by default
 
 TAGS="TODO|FIXME|BUG|\[ \]"
 
@@ -19,4 +17,4 @@ TAGS="TODO|FIXME|BUG|\[ \]"
 REGEX="(//|#|<\!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
-rg --ignore-case --vimgrep "$@" "$REGEX" "$GIT_ROOT"
+rg --ignore-case --vimgrep "$REGEX" "$GIT_ROOT"

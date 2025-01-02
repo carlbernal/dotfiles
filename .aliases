@@ -1,11 +1,11 @@
-alias v="vim"
+alias v="nvim"
 alias c="clear"
 
 alias l="eza --color=auto --icons=auto --sort=type --all"
 alias ll="l -T --git-ignore"
 
 alias md="mkdir -p"
-alias rd=rmdir
+alias rd="rmdir"
 
 alias -g ..="cd .."
 alias -g ...="cd ../.."
