@@ -1,0 +1,71 @@
+{
+    // Editor
+    "editor.cursorBlinking": "solid",
+    "editor.folding": false,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [80],
+    "extensions.ignoreRecommendations": true,
+    "outline.collapseItems": "alwaysCollapse",
+    "telemetry.telemetryLevel": "off",
+    "workbench.enableExperiments": false,
+    "workbench.startupEditor": "none",
+
+    // Scrolling
+    "editor.cursorSurroundingLines": 5,
+    "editor.scrollbar.horizontalScrollbarSize": 6,
+    "editor.scrollbar.verticalScrollbarSize": 7,
+    "editor.smoothScrolling": true,
+    "editor.stickyScroll.enabled": false,
+
+    // Font
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    
+    // Spacing
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+
+    // Vim
+    "vim.hlsearch": true,
+    "vim.replaceWithRegister": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-t>": true,
+        "<C-w>": true
+    },
+    "vim.scroll": 8,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>","<space>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["R"],
+            "commands": ["editor.action.rename"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"]
+        }
+    ],
+    
+    // Extension
+    "material-icon-theme.folders.theme": "classic",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+    // Web
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "html.format.indentInnerHtml": true,
+    "html.format.wrapAttributes": "force-aligned",
+
+    // Python
+    "python.venvFolders": [".venv"],
+
+    // Golang
+    "gopls": {"ui.semanticTokens": true}
+}
