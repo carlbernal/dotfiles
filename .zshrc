@@ -15,10 +15,16 @@ source "$ZSH/oh-my-zsh.sh"
 
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
-export PATH="$PATH:/opt/nvim-linux64/bin"
 export GOPATH="$HOME/.go"
 
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    export PATH="$PATH:/opt/nvim-linux64/bin"
+fi
 
 unalias -m "*"
 source ~/.aliases
