@@ -1,4 +1,5 @@
-vim.g.mapleader = vim.keycode("<space>")
+vim.g.mapleader = nil
+vim.g.maplocalleader = nil
 
 -- Platform Settings
 vim.opt.mouse = "nvi"
@@ -17,11 +18,12 @@ vim.background = "dark"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 4
-vim.opt.signcolumn = "no"
+vim.opt.signcolumn = "yes"
+vim.opt.showcmd = false
 vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
-vim.opt.fillchars:append({eob = " ", vert = " "})
+vim.opt.fillchars:append({ eob = " ", vert = " " })
 vim.g.netrw_banner = 0
 
 -- Search Settings
@@ -29,7 +31,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.wildmenu = true
+-- No need to check for rg in path, I install it everywhere anyway
 vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
@@ -38,12 +40,12 @@ vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 -- Completion
+vim.opt.wildmenu = true
+vim.opt.wildoptions = "fuzzy,pum"
 vim.opt.completeopt = "menuone,noinsert"
- 
--- Highlight Overrides
-vim.api.nvim_set_hl(0, "MatchParen", { fg = "NONE" })
+-- vim.opt.completeopt = "menuone,noinsert,fuzzy" -- V0.11 or Nightly
