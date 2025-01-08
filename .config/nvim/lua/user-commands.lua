@@ -11,21 +11,19 @@ vim.api.nvim_create_user_command("Format", function(args)
 	require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
 
--- Search commands
-vim.api.nvim_create_user_command("Sc", function()
+-- Open search on config folder
+vim.api.nvim_create_user_command("Config", function()
 	require("telescope.builtin").find_files({
 		cwd = vim.fn.stdpath("config"),
 	})
 end, {})
 
--- Gitsigns commands
-vim.api.nvim_create_user_command("Gn", "Gitsigns next_hunk", {})
-vim.api.nvim_create_user_command("Gs", "Gitsigns stage_hunk", {})
-vim.api.nvim_create_user_command("Gu", "Gitsigns undo_stage_hunk", {})
-vim.api.nvim_create_user_command("Gp", "Gitsigns preview_hunk", {})
-vim.api.nvim_create_user_command("Gb", "Gitsigns blame_line", {})
-
 -- Open diagnostics errors
 vim.api.nvim_create_user_command("E", function()
-    vim.diagnostic.setqflist({ open = true })
+	vim.diagnostic.setloclist({ open = true })
+end, {})
+
+-- Open todos
+vim.api.nvim_create_user_command("T", function()
+	vim.cmd("cgetexpr system('todo')")
 end, {})

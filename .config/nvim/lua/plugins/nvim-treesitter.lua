@@ -6,6 +6,7 @@ return {
 		end,
 		opt = {
 			ensure_installed = {
+				"vimdoc",
 				"sql",
 				"json",
 				"html",
@@ -17,10 +18,11 @@ return {
 				"bash",
 				"python",
 				"lua",
-				"commonlisp",
+				"markdown",
+				"scheme",
 			},
+			sync_install = true,
 			auto_install = false,
-			sync_install = false,
 			indent = { enable = true },
 			highlight = {
 				enabled = true,

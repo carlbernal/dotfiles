@@ -15,6 +15,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Disable unused providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
 -- Set vim options
 require("options")
 
@@ -26,9 +32,20 @@ require("lazy").setup({
 		"tpope/vim-repeat",
 		"tpope/vim-surround",
 		"vim-scripts/ReplaceWithRegister",
+		-- TODO replace targets with treesitter-objects
 		"wellle/targets.vim",
 		-- Utilities
+		"romainl/vim-qf",
 		{ "lewis6991/gitsigns.nvim", opts = {} },
+		-- Colorscheme
+		{
+			"Mofiqul/vscode.nvim",
+			lazy = false,
+			priority = 1000,
+			init = function()
+				vim.cmd("colorscheme vscode")
+			end,
+		},
 	},
 	dev = {
 		-- My plugins
@@ -44,9 +61,9 @@ require("lazy").setup({
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
-    underline = false,
+	underline = false,
 	update_in_insert = false,
-    -- severity_sort = true
+	-- severity_sort = true
 })
 
 -- Set all autocmds, user commands, and keymaps in their own separate file

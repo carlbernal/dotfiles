@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Window
+config.color_scheme = "Monokai Remastered"
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = {
 	left = "0",

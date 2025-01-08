@@ -1,5 +1,5 @@
-vim.g.mapleader = nil
-vim.g.maplocalleader = nil
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 
 -- Platform Settings
 vim.opt.mouse = "nvi"
@@ -19,6 +19,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
 vim.opt.showcmd = false
 vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
@@ -47,5 +48,7 @@ vim.opt.shiftwidth = 4
 -- Completion
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "fuzzy,pum"
+-- Only use use words from current buffer for insert mode completion
+vim.opt.complete = "."
 vim.opt.completeopt = "menuone,noinsert"
 -- vim.opt.completeopt = "menuone,noinsert,fuzzy" -- V0.11 or Nightly
