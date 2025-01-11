@@ -20,8 +20,8 @@ return {
 				lua = { "stylua" },
 			},
 		},
-		init = function()
-			vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
-		end,
+		-- init = function()
+		-- 	vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+		-- end,
 	},
 }

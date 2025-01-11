@@ -21,6 +21,7 @@ vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.showcmd = false
+vim.opt.statusline = "%y %l:%c" .. "%=" .. "%t"
 vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
@@ -44,6 +45,7 @@ vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.breakindent = true
 
 -- Completion
 vim.opt.wildmenu = true

@@ -57,7 +57,11 @@ require("lazy").setup({
 	},
 })
 
--- TODO configure
+-- TODO put lsp in a separate file
+-- TODO configure lsp
+-- https://github.com/neovim/nvim-lspconfig?tab=readme-ov-file#configuration
+-- Remove mappings to K, [d, ]d, and <c-w> d
+-- Remove formatexpr lsp format
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
@@ -65,6 +69,16 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	-- severity_sort = true
 })
+-- TODO configure lsp actions
+-- TODO if possible, create a common lsp config and include them on all lsps
+
+-- TODO make sure no lsp run only on directory that requires a root marker
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+
+-- References
+-- https://github.com/oryband/dotfiles/blob/aef18869243d48b025337d3ba41f2b410b7a6cb0/.config/nvim/lua/user/init.lua#L10
+-- https://neovim.io/doc/user/diagnostic.html
+-- https://neovim.io/doc/user/lsp.html#_lua-module:-vim.lsp.codelens
 
 -- Set all autocmds, user commands, and keymaps in their own separate file
 require("autocmds")

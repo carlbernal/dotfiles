@@ -18,3 +18,6 @@ REGEX="(//|#|<\!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
 rg --ignore-case --vimgrep "$REGEX" "$GIT_ROOT"
+
+# TODO add sorting by priority
+# TODO add other root directory markers besides git
