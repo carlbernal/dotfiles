@@ -85,3 +85,4 @@ vim.diagnostic.config({
 require("autocmds")
 require("user-commands")
 require("keymaps")
+require("highlights")
