@@ -39,11 +39,12 @@ require("lazy").setup({
 		{ "lewis6991/gitsigns.nvim", opts = {} },
 		-- Colorscheme
 		{
-			"Mofiqul/vscode.nvim",
+			"tomasiser/vim-code-dark",
 			lazy = false,
 			priority = 1000,
 			init = function()
-				vim.cmd("colorscheme vscode")
+				vim.g["codedark_conservative"] = 1
+				vim.cmd("colorscheme codedark")
 			end,
 		},
 	},
