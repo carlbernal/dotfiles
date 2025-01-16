@@ -37,6 +37,7 @@ require("lazy").setup({
 		-- Utilities
 		"romainl/vim-qf",
 		{ "lewis6991/gitsigns.nvim", opts = {} },
+        "b0o/schemastore.nvim",
 		-- Colorscheme
 		{
 			"tomasiser/vim-code-dark",

@@ -1,5 +1,6 @@
 alias v="nvim"
 alias c="clear"
+alias pn="pnpm"
 
 alias l="eza --color=auto --icons=auto --sort=type --all"
 alias ll="l -T --git-ignore"

@@ -16,6 +16,7 @@ return {
 				max_width = 50,
 				preserve_equality = false,
 			},
+			highlight_mode = "none",
 			close_on_select = true,
 			ignore = {
 				unlisted_buffers = true,
