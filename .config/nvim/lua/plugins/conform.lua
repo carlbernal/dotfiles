@@ -8,6 +8,7 @@ return {
 			formatters_by_ft = {
 				["*"] = { "trim_newlines", "trim_whitespace" },
 				sql = { "sqlfluff" },
+				yaml = { "yamlfmt" },
 				json = { "jq" },
 				html = { "prettier" },
 				css = { "prettier" },
