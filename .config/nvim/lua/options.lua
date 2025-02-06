@@ -3,7 +3,9 @@ vim.g.maplocalleader = ","
 
 -- Platform Settings
 vim.opt.mouse = "nvi"
+vim.opt.mousemodel = "extend"
 vim.opt.clipboard = "unnamedplus"
+vim.opt.termguicolors = true
 
 -- File Management
 vim.opt.hidden = true
@@ -14,12 +16,11 @@ vim.opt.backupdir:prepend(tmpdir .. "//")
 vim.opt.directory:prepend(tmpdir .. "//")
 
 -- Visual Settings
-vim.background = "dark"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
-vim.opt.cursorline = true
+vim.opt.colorcolumn = "80,120"
 vim.opt.showcmd = false
 vim.opt.statusline = "%y %l:%c" .. "%=" .. "%t"
 vim.opt.pumheight = 6
@@ -54,3 +55,4 @@ vim.opt.wildoptions = "fuzzy,pum"
 vim.opt.complete = "."
 vim.opt.completeopt = "menuone,noinsert"
 -- vim.opt.completeopt = "menuone,noinsert,fuzzy" -- V0.11 or Nightly
+-- Set vim.lsp.completion on V0.11

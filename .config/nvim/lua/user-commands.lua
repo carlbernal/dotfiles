@@ -26,6 +26,7 @@ end, {})
 -- Open todos
 vim.api.nvim_create_user_command("T", function()
 	vim.cmd("cgetexpr system('todo')")
+    -- TODO toggle if quickfix list is already open
 end, {})
 
 -- Print and copy file full path

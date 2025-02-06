@@ -32,12 +32,10 @@ require("lazy").setup({
 		"tpope/vim-repeat",
 		"tpope/vim-surround",
 		"vim-scripts/ReplaceWithRegister",
-		-- TODO replace targets with treesitter-objects
 		"wellle/targets.vim",
 		-- Utilities
 		"romainl/vim-qf",
 		{ "lewis6991/gitsigns.nvim", opts = {} },
-        "b0o/schemastore.nvim",
 		-- Colorscheme
 		{
 			"tomasiser/vim-code-dark",

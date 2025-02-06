@@ -3,7 +3,6 @@ return {
 		"stevearc/aerial.nvim",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
 			backends = {
@@ -17,6 +16,9 @@ return {
 				preserve_equality = false,
 			},
 			highlight_mode = "none",
+			highlight_closest = false,
+			highlight_on_hover = false,
+			highlight_on_jump = false,
 			close_on_select = true,
 			ignore = {
 				unlisted_buffers = true,

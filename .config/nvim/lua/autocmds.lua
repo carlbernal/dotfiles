@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 -- Set 2 space indendation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	group = my_autocmds,
-	pattern = "javascript,html,css,json",
+	pattern = "javascript,html,css,json,markdown",
 	callback = function()
 		vim.opt_local.softtabstop = 2
 		vim.opt_local.shiftwidth = 2
@@ -30,6 +30,16 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.signcolumn = "no"
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
+	end,
+})
+
+-- Set terminal mode options
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+	group = my_autocmds,
+	callback = function()
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+		vim.opt.signcolumn = "no"
 	end,
 })
 
@@ -49,6 +59,13 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
 	callback = function()
 		require("lint").try_lint()
 	end,
+})
+
+-- Additional file types
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = my_autocmds,
+	pattern = "*.njk",
+	command = "setfiletype html",
 })
 
 -- https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers

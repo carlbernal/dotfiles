@@ -4,12 +4,12 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				sql = { "sqlfluff" },
-				yaml = { "yamllint" },
+				-- yaml = {},
 				-- json = {},
 				-- html = {},
 				-- css = {},
 				javascript = { "eslint" },
-				go = { "golangcilint" },
+				typescript = { "eslint" },
 				cpp = { "clangtidy" },
 				c = { "clangtidy" },
 				sh = { "shellcheck" },

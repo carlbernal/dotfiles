@@ -16,6 +16,15 @@ vim.keymap.set("n", "<c-x>", ":bp<bar>sp<bar>bn<bar>bd<cr>", { noremap = true, s
 -- Remap shift + enter to zt
 vim.keymap.set("n", "<s-cr>", "zt", { noremap = true, silent = true })
 
+-- Toggle diagnostics
+vim.keymap.set("n", "<c-e>", function()
+	vim.diagnostic.setloclist({ open = true })
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "<c-b>", "<nop>", { noremap = true, silent = true })
+
+-- Remap esc in terminal mode
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true })
+
 -- Gitsigns mappings
 vim.keymap.set({ "o", "x" }, "ih", ":<c-u>Gitsigns select_hunk<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<cr>", { noremap = true, silent = true })
