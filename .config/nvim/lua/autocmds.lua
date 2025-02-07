@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Set terminal mode options
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
+vim.api.nvim_create_autocmd("TermOpen", {
 	group = my_autocmds,
 	callback = function()
 		vim.opt.number = false
