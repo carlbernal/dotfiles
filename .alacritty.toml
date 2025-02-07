@@ -1,0 +1,40 @@
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+    # https://stackoverflow.com/a/42461580
+    { chars = "\u001B[13;2u", key = "Return", mods = "Shift" },
+    # Browser like tab navigation
+    { key = "Tab", mods = "Control", action = "SelectNextTab" },
+    { key = "Tab", mods = "Control|Shift", action = "SelectPreviousTab" }
+]
+
+[font]
+size = 14
+offset.y = 8
+
+# XTerm darker shade
+[colors.primary]
+background = '#121212'
+foreground = '#b0b0b0'
+
+[colors.normal]
+black   = '#1c1c1c'
+red     = '#9c0000'
+green   = '#009900'
+yellow  = '#999900'
+blue    = '#0000cc'
+magenta = '#9c009c'
+cyan    = '#009999'
+white   = '#d0d0d0'
+
+[colors.bright]
+black   = '#555555'
+red     = '#b30000'
+green   = '#00b300'
+yellow  = '#b3b300'
+blue    = '#3a3aff'
+magenta = '#b300b3'
+cyan    = '#00b3b3'
+white   = '#bfbfbf'

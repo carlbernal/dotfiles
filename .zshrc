@@ -7,7 +7,6 @@ plugins=( \
     colored-man-pages \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
-    vi-mode \
     httpie \
 )
 
@@ -15,7 +14,6 @@ source "$ZSH/oh-my-zsh.sh"
 
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
-export GOPATH="$HOME/.go"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
