@@ -1,3 +1,6 @@
+-- Remove c-c echo message
+vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
+
 -- Search directory for file
 vim.keymap.set("n", "<c-p>", require("telescope.builtin").find_files, { noremap = true, silent = true })
 
@@ -26,6 +29,6 @@ vim.keymap.set("n", "<c-b>", "<nop>", { noremap = true, silent = true })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { noremap = true, silent = true })
 
 -- Gitsigns mappings
-vim.keymap.set({ "o", "x" }, "ih", ":<c-u>Gitsigns select_hunk<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "o", "x" }, "ih", ":Gitsigns select_hunk<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<cr>", { noremap = true, silent = true })
