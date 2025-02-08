@@ -33,6 +33,7 @@ require("lazy").setup({
 		"tpope/vim-surround",
 		"vim-scripts/ReplaceWithRegister",
 		"wellle/targets.vim",
+		"guns/vim-sexp",
 		-- Utilities
 		"romainl/vim-qf",
 		{ "lewis6991/gitsigns.nvim", opts = {} },

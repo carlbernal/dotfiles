@@ -22,8 +22,5 @@ return {
 				markdown = { "prettier" },
 			},
 		},
-		-- init = function()
-		-- 	vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
-		-- end,
 	},
 }

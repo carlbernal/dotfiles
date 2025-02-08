@@ -40,6 +40,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.opt.number = false
 		vim.opt.relativenumber = false
 		vim.opt.signcolumn = "no"
+		vim.opt.scrolloff = 0
 	end,
 })
 

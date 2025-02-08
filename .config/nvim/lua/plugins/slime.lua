@@ -2,7 +2,7 @@ return {
 	{
 		"jpalardy/vim-slime",
 		ft = {
-			"commonlisp",
+            "lisp",
 			"scheme",
 			"python",
 			"sql",
