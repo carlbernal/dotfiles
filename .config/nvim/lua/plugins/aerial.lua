@@ -11,9 +11,13 @@ return {
 				"markdown",
 			},
 			layout = {
-				min_width = 30,
-				max_width = 50,
+				max_width = 75,
+				min_width = 75,
 				preserve_equality = false,
+				default_direction = "float",
+			},
+			close_automatic_events = {
+				"unsupported",
 			},
 			highlight_mode = "none",
 			highlight_closest = false,
@@ -22,6 +26,14 @@ return {
 			close_on_select = true,
 			ignore = {
 				unlisted_buffers = true,
+			},
+			float = {
+				relative = "win",
+				max_height = 0.8,
+				min_height = 0.8,
+			},
+			keymaps = {
+				["<esc>"] = "actions.close",
 			},
 		},
 	},

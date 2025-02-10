@@ -33,8 +33,6 @@ require("lazy").setup({
 		"tpope/vim-surround",
 		"vim-scripts/ReplaceWithRegister",
 		"wellle/targets.vim",
-		"guns/vim-sexp",
-		"tpope/vim-sexp-mappings-for-regular-people",
 		-- Utilities
 		"mfussenegger/nvim-fzy",
 		"romainl/vim-qf",

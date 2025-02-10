@@ -11,7 +11,8 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "==", ":<c-u>Format<cr>", { noremap = true, silent = true })
 
 -- View code outline
-vim.keymap.set("n", "--", ":<c-u>AerialToggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<c-->", ":<c-u>AerialToggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<c-+>", "<nop>", { noremap = true, silent = true })
 
 -- Buffer controls
 vim.keymap.set("n", "<c-j>", ":bn<cr>", { noremap = true, silent = true })

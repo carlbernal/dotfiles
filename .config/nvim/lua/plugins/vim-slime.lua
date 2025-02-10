@@ -2,7 +2,6 @@ return {
 	{
 		"jpalardy/vim-slime",
 		ft = {
-            "lisp",
 			"python",
 			"sql",
 		},
