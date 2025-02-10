@@ -22,7 +22,7 @@ vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80,120"
 vim.opt.showcmd = false
-vim.opt.statusline = "%y %l:%c" .. "%=" .. "%t"
+vim.opt.statusline = " %y %l:%c" .. "%=" .. "%t "
 vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")

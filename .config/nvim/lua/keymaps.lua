@@ -2,7 +2,10 @@
 vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 
 -- Search directory for file
-vim.keymap.set("n", "<c-p>", require("telescope.builtin").find_files, { noremap = true, silent = true })
+vim.keymap.set("n", "<c-p>", function()
+	local fzy = require("fzy")
+	fzy.execute("fd", fzy.sinks.edit_file)
+end, { noremap = true, silent = true })
 
 -- Format file
 vim.keymap.set("n", "==", ":<c-u>Format<cr>", { noremap = true, silent = true })

@@ -11,13 +11,6 @@ vim.api.nvim_create_user_command("Format", function(args)
 	require("conform").format({ async = true, lsp_format = "fallback", range = range })
 end, { range = true })
 
--- Open search on config folder
-vim.api.nvim_create_user_command("Config", function()
-	require("telescope.builtin").find_files({
-		cwd = vim.fn.stdpath("config"),
-	})
-end, {})
-
 -- Open diagnostics errors
 vim.api.nvim_create_user_command("E", function()
 	vim.diagnostic.setloclist({ open = true })

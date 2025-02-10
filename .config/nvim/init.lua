@@ -34,7 +34,9 @@ require("lazy").setup({
 		"vim-scripts/ReplaceWithRegister",
 		"wellle/targets.vim",
 		"guns/vim-sexp",
+		"tpope/vim-sexp-mappings-for-regular-people",
 		-- Utilities
+		"mfussenegger/nvim-fzy",
 		"romainl/vim-qf",
 		{ "lewis6991/gitsigns.nvim", opts = {} },
 		-- Colorscheme
