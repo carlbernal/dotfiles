@@ -21,6 +21,12 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export PATH="$PATH:/opt/nvim-linux64/bin"
+
+    export PNPM_HOME="/home/carlbernal/.local/share/pnpm"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
 fi
 
 unalias -m "*"
