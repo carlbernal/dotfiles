@@ -11,8 +11,8 @@ return {
 				"markdown",
 			},
 			layout = {
-				max_width = 75,
-				min_width = 75,
+				max_width = 0.9,
+				min_width = 0.9,
 				preserve_equality = false,
 				default_direction = "float",
 			},
@@ -28,6 +28,7 @@ return {
 				unlisted_buffers = true,
 			},
 			float = {
+                border = "single",
 				relative = "win",
 				max_height = 0.8,
 				min_height = 0.8,

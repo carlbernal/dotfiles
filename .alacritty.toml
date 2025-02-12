@@ -5,9 +5,7 @@ hide_when_typing = true
 bindings = [
     # https://stackoverflow.com/a/42461580
     { chars = "\u001B[13;2u", key = "Return", mods = "Shift" },
-    # Browser like tab navigation
-    { key = "Tab", mods = "Control", action = "SelectNextTab" },
-    { key = "Tab", mods = "Control|Shift", action = "SelectPreviousTab" }
+    { key = "t", mods = "Command", action = "None" },
 ]
 
 [font]

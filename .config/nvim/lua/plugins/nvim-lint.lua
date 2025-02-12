@@ -15,6 +15,7 @@ return {
 				sh = { "shellcheck" },
 				python = { "flake8" },
 				-- lua = {},
+				markdown = { "vale" },
 			}
 		end,
 	},

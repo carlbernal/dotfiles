@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Set lint events
-vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
 	group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
 	callback = function()
 		require("lint").try_lint()
