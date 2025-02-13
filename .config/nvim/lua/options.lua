@@ -26,7 +26,8 @@ vim.opt.statusline = " %y %l:%c" .. "%=" .. "%t "
 vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
-vim.opt.fillchars:append({ eob = " ", vert = " " })
+vim.opt.fillchars:append({ eob = " " })
+-- vim.opt.fillchars:append({ eob = " ", vert = " " })
 vim.g.netrw_banner = 0
 
 -- Search Settings
@@ -34,9 +35,10 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- No need to check for rg in path, I install it everywhere anyway
-vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
-vim.opt.grepformat = "%f:%l:%c:%m"
+if vim.fn.executable("rg") == 1 then
+	vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
+	vim.opt.grepformat = "%f:%l:%c:%m"
+end
 
 -- Indentation
 vim.opt.smarttab = true

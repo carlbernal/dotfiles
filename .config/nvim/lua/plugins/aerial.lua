@@ -28,7 +28,7 @@ return {
 				unlisted_buffers = true,
 			},
 			float = {
-                border = "single",
+				border = "single",
 				relative = "win",
 				max_height = 0.8,
 				min_height = 0.8,

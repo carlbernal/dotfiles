@@ -37,13 +37,13 @@ vim.keymap.set("n", "gi", "<nop>", default)
 vim.keymap.set("n", "crn", "<nop>", default)
 vim.keymap.set("n", "crr", "<nop>", default)
 vim.keymap.set("n", "<c-w>d", "<nop>", default)
+vim.keymap.set("n", "K", "<nop>", default)
 
 -- Restore gq default behavior
 vim.keymap.set("n", "gq", "gq", default)
 vim.keymap.set("v", "gq", "gq", default)
 
 -- LSP mappings
-vim.keymap.set("n", "K", vim.lsp.buf.hover, default)
 vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
 vim.keymap.set("n", "<c-.>", vim.lsp.buf.code_action, default)
 
@@ -63,3 +63,4 @@ vim.keymap.set("n", "[c", ":Gitsigns prev_hunk<cr>", default)
 vim.keymap.set("n", "<c-e>", "<nop>", default)
 vim.keymap.set("n", "<c-b>", "<nop>", default)
 vim.keymap.set("n", "<c-+>", "<nop>", default)
+vim.keymap.set("n", "<c-[>", "<nop>", default)
