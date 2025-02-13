@@ -13,7 +13,6 @@ return {
 				html = { "prettier" },
 				css = { "prettier" },
 				javascript = { "prettier" },
-				typescript = { "prettier" },
 				cpp = { "clang-format" },
 				c = { "clang-format" },
 				sh = { "shfmt" },

@@ -27,6 +27,9 @@ vim.keymap.set("n", "<c-->", ":<c-u>AerialToggle<cr>", default)
 -- Delete buffer https://stackoverflow.com/questions/1444322
 vim.keymap.set("n", "<c-x>", ":<c-u>bp<bar>sp<bar>bn<bar>bd!<cr>", default)
 
+-- Make <c-^> work with au buffer fix
+vim.keymap.set("n", "<c-j>", ":<c-u>b #<cr>", default)
+
 -- Remap shift + enter to zt
 vim.keymap.set("n", "<s-cr>", "zt", default)
 
@@ -59,7 +62,8 @@ vim.keymap.set("n", "<c-+>", "<nop>", default)
 vim.keymap.set("n", "<c-[>", "<nop>", default)
 vim.keymap.set("n", "<c-e>", "<nop>", default)
 vim.keymap.set("n", "<c-b>", "<nop>", default)
-vim.keymap.set("n", "<c-j>", "<nop>", default)
+-- vim.keymap.set("n", "<c-j>", "<nop>", default)
 vim.keymap.set("n", "<c-k>", "<nop>", default)
 vim.keymap.set("n", "<c-i>", "<nop>", default)
 vim.keymap.set("n", "<c-o>", "<nop>", default)
+vim.keymap.set("n", "<c-^>", "<nop>", default)
