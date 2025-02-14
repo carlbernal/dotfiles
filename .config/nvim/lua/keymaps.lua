@@ -9,8 +9,12 @@ vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 -- Remap esc in terminal mode
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
 
--- Add InsertLeave event to x
+-- Add InsertLeave event to various verbs instead of using TextChange and debounce
 vim.keymap.set("n", "x", "x:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "p", "p:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "u", "u:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "r", "r:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "~", "~:doautocmd InsertLeave<cr>", default)
 
 -- Search directory for file
 vim.keymap.set("n", "<c-p>", function()
