@@ -13,7 +13,7 @@ vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
 vim.keymap.set("n", "x", "x:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "p", "p:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "u", "u:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "r", "r:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "<c-r>", "<c-r>:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "~", "~:doautocmd InsertLeave<cr>", default)
 
 -- Search directory for file
