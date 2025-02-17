@@ -3,11 +3,13 @@ bindings = [
     # https://stackoverflow.com/a/42461580
     { chars = "\u001B[13;2u", key = "Return", mods = "Shift" },
     { key = "t", mods = "Command", action = "None" },
+    { key = "Minus", mods = "Control", action = "ReceiveChar" },
+    { key = "Plus", mods = "Control", action = "ReceiveChar" },
 ]
 
 [font]
-size = 14
-offset.y = 8
+size = 12
+offset.y = 6
 
 # XTerm darker shade
 [colors.primary]
