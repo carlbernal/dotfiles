@@ -3,6 +3,7 @@ return {
 		"jpalardy/vim-slime",
 		ft = {
 			"python",
+			"lua",
 			"sql",
 		},
 		init = function()
