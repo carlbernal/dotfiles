@@ -6,9 +6,9 @@
 # re-transform it everytime the file is updated
 
 # Check if dependencies are installed
-dependencies=("pandoc" "fswatch")
+dependencies=("pandoc" "fswatch" "wget")
 for i in "${dependencies[@]}"; do
-    if ! command -v "$i" &> /dev/null; then
+    if ! command -v "$i" &>/dev/null; then
         echo "$i needs to be in path!"
         exit 1
     fi
@@ -26,28 +26,32 @@ if [ $# -ne 1 ]; then
 fi
 
 # Check if argument is a markdown file
-if  [[ ! -f "$1" || ! "$1" =~ \.md$ ]]; then
+if [[ ! -f "$1" || ! "$1" =~ \.md$ ]]; then
     echo "$invalid_command_msg"
     echo "Error: $1 is not a markdown file"
     echo "$usage_msg"
     exit 1
 fi
 
-# https://github.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS
-# Replace with own css if needed
-# FIXME not working in linux
-gfm_css_file="https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
-
 # Use temporary file for output html and delete it after the script exits
 input_file="$1"
 tempdir=$(mktemp -d)
 trap 'rm -rf "$tempdir"' EXIT
 output_file="$tempdir/output.html"
+css_file="$tempdir/styles.css"
+
+# TODO maybe cache the css file?
+
+# https://github.com/sindresorhus/github-markdown-css
+wget -qO "$css_file" "https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
 
 convertToHtml() {
     # Removed pandoc stderr checks for performance
     pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
-    --embed-resources --standalone --css="$gfm_css_file"
+        --embed-resources --standalone --css="$css_file"
+
+    # Add markdown-body class required by sindresorhus/githun-markdown-css
+    sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file"
 }
 
 # Initial trasnform
@@ -56,8 +60,7 @@ open "$tempdir/output.html"
 echo "Built html in $output_file"
 
 # Transform everytime the markdown file is updated
-fswatch -o --event Updated --latency=0.5 "$input_file"| while read -r;
-do
+fswatch -o --event Updated --latency=0.5 "$input_file" | while read -r; do
     echo "File updated. Rebuilding HTML..."
     convertToHtml
 done
