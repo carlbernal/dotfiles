@@ -13,4 +13,4 @@ alias -g ..="cd .."
 alias -g ...="cd ../.."
 alias -g ....="cd ../../.."
 
-alias ipython="ipython3"
+alias ipy="ipython3"

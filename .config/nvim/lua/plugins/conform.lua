@@ -14,7 +14,6 @@ return {
 				css = { "prettier" },
 				javascript = { "prettier" },
 				cpp = { "clang-format" },
-				c = { "clang-format" },
 				sh = { "shfmt" },
 				python = { "black" },
 				lua = { "stylua" },
