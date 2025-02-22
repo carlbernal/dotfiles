@@ -7,10 +7,12 @@ return {
 			"sql",
 		},
 		init = function()
+			-- Must be configured before plugin is loaded
 			vim.g["slime_target"] = "neovim"
-			vim.g["slime_python_ipython"] = true
 		end,
 		config = function()
+			-- Options after plugin is loaded
+			vim.g["slime_bracketed_paste"] = true
 			vim.g["slime_input_pid"] = false
 			vim.g["slime_suggest_default"] = true
 			vim.g["slime_menu_config"] = false

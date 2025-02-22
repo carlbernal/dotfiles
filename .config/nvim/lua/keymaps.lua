@@ -61,6 +61,21 @@ vim.keymap.set({ "o", "x" }, "ih", ":<c-u>Gitsigns select_hunk<cr>", default)
 vim.keymap.set("n", "]c", ":<c-u>Gitsigns next_hunk<cr>", default)
 vim.keymap.set("n", "[c", ":<c-u>Gitsigns prev_hunk<cr>", default)
 
+-- Python keymaps
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		-- Run current file in ipython
+		vim.keymap.set("n", "<c-c><c-l>", function()
+			local path = vim.api.nvim_buf_get_name(0)
+			-- https://neovim.io/doc/user/builtin.html#fnameescape()
+			local cmd = "%run -i " .. vim.fn.fnameescape(path) .. "\n"
+			-- https://github.com/jpalardy/vim-slime/blob/main/autoload/slime.vim#L140
+			vim.fn["slime#send"](cmd)
+		end, default)
+	end,
+})
+
 -- Reserve
 vim.keymap.set("n", "<c-+>", "<nop>", default)
 vim.keymap.set("n", "<c-[>", "<nop>", default)
