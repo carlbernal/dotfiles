@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 -- Set 2 space indendation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	group = my_autocmds,
-	pattern = "javascript,html,css,json,markdown",
+	pattern = "lisp,scheme,javascript,html,css,json,markdown",
 	callback = function()
 		vim.opt_local.softtabstop = 2
 		vim.opt_local.shiftwidth = 2

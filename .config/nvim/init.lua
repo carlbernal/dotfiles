@@ -64,7 +64,7 @@ vim.diagnostic.config({
 	signs = true,
 	underline = false,
 	update_in_insert = false,
-	severity_sort = false
+	severity_sort = false,
 })
 
 -- Set all autocmds, user commands, and keymaps in their own separate file
