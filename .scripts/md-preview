@@ -43,7 +43,10 @@ css_file="$tempdir/styles.css"
 # TODO maybe cache the css file?
 
 # https://github.com/sindresorhus/github-markdown-css
-wget -qO "$css_file" "https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
+# wget -qO "$css_file" "https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
+
+# https://github.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS
+wget -qO "$css_file" "https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
 
 convertToHtml() {
     # Removed pandoc stderr checks for performance
@@ -51,7 +54,7 @@ convertToHtml() {
         --embed-resources --standalone --css="$css_file"
 
     # Add markdown-body class required by sindresorhus/githun-markdown-css
-    sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file"
+    # sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file"
 }
 
 # Initial trasnform
