@@ -65,20 +65,20 @@ vim.keymap.set("n", "[c", ":<c-u>Gitsigns prev_hunk<cr>", default)
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python,scheme,lisp",
 	callback = function()
-		local filetype = vim.bo.filetype
-		-- https://neovim.io/doc/user/api.html#nvim_buf_get_name()
-		-- https://neovim.io/doc/user/builtin.html#fnameescape()
-		local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-		local cmd = nil
-
-		if filetype == "python" then
-			cmd = "%run -i " .. path .. "\n"
-		elseif filetype == "scheme" or filetype == "lisp" then
-			cmd = '(load "' .. path .. '")\n'
-		end
-
 		-- Send file to repl
 		vim.keymap.set("n", "<c-c><c-l>", function()
+			local filetype = vim.bo.filetype
+			-- https://neovim.io/doc/user/api.html#nvim_buf_get_name()
+			-- https://neovim.io/doc/user/builtin.html#fnameescape()
+			local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+			local cmd = ""
+
+			if filetype == "python" then
+				cmd = "%run -i " .. path .. "\n"
+			elseif filetype == "scheme" or filetype == "lisp" then
+				cmd = '(load "' .. path .. '")\n'
+			end
+
 			-- https://github.com/jpalardy/vim-slime/blob/main/autoload/slime.vim#L140
 			vim.fn["slime#send"](cmd)
 		end, default)
