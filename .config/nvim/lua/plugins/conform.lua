@@ -13,6 +13,7 @@ return {
 				html = { "prettier" },
 				css = { "prettier" },
 				javascript = { "prettier" },
+				c = { "clang-format" },
 				cpp = { "clang-format" },
 				sh = { "shfmt" },
 				python = { "black" },

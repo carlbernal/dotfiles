@@ -28,10 +28,12 @@ require("options")
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
-		-- Text object and verb
+		-- Verbs
 		"tpope/vim-repeat",
 		"tpope/vim-surround",
 		"vim-scripts/ReplaceWithRegister",
+		-- Objects
+		"michaeljsmith/vim-indent-object",
 		"wellle/targets.vim",
 		-- Utilities
 		"mfussenegger/nvim-fzy",
@@ -47,10 +49,6 @@ require("lazy").setup({
 				vim.cmd("colorscheme codedark")
 			end,
 		},
-	},
-	dev = {
-		-- My plugins
-		path = "~/repo/nvim-plugins",
 	},
 	change_detection = {
 		enable = false,

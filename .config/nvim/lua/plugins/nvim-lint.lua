@@ -5,6 +5,7 @@ return {
 			require("lint").linters_by_ft = {
 				sql = { "sqlfluff" },
 				javascript = { "eslint" },
+				c = { "clangtidy" },
 				cpp = { "clangtidy" },
 				sh = { "shellcheck" },
 				python = { "flake8" },
