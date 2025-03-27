@@ -1,0 +1,11 @@
+christian-kohler.npm-intellisense
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+eseom.nunjucks-template
+ms-python.black-formatter
+ms-python.debugpy
+ms-python.flake8
+ms-python.python
+ms-python.vscode-pylance
+pkief.material-icon-theme
+vscodevim.vim
