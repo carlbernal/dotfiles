@@ -14,9 +14,15 @@ source "$ZSH/oh-my-zsh.sh"
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+    export PATH="$PATH:$(brew --prefix)/opt/libpq/bin/"
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
