@@ -9,7 +9,7 @@ bindings = [
 
 [font]
 size = 14
-offset.y = 6
+offset.y = 5
 
 # XTerm darker shade
 [colors.primary]
@@ -20,18 +20,24 @@ foreground = '#b0b0b0'
 black   = '#1c1c1c'
 red     = '#9c0000'
 green   = '#009900'
-yellow  = '#999900'
-blue    = '#0000cc'
+# yellow  = '#999900'
+yellow  = '#8A8500'
+# blue    = '#0000cc'
+blue    = '#4F6FAF'
 magenta = '#9c009c'
-cyan    = '#009999'
+# cyan    = '#009999'
+cyan    = '#4FA7A7'
 white   = '#d0d0d0'
 
 [colors.bright]
 black   = '#555555'
 red     = '#b30000'
 green   = '#00b300'
-yellow  = '#b3b300'
-blue    = '#3a3aff'
+# yellow  = '#b3b300'
+yellow  = '#A89A00'
+# blue    = '#3a3aff'
+blue    = '#6F8FD7'
 magenta = '#b300b3'
-cyan    = '#00b3b3'
+# cyan    = '#00b3b3'
+cyan    = '#6FC7C7'
 white   = '#bfbfbf'
