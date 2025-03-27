@@ -53,8 +53,6 @@ vim.opt.breakindent = true
 -- Completion
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "fuzzy,pum"
--- Only use use words from current buffer for insert mode completion
-vim.opt.complete = "."
-vim.opt.completeopt = "menuone,noinsert"
--- vim.opt.completeopt = "menuone,noinsert,fuzzy" -- V0.11 or Nightly
--- Set vim.lsp.completion on V0.11
+-- Words from current and visible buffers
+vim.opt.complete = ".,w"
+vim.opt.completeopt = "menuone,noinsert,fuzzy"

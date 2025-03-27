@@ -7,7 +7,7 @@ return {
 			"lisp",
 		},
 		config = function()
-			vim.g["parinfer_mode"] = "indent"
+			vim.g["parinfer_mode"] = "smart"
 		end,
 	},
 }
