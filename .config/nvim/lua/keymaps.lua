@@ -44,6 +44,12 @@ vim.keymap.set("i", "<c-f>", "<c-x><c-f>", default)
 -- Remove default LSP mappings
 vim.keymap.set("n", "<c-w>d", "<nop>", default)
 vim.keymap.set("n", "K", "<nop>", default)
+vim.keymap.del("n", "grn")
+-- vim.keymap.del("n", "grr")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "gO")
+vim.keymap.del("i", "<C-s>")
+vim.keymap.del("s", "<C-s>")
 
 -- Restore gq default behavior
 vim.keymap.set("n", "gq", "gq", default)

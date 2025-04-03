@@ -1,0 +1,72 @@
+--fields=+KSn          # Add kind, line number, and scope info
+--extras=-             # Disable references, constant values, etc.
+--exclude=.git
+--exclude=.hg
+--exclude=.svn
+--exclude=node_modules
+--exclude=__pycache__
+--exclude=dist
+--exclude=build
+--exclude=out
+--exclude=bin
+--exclude=obj
+--exclude=venv
+--exclude=.venv
+--exclude=.mypy_cache
+--exclude=.tox
+--exclude=coverage
+--exclude=test
+--exclude=tests
+--exclude=docs
+--exclude=*.min.js
+--exclude=*.d.ts
+--exclude=*.json
+--exclude=*.xml
+--exclude=*.lock
+--exclude=*.log
+--exclude=*.class
+--exclude=*.jar
+--exclude=*.exe
+--exclude=*.dll
+--exclude=*.png
+--exclude=*.jpg
+--exclude=*.jpeg
+--exclude=*.gif
+--exclude=*.svg
+
+--languages=+C,C++,Python,Java,JavaScript,TypeScript,Go,Rust,Lua,Scheme,CommonLisp,Sh,Make
+
+# C / C++
+--c-kinds=fp
+--c++-kinds=fp
+
+# Python
+--python-kinds=fvc
+
+# Java
+--java-kinds=cfm
+
+# JavaScript / TypeScript
+--javascript-kinds=cfmv
+--typescript-kinds=cfmv
+
+# Go
+--go-kinds=cfv
+
+# Rust
+--rust-kinds=fn
+
+# Lua
+--lua-kinds=fv
+
+# Scheme
+--scheme-kinds=f
+
+# Common Lisp
+--commonlisp-kinds=fmctv
+
+# Shell
+--sh-kinds=fv
+
+# Makefile
+--make-kinds=m

@@ -69,6 +69,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	command = "setfiletype html",
 })
 
+-- Omni complete fallback
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if vim.bo.omnifunc == "" then
+			vim.bo.omnifunc = "syntaxcomplete#Complete"
+		end
+	end,
+})
+
 -- https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers
 vim.cmd([[
 " Save current view settings on a per-window, per-buffer basis.

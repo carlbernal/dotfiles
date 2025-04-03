@@ -9,6 +9,7 @@ return {
 				"treesitter",
 				"lsp",
 				"markdown",
+				"ctags",
 			},
 			layout = {
 				max_width = 0.9,

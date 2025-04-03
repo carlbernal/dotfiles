@@ -15,9 +15,7 @@ local tmpdir = vim.loop.os_getenv("TMPDIR") or "/tmp"
 vim.opt.backupdir:prepend(tmpdir .. "//")
 vim.opt.directory:prepend(tmpdir .. "//")
 
--- Visual Settings
-vim.opt.number = true
-vim.opt.relativenumber = true
+-- UI Settings
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80,120"
@@ -27,8 +25,8 @@ vim.opt.pumheight = 6
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
 vim.opt.fillchars:append({ eob = " " })
--- vim.opt.fillchars:append({ eob = " ", vert = " " })
 vim.g.netrw_banner = 0
+-- vim.g.loaded_matchparen = 1
 
 -- Search Settings
 vim.opt.hlsearch = true
@@ -53,6 +51,5 @@ vim.opt.breakindent = true
 -- Completion
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "fuzzy,pum"
--- Words from current and visible buffers
 vim.opt.complete = ".,w"
 vim.opt.completeopt = "menuone,noinsert,fuzzy"

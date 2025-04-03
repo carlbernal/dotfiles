@@ -9,7 +9,6 @@ return {
 				cpp = { "clangtidy" },
 				sh = { "shellcheck" },
 				python = { "flake8" },
-				markdown = { "cspell" },
 			}
 		end,
 	},
