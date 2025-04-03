@@ -8,36 +8,33 @@ bindings = [
 ]
 
 [font]
-size = 14
+size = 14.9
 offset.y = 5
 
-# XTerm darker shade
+[window]
+opacity = 0.95
+
+# XTerm colors
 [colors.primary]
-background = '#121212'
-foreground = '#b0b0b0'
+background = '#000000'
+foreground = '#ffffff'
 
 [colors.normal]
-black   = '#1c1c1c'
-red     = '#9c0000'
-green   = '#009900'
-# yellow  = '#999900'
-yellow  = '#8A8500'
-# blue    = '#0000cc'
-blue    = '#4F6FAF'
-magenta = '#9c009c'
-# cyan    = '#009999'
-cyan    = '#4FA7A7'
-white   = '#d0d0d0'
+black   = '#000000'
+red     = '#cd0000'
+green   = '#00cd00'
+yellow  = '#cdcd00'
+blue    = '#0000ee'
+magenta = '#cd00cd'
+cyan    = '#00cdcd'
+white   = '#e5e5e5'
 
 [colors.bright]
-black   = '#555555'
-red     = '#b30000'
-green   = '#00b300'
-# yellow  = '#b3b300'
-yellow  = '#A89A00'
-# blue    = '#3a3aff'
-blue    = '#6F8FD7'
-magenta = '#b300b3'
-# cyan    = '#00b3b3'
-cyan    = '#6FC7C7'
-white   = '#bfbfbf'
+black   = '#7f7f7f'
+red     = '#ff0000'
+green   = '#00ff00'
+yellow  = '#ffff00'
+blue    = '#5c5cff'
+magenta = '#ff00ff'
+cyan    = '#00ffff'
+white   = '#ffffff'
