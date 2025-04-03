@@ -69,7 +69,7 @@
   {
     "key": "ctrl+b",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "vim.mode == 'Normal'"
+    "when": "vim.mode == 'Normal' || terminalFocus"
   },
   {
     "key": "cmd+b",

@@ -3,20 +3,24 @@
   "chat.commandCenter.enabled": false,
   "editor.cursorBlinking": "solid",
   "editor.folding": false,
-  "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "off",
   "editor.minimap.enabled": false,
   "editor.rulers": [80],
   "editor.wordWrap": "bounded",
   "extensions.ignoreRecommendations": true,
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
+  "git.openRepositoryInParentFolders": "always",
   "outline.collapseItems": "alwaysCollapse",
   "telemetry.telemetryLevel": "off",
   "window.commandCenter": false,
+  "workbench.activityBar.location": "hidden",
   "workbench.enableExperiments": false,
   "workbench.startupEditor": "none",
 
   // Scrolling
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontal": "hidden",
   "editor.cursorSurroundingLines": 5,
   "editor.scrollbar.horizontalScrollbarSize": 6,
   "editor.scrollbar.verticalScrollbarSize": 7,
@@ -24,13 +28,20 @@
   "editor.stickyScroll.enabled": true,
 
   // Font
-  "editor.fontSize": 14,
+  "editor.fontSize": 14.5,
   "terminal.integrated.fontSize": 14,
 
   // Spacing
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
 
+  // Terminal
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleSidebarVisibility",
+    "workbench.action.closeActiveEditor"
+  ],
+
+  // Files
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -76,6 +87,9 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "html.format.indentInnerHtml": true,
   "html.format.wrapAttributes": "force-aligned",
+  "emmet.includeLanguages": {
+    "javascript": "html"
+  },
   "[javascript]": {
     "editor.tabSize": 2
   },
@@ -97,6 +111,5 @@
   "python.terminal.launchArgs": ["-m", "IPython"],
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
-},
-"git.openRepositoryInParentFolders": "always"
+  }
 }
