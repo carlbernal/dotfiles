@@ -2,7 +2,7 @@ alias v="nvim"
 alias pn="pnpm"
 alias d="podman"
 
-alias l="eza --color=auto --icons=never --sort=type --all"
+alias l="eza --color=auto --icons=never --sort=type"
 alias ll="l -T --git-ignore"
 
 alias rm="rm -i"
