@@ -40,11 +40,9 @@ vim.keymap.set("n", "<c-cr>", function()
   vim.diagnostic.setloclist({ open = true })
 end, default)
 
--- Search directory for file
-vim.keymap.set("n", "<c-p>", function()
-  local fzy = require("fzy")
-  fzy.execute("fd --type f --strip-cwd-prefix", fzy.sinks.edit_file)
-end, default)
+-- FZF keymaps
+vim.keymap.set("n", "<c-p>", "<cmd>FzfLua files<cr>", default)
+vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
 
 -- Open tagbar
 vim.keymap.set("n", "<c-->", "<cmd>TagbarToggle<cr>", default)

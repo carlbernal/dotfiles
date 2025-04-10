@@ -18,7 +18,8 @@ vim.opt.directory:prepend(tmpdir .. "//")
 -- UI Settings
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80,120"
+vim.opt.colorcolumn = "80,100"
+vim.opt.number = true
 vim.opt.showcmd = false
 vim.opt.statusline = "%y %l:%c" .. "%=" .. "%t"
 vim.opt.pumheight = 6
