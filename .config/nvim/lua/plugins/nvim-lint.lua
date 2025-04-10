@@ -1,15 +1,16 @@
 return {
-	{
-		"mfussenegger/nvim-lint",
-		config = function()
-			require("lint").linters_by_ft = {
-				sql = { "sqlfluff" },
-				javascript = { "eslint" },
-				c = { "clangtidy" },
-				cpp = { "clangtidy" },
-				sh = { "shellcheck" },
-				python = { "flake8" },
-			}
-		end,
-	},
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters_by_ft = {
+        c = { "clangtidy" },
+        cpp = { "clangtidy" },
+        javascript = { "eslint" },
+        lua = { "luacheck" },
+        python = { "flake8" },
+        sh = { "shellcheck" },
+        sql = { "sqlfluff" },
+      }
+    end,
+  },
 }

@@ -26,7 +26,6 @@ vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
 vim.opt.fillchars:append({ eob = " " })
 vim.g.netrw_banner = 0
--- vim.g.loaded_matchparen = 1
 
 -- Search Settings
 vim.opt.hlsearch = true
@@ -34,8 +33,8 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 if vim.fn.executable("rg") == 1 then
-	vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
-	vim.opt.grepformat = "%f:%l:%c:%m"
+  vim.opt.grepprg = "rg --vimgrep --smart-case --hidden"
+  vim.opt.grepformat = "%f:%l:%c:%m"
 end
 
 -- Indentation
@@ -49,7 +48,17 @@ vim.opt.shiftwidth = 4
 vim.opt.breakindent = true
 
 -- Completion
+vim.opt.omnifunc = "syntaxcomplete#Complete"
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "fuzzy,pum"
 vim.opt.complete = ".,w"
 vim.opt.completeopt = "menuone,noinsert,fuzzy"
+
+-- Diagnostics
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = false,
+  update_in_insert = false,
+  severity_sort = false,
+})
