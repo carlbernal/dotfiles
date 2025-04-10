@@ -8,3 +8,6 @@ vim.api.nvim_set_hl(0, "QuickFixLine", { bg = "NONE", ctermbg = "NONE" })
 
 -- Invert matching parenthesis highlight color
 vim.api.nvim_set_hl(0, "MatchParen", { bg = "#3b424f", fg = "NONE" })
+
+-- Remove tagbar highlight
+vim.api.nvim_set_hl(0, "TagbarHighlight", { link = "Normal", default = true })

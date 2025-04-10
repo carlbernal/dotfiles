@@ -47,18 +47,17 @@ vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
 -- Open tagbar
 vim.keymap.set("n", "<c-->", "<cmd>TagbarToggle<cr>", default)
 
--- Close tagbar
+-- -- Close tagbar
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tagbar",
   callback = function()
-    vim.keymap.set("n", "<esc>", "<c-w>c", default)
+    vim.keymap.set("n", "<esc>", "<c-w>c", { buffer = true })
   end,
 })
 
 -- Gitsigns Textobject
 vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
-vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 -- Slime keymaps
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python,scheme,lisp,clojure",
