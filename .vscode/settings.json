@@ -14,7 +14,7 @@
   "outline.collapseItems": "alwaysCollapse",
   "telemetry.telemetryLevel": "off",
   "window.commandCenter": false,
-  "workbench.activityBar.location": "hidden",
+  "workbench.activityBar.location": "default",
   "workbench.enableExperiments": false,
   "workbench.startupEditor": "none",
 
@@ -28,7 +28,8 @@
   "editor.stickyScroll.enabled": true,
 
   // Font
-  "editor.fontSize": 14.5,
+  "editor.fontSize": 14,
+  "editor.fontFamily": "Jetbrains Mono NL",
   "terminal.integrated.fontSize": 14,
 
   // Spacing
