@@ -5,6 +5,7 @@ return {
       require("lint").linters_by_ft = {
         c = { "clangtidy" },
         cpp = { "clangtidy" },
+        go = { "golangcilint" },
         javascript = { "eslint" },
         lua = { "luacheck" },
         python = { "flake8" },

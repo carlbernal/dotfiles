@@ -37,8 +37,8 @@
 --languages=+C,C++,Python,Java,JavaScript,TypeScript,Go,Rust,Lua,Scheme,CommonLisp,Sh,Make
 
 # C / C++
---c-kinds=fp
---c++-kinds=fp
+--c-kinds=fpv
+--c++-kinds=fpv
 
 # Python
 --python-kinds=fvc
@@ -51,7 +51,7 @@
 --typescript-kinds=cfmv
 
 # Go
---go-kinds=cfv
+--go-kinds=cfvs
 
 # Rust
 --rust-kinds=fn
