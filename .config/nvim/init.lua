@@ -37,7 +37,6 @@ require("lazy").setup({
     "wellle/targets.vim",
     -- Utilities
     "romainl/vim-qf",
-    "tpope/vim-fugitive",
     { "lewis6991/gitsigns.nvim", opts = {} },
     -- Colorscheme
     {
