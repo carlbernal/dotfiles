@@ -14,11 +14,6 @@ source "$ZSH/oh-my-zsh.sh"
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
@@ -27,12 +22,6 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-    export PNPM_HOME="$HOME/.local/share/pnpm"
-    case ":$PATH:" in
-      *":$PNPM_HOME:"*) ;;
-      *) export PATH="$PNPM_HOME:$PATH" ;;
-    esac
 fi
 
 unalias -m "*"

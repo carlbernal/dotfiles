@@ -1,5 +1,4 @@
 alias v="nvim"
-alias pn="pnpm"
 alias d="podman"
 
 alias l="eza --color=auto --icons=never --sort=type"
@@ -12,5 +11,3 @@ alias rd="rmdir"
 alias -g ..="cd .."
 alias -g ...="cd ../.."
 alias -g ....="cd ../../.."
-
-alias ipy="ipython3"
