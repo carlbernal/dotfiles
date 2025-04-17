@@ -6,7 +6,6 @@ return {
       "python",
       "scheme",
       "lisp",
-      "clojure",
     },
     init = function()
       vim.g["slime_target"] = "neovim"

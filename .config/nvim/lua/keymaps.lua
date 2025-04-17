@@ -21,6 +21,18 @@ vim.keymap.set("n", "p", "p:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "u", "u:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "<c-r>", "<c-r>:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "~", "~:doautocmd InsertLeave<cr>", default)
+vim.keymap.set("n", "D", function()
+  vim.cmd("normal! D")
+  vim.cmd("doautocmd InsertLeave")
+end, { silent = true })
+vim.keymap.set("n", "dd", function()
+  vim.cmd("normal! dd")
+  vim.cmd("doautocmd InsertLeave")
+end, { silent = true })
+vim.keymap.set("v", "d", function()
+  vim.cmd('normal! d')
+  vim.cmd("doautocmd InsertLeave")
+end, { silent = true })
 
 -- Restore gq default behavior
 vim.keymap.set("n", "gq", "gq", default)
@@ -72,8 +84,6 @@ vim.api.nvim_create_autocmd("FileType", {
         cmd = "%run -i " .. path .. "\n"
       elseif filetype == "scheme" or filetype == "lisp" then
         cmd = '(load "' .. path .. '")\n'
-      elseif filetype == "clojure" then
-        cmd = '(load-file "' .. path .. '")\n'
       end
 
       -- https://github.com/jpalardy/vim-slime/blob/main/autoload/slime.vim#L140

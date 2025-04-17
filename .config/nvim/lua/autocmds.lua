@@ -52,10 +52,10 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
   end,
 })
 
--- Nunjucks file type
+-- Template engine file types
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = my_autocmds,
-  pattern = "*.njk",
+  pattern = "*.njk,*.jinja",
   command = "setfiletype html",
 })
 
