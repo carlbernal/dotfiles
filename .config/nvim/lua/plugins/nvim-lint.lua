@@ -6,7 +6,6 @@ return {
         c = { "cppcheck" },
         cpp = { "cppcheck" },
         javascript = { "eslint_d" },
-        lua = { "luacheck" },
         python = { "flake8" },
         sh = { "shellcheck" },
         sql = { "sqlfluff" },

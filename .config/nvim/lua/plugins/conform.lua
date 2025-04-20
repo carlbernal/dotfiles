@@ -15,7 +15,6 @@ return {
         javascript = { "prettier" },
         json = { "jq" },
         lua = { "stylua" },
-        markdown = { "prettier" },
         python = { "black" },
         sh = { "shfmt" },
         sql = { "sqlfluff" },

@@ -49,7 +49,6 @@ vim.opt.shiftwidth = 4
 vim.opt.breakindent = true
 
 -- Completion
-vim.opt.omnifunc = "syntaxcomplete#Complete"
 vim.opt.wildmenu = true
 vim.opt.wildoptions = "fuzzy,pum"
 vim.opt.complete = ".,w"

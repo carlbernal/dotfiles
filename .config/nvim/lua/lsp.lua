@@ -1,3 +1,17 @@
+-- Global config
+vim.lsp.config("*", {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+  root_markers = {
+    '.git'
+  },
+})
+
 -- C, C++
 vim.lsp.config["clangd"] = {
   cmd = { "clangd" },
@@ -8,7 +22,6 @@ vim.lsp.config["clangd"] = {
     "compile_commands.json",
     "compile_flags.txt",
     "configure.ac",
-    ".git"
   },
   filetypes = {
     "c",
@@ -23,7 +36,6 @@ vim.lsp.config["gopls"] = {
   root_markers = {
     "go.work",
     "go.mod",
-    ".git"
   },
   filetypes = {
     "go",
@@ -44,19 +56,8 @@ vim.lsp.config["lua_ls"] = {
     "stylua.toml",
     "selene.toml",
     "selene.yml",
-    ".git"
   },
-  filetypes = { "lua" },
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      runtime = {
-        version = 'LuaJIT',
-      }
-    },
-  },
+  filetypes = { "lua" }
 }
 
 -- Python
@@ -69,7 +70,6 @@ vim.lsp.config["pyright"] = {
     "requirements.txt",
     "Pipfile",
     "pyrightconfig.json",
-    ".git"
   },
   filetypes = { "python" },
   settings = {
@@ -90,7 +90,6 @@ vim.lsp.config["ts_ls"] = {
     "tsconfig.json",
     "jsconfig.json",
     "package.json",
-    ".git"
   },
   filetypes = {
     "javascript",
