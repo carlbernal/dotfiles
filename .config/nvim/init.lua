@@ -55,8 +55,9 @@ require("lazy").setup({
   },
 })
 
--- Set all autocmds, user commands, and keymaps in their own separate file
+-- Set other options
 require("autocmds")
 require("user-commands")
 require("keymaps")
 require("highlights")
+require("lsp")

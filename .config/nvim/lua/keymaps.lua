@@ -47,6 +47,10 @@ vim.keymap.del("n", "gO")
 vim.keymap.del("i", "<C-s>")
 vim.keymap.del("s", "<C-s>")
 
+-- LSP mappings
+vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
+vim.keymap.set("n", "<c-.>", vim.lsp.buf.code_action, default)
+
 -- Diagnostics mappings
 vim.keymap.set("n", "<c-cr>", function()
   vim.diagnostic.setloclist({ open = true })
@@ -55,6 +59,9 @@ end, default)
 -- FZF keymaps
 vim.keymap.set("n", "<c-p>", "<cmd>FzfLua files<cr>", default)
 vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
+
+-- Format file using conform
+vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
 
 -- Open tagbar
 vim.keymap.set("n", "<c-->", "<cmd>TagbarToggle<cr>", default)
@@ -67,12 +74,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Gitsigns Textobject
+-- Gitsigns textobject
 vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
 -- Slime keymaps
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme,lisp,clojure",
+  pattern = "sql,python,scheme,lisp",
   callback = function()
     -- Send file to repl
     vim.keymap.set("n", "<c-c><c-k>", function()

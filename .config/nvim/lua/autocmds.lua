@@ -52,6 +52,16 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
   end,
 })
 
+-- Enable built-in auto-completion
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client:supports_method('textDocument/completion') then
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+  end,
+})
+
 -- Template engine file types
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = my_autocmds,
