@@ -66,7 +66,7 @@ vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
 -- Open tagbar
 vim.keymap.set("n", "<c-->", "<cmd>TagbarToggle<cr>", default)
 
--- -- Close tagbar
+-- Close tagbar
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tagbar",
   callback = function()
