@@ -13,6 +13,7 @@
   "git.openRepositoryInParentFolders": "always",
   "outline.collapseItems": "alwaysCollapse",
   "telemetry.telemetryLevel": "off",
+  "update.showReleaseNotes": false,
   "window.commandCenter": false,
   "workbench.activityBar.location": "default",
   "workbench.enableExperiments": false,
