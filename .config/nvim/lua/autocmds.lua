@@ -44,6 +44,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- Set omnifunc source dynamically
+vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
+  callback = function(args)
+    local bufnr = args.buf
+    local has_lsp = not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = bufnr }))
+    if has_lsp then
+      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    else
+      vim.bo[bufnr].omnifunc = "syntaxcomplete#Complete"
+    end
+  end,
+})
+
 -- Set lint events
 vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
   group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),

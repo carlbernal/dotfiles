@@ -30,6 +30,21 @@ vim.lsp.config["clangd"] = {
   },
 }
 
+-- Golang
+vim.lsp.config["gopls"] = {
+  cmd = { "gopls" },
+  root_markers = {
+    "go.work",
+    "go.mod"
+  },
+  filetypes = {
+   "go",
+   "gomod",
+   "gowork",
+   "gotmpl"
+  },
+}
+
 -- Lua
 vim.lsp.config["lua_ls"] = {
   cmd = { "lua-language-server"},
