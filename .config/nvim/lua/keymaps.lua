@@ -4,7 +4,7 @@ local default = {
 }
 
 -- Remap shift + enter to zt
-vim.keymap.set("n", "<s-cr>", "zt", default)
+-- vim.keymap.set("n", "<s-cr>", "zt", default)
 
 -- Remap esc in terminal mode
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
@@ -64,7 +64,7 @@ vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
 vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
 
 -- Open tagbar
-vim.keymap.set("n", "<c-->", "<cmd>TagbarToggle<cr>", default)
+vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", default)
 
 -- Close tagbar
 vim.api.nvim_create_autocmd("FileType", {
