@@ -45,21 +45,6 @@ vim.lsp.config["gopls"] = {
   },
 }
 
--- Lua
-vim.lsp.config["lua_ls"] = {
-  cmd = { "lua-language-server"},
-  root_markers = {
-    ".luarc.json",
-    ".luarc.jsonc",
-    ".luacheckrc",
-    ".stylua.toml",
-    "stylua.toml",
-    "selene.toml",
-    "selene.yml",
-  },
-  filetypes = { "lua" }
-}
-
 -- Python
 vim.lsp.config["pyright"] = {
   cmd = { "pyright-langserver", "--stdio" },
@@ -103,7 +88,6 @@ vim.lsp.config["ts_ls"] = {
 vim.lsp.enable({
   "clangd",
   "gopls",
-  "lua_ls",
   "pyright",
   "ts_ls"
 })

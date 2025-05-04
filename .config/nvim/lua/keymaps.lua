@@ -52,7 +52,7 @@ vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
 vim.keymap.set("n", "<c-.>", vim.lsp.buf.code_action, default)
 
 -- Diagnostics mappings
-vim.keymap.set("n", "<c-cr>", function()
+vim.keymap.set("n", "<c-m>", function()
   vim.diagnostic.setloclist({ open = true })
 end, default)
 
