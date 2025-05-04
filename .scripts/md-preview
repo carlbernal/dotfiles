@@ -59,7 +59,13 @@ convertToHtml() {
 
 # Initial trasnform
 convertToHtml
-open "$tempdir/output.html"
+if grep -qi "microsoft" /proc/version; then
+    # TODO find a way to open file in WSL
+    chrome="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+    "$chrome" "$tempdir/output.html"
+else
+    open "$tempdir/output.html"
+fi
 echo "Built html in $output_file"
 
 # Transform everytime the markdown file is updated
