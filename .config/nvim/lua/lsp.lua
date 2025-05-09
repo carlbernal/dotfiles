@@ -12,7 +12,7 @@ vim.lsp.config("*", {
   },
 })
 
--- C, C++
+-- C++
 vim.lsp.config["clangd"] = {
   cmd = { "clangd" },
   root_markers = {
@@ -24,7 +24,6 @@ vim.lsp.config["clangd"] = {
     "configure.ac",
   },
   filetypes = {
-    "c",
     "cpp",
     "proto"
   },
@@ -68,7 +67,7 @@ vim.lsp.config["pyright"] = {
   }
 }
 
--- JS, TS
+-- JS
 vim.lsp.config["ts_ls"] = {
   cmd = { "typescript-language-server", "--stdio" },
   root_markers = {
@@ -78,7 +77,6 @@ vim.lsp.config["ts_ls"] = {
   },
   filetypes = {
     "javascript",
-    "typescript"
   },
   init_options = {
     hostInfo = "neovim"

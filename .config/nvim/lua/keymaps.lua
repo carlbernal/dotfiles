@@ -3,8 +3,9 @@ local default = {
   silent = true,
 }
 
--- Remap shift + enter to zt
--- vim.keymap.set("n", "<s-cr>", "zt", default)
+-- Swap zt and zz
+vim.keymap.set("n", "zz", "zt", default)
+vim.keymap.set("n", "zt", "zz", default)
 
 -- Remap esc in terminal mode
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
