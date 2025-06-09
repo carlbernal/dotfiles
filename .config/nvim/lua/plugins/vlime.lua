@@ -2,9 +2,10 @@ return {
   {
     "vlime/vlime",
     ft = "lisp",
-    config = function()
-      vim.g.vlime_cl_connection_type = "swank"
-      vim.g.vlime_cl_swank_cmd = "sbcl --load ~/quicklisp/setup.lisp --eval '(ql:quickload :swank)' --eval '(swank:create-server :port 4005 :dont-close t)'"
+    init = function()
+      vim.g["vlime_force_default_keys"] = true
+      vim.g["vlime_indent_keywords"] = {}
+      vim.g["vlime_enable_autodoc"] = false
     end,
   },
 }

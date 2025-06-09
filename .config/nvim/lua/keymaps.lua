@@ -39,6 +39,9 @@ end, { silent = true })
 vim.keymap.set("n", "gq", "gq", default)
 vim.keymap.set("v", "gq", "gq", default)
 
+-- Trigger omni completion
+vim.api.nvim_set_keymap('i', '<c-space>', '<c-x><c-o>', default)
+
 -- Remove default LSP keymap
 vim.keymap.set("n", "<c-w>d", "<nop>", default)
 vim.keymap.set("n", "K", "<nop>", default)

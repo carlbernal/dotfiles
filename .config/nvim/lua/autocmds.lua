@@ -67,6 +67,7 @@ vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
       mysql = true,
       plsql = true,
       go = true,
+      lisp = true,
     }
     if excluded[filetype] then
       return
