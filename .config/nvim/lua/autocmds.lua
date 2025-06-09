@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
 -- Set 2 space indendation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = my_autocmds,
-  pattern = "lisp,scheme,lua,javascript,html,css,json",
+  pattern = "css,html,javascript,json,lisp,lua",
   callback = function()
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2
@@ -44,16 +44,46 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- Set omnifunc source dynamically
+-- Set dbout options
+vim.api.nvim_create_autocmd("FileType", {
+  group = my_autocmds,
+  pattern = "dbout",
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+    vim.opt_local.scrolloff = 0
+  end,
+})
+
+-- Set omnifunc source
 vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
   callback = function(args)
     local bufnr = args.buf
+    local filetype = vim.bo[bufnr].filetype
+
+    local excluded = {
+      sql = true,
+      mysql = true,
+      plsql = true,
+      go = true,
+    }
+    if excluded[filetype] then
+      return
+    end
+
     local has_lsp = not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = bufnr }))
     if has_lsp then
       vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
     else
       vim.bo[bufnr].omnifunc = "syntaxcomplete#Complete"
     end
+  end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sql,mysql,plsql",
+  callback = function()
+    vim.bo.omnifunc = "vim_dadbod_completion#omni"
   end,
 })
 

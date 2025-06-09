@@ -16,10 +16,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Disable unused providers
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_node_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = false
+vim.g.loaded_node_provider = false
+vim.g.loaded_ruby_provider = false
+vim.g.loaded_perl_provider = false
 
 -- Set vim options
 require("options")
@@ -38,6 +38,7 @@ require("lazy").setup({
     -- Utilities
     "romainl/vim-qf",
     { "lewis6991/gitsigns.nvim", opts = {} },
+    { "vim-scripts/a.vim", ft = "cpp" },
     -- Colorscheme
     {
       "tomasiser/vim-code-dark",

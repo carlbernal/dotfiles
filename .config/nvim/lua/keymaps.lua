@@ -39,7 +39,7 @@ end, { silent = true })
 vim.keymap.set("n", "gq", "gq", default)
 vim.keymap.set("v", "gq", "gq", default)
 
--- Remove default LSP mappings
+-- Remove default LSP keymap
 vim.keymap.set("n", "<c-w>d", "<nop>", default)
 vim.keymap.set("n", "K", "<nop>", default)
 vim.keymap.del("n", "grn")
@@ -48,26 +48,30 @@ vim.keymap.del("n", "gO")
 vim.keymap.del("i", "<C-s>")
 vim.keymap.del("s", "<C-s>")
 
--- LSP mappings
+-- LSP
 vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
 vim.keymap.set("n", "<c-.>", vim.lsp.buf.code_action, default)
 
--- Diagnostics mappings
+-- Diagnostics
 vim.keymap.set("n", "<c-m>", function()
   vim.diagnostic.setloclist({ open = true })
 end, default)
 
--- FZF keymaps
+-- FZF
 vim.keymap.set("n", "<c-p>", "<cmd>FzfLua files<cr>", default)
 vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
 
--- Format file using conform
+-- Format file
 vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.keymap.set("n", "==", "<cmd>GoFmt<cr>", default)
+  end,
+})
 
--- Open tagbar
+-- Tagbar
 vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", default)
-
--- Close tagbar
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tagbar",
   callback = function()
@@ -78,27 +82,19 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Gitsigns textobject
 vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
--- Slime keymaps
+-- Slime
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "sql,python,scheme,lisp",
+  pattern = "python",
   callback = function()
-    -- Send file to repl
+    -- Send file to ipython
     vim.keymap.set("n", "<c-c><c-k>", function()
-      local filetype = vim.bo.filetype
       local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-      local cmd = ""
-
-      if filetype == "python" then
-        cmd = "%run -i " .. path .. "\n"
-      elseif filetype == "scheme" or filetype == "lisp" then
-        cmd = '(load "' .. path .. '")\n'
-      end
-
-      -- https://github.com/jpalardy/vim-slime/blob/main/autoload/slime.vim#L140
-      vim.fn["slime#send"](cmd)
+      vim.fn["slime#send"]("%run -i " .. path .. "\n")
     end, default)
+
     -- Clear screen
     vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', default)
+
     -- Clear input
     vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', default)
   end,

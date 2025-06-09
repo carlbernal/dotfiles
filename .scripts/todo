@@ -14,7 +14,7 @@ TAGS="TODO|FIXME|BUG|\[ \]"
 #   <!-- (HTML)
 #   -- (Lua)
 #   ; (Lisp)
-REGEX="(//|#|<\!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
+REGEX="(//|#|<!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
 rg --ignore-case --vimgrep "$REGEX" "$GIT_ROOT"

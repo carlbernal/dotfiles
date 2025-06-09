@@ -29,21 +29,6 @@ vim.lsp.config["clangd"] = {
   },
 }
 
--- Golang
-vim.lsp.config["gopls"] = {
-  cmd = { "gopls" },
-  root_markers = {
-    "go.work",
-    "go.mod"
-  },
-  filetypes = {
-   "go",
-   "gomod",
-   "gowork",
-   "gotmpl"
-  },
-}
-
 -- Python
 vim.lsp.config["pyright"] = {
   cmd = { "pyright-langserver", "--stdio" },
@@ -85,7 +70,6 @@ vim.lsp.config["ts_ls"] = {
 
 vim.lsp.enable({
   "clangd",
-  "gopls",
   "pyright",
   "ts_ls"
 })
