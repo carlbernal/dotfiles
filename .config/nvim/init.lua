@@ -36,9 +36,9 @@ require("lazy").setup({
     "michaeljsmith/vim-indent-object",
     "wellle/targets.vim",
     -- Utilities
+    "mfussenegger/nvim-fzy",
     "romainl/vim-qf",
     { "lewis6991/gitsigns.nvim", opts = {} },
-    { "vim-scripts/a.vim", ft = "cpp" },
     -- Colorscheme
     {
       "tomasiser/vim-code-dark",

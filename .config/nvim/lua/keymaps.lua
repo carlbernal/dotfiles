@@ -16,6 +16,26 @@ vim.keymap.set("n", "<c-x>", ":<c-u>bp<bar>sp<bar>bn<bar>bd!<cr>", default)
 -- Remove c-c echo message
 vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 
+-- Clear
+vim.keymap.set("n", "<c-l>", function()
+  vim.cmd("nohlsearch")
+  vim.cmd("diffupdate")
+  vim.cmd("normal! <c-l>")
+
+  -- Remove vlime arglist buffer when clearing screen
+  if vim.bo.filetype == 'lisp' then
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      local ok, ft = pcall(vim.api.nvim_buf_get_option, buf, 'filetype')
+      if ok and ft == 'vlime_arglist' then
+        vim.api.nvim_buf_delete(buf, { force = true })
+        break
+      end
+    end
+  end
+
+  vim.cmd('echo ""')
+end, default)
+
 -- Add InsertLeave event to various verbs
 vim.keymap.set("n", "x", "x:doautocmd InsertLeave<cr>", default)
 vim.keymap.set("n", "p", "p:doautocmd InsertLeave<cr>", default)
@@ -48,8 +68,8 @@ vim.keymap.set("n", "K", "<nop>", default)
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "gO")
-vim.keymap.del("i", "<C-s>")
-vim.keymap.del("s", "<C-s>")
+vim.keymap.del("i", "<c-s>")
+vim.keymap.del("s", "<c-s>")
 
 -- LSP
 vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
@@ -60,9 +80,11 @@ vim.keymap.set("n", "<c-m>", function()
   vim.diagnostic.setloclist({ open = true })
 end, default)
 
--- FZF
-vim.keymap.set("n", "<c-p>", "<cmd>FzfLua files<cr>", default)
-vim.keymap.set("n", "<c-\\>", "<cmd>FzfLua buffers<cr>", default)
+-- Find file
+vim.keymap.set("n", "<c-p>", function()
+  local fzy = require("fzy")
+  fzy.execute("fd --type f --strip-cwd-prefix", fzy.sinks.edit_file)
+end, default)
 
 -- Format file
 vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
