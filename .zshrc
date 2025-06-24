@@ -24,10 +24,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Neovim
     export PATH="$PATH:/opt/nvim-linux-arm64/bin"
 
-    # Go
-    export PATH="$PATH:/usr/local/go/bin"
-    export PATH="$PATH:$HOME/go/bin"
-
     # Node
     export PNPM_HOME="$HOME/.local/share/pnpm"
     case ":$PATH:" in

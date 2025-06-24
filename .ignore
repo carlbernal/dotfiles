@@ -1,0 +1,37 @@
+# System/cache directories
+.cache/
+.cargo/
+.npm/
+.rustup/
+.xmake/
+.local/
+.ssh/
+
+# Shell & CLI tool configs/history
+.zsh_history
+.zshrc.backup
+.zshenv
+.zcompdump*
+.sudo_as_admin_successful
+.wget-hsts
+.profile
+.aliases
+.lesshst
+.boto
+
+# Editor/REPL history
+.ipython/
+.sqlite_history
+.sqlite3_history
+.sbcl_history*
+.chibi-scheme_history*
+
+# VCS/tools
+.oh-my-zsh/
+.gitconfig
+.tags
+.ctags
+
+# Third party builds
+google-cloud-sdk/
+quicklisp/
