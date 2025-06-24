@@ -12,7 +12,7 @@ vim.lsp.config("*", {
   },
 })
 
--- C++
+-- C / C++
 vim.lsp.config["clangd"] = {
   cmd = { "clangd" },
   root_markers = {
@@ -24,6 +24,7 @@ vim.lsp.config["clangd"] = {
     "configure.ac",
   },
   filetypes = {
+    "c",
     "cpp",
     "proto"
   },

@@ -20,13 +20,15 @@ vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 vim.keymap.set("n", "<c-l>", function()
   vim.cmd("nohlsearch")
   vim.cmd("diffupdate")
-  vim.cmd("normal! <c-l>")
 
   -- Remove vlime arglist buffer when clearing screen
   if vim.bo.filetype == 'lisp' then
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       local ok, ft = pcall(vim.api.nvim_buf_get_option, buf, 'filetype')
-      if ok and ft == 'vlime_arglist' then
+      if ok and (
+        ft == 'vlime_arglist' or
+        ft == 'vlime_preview'
+      ) then
         vim.api.nvim_buf_delete(buf, { force = true })
         break
       end
@@ -58,9 +60,6 @@ end, { silent = true })
 -- Restore gq default behavior
 vim.keymap.set("n", "gq", "gq", default)
 vim.keymap.set("v", "gq", "gq", default)
-
--- Trigger omni completion
-vim.api.nvim_set_keymap('i', '<c-space>', '<c-x><c-o>', default)
 
 -- Remove default LSP keymap
 vim.keymap.set("n", "<c-w>d", "<nop>", default)
@@ -109,18 +108,33 @@ vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
 -- Slime
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python",
+  pattern = "python,scheme",
   callback = function()
-    -- Send file to ipython
+    local opts = {
+      noremap = true,
+      silent = true,
+      buffer = true
+    }
+
+    -- Send file to repl
     vim.keymap.set("n", "<c-c><c-k>", function()
       local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-      vim.fn["slime#send"]("%run -i " .. path .. "\n")
-    end, default)
+      local filetype = vim.bo.filetype
+      local cmd = nil
+
+      if filetype == "python" then
+        cmd = "%run -i " .. path .. "\n"
+      elseif filetype == "scheme" then
+        cmd = '(load "' .. path .. '")\n'
+      end
+
+      vim.fn["slime#send"](cmd)
+    end, opts)
 
     -- Clear screen
-    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', default)
+    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', opts)
 
     -- Clear input
-    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', default)
+    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', opts)
   end,
 })
