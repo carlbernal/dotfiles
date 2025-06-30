@@ -20,21 +20,6 @@ vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 vim.keymap.set("n", "<c-l>", function()
   vim.cmd("nohlsearch")
   vim.cmd("diffupdate")
-
-  -- Remove vlime arglist buffer when clearing screen
-  if vim.bo.filetype == 'lisp' then
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-      local ok, ft = pcall(vim.api.nvim_buf_get_option, buf, 'filetype')
-      if ok and (
-        ft == 'vlime_arglist' or
-        ft == 'vlime_preview'
-      ) then
-        vim.api.nvim_buf_delete(buf, { force = true })
-        break
-      end
-    end
-  end
-
   vim.cmd('echo ""')
 end, default)
 
@@ -108,7 +93,7 @@ vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
 -- Slime
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme",
+  pattern = "python,scheme,lisp",
   callback = function()
     local opts = {
       noremap = true,
@@ -124,7 +109,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
       if filetype == "python" then
         cmd = "%run -i " .. path .. "\n"
-      elseif filetype == "scheme" then
+      elseif filetype == "scheme" or filetype =="lisp" then
         cmd = '(load "' .. path .. '")\n'
       end
 
