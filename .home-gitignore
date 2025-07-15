@@ -3,6 +3,7 @@
 .cargo/
 .npm/
 .rustup/
+.xmake/
 .local/
 .ssh/
 

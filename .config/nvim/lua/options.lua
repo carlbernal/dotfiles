@@ -22,7 +22,7 @@ vim.opt.colorcolumn = "80,100"
 vim.opt.number = true
 vim.opt.showcmd = false
 vim.opt.statusline = "%y %l:%c" .. "%=" .. "%t"
-vim.opt.pumheight = 6
+vim.opt.pumheight = 11
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
 vim.opt.fillchars:append({ eob = " " })

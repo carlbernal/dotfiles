@@ -13,6 +13,9 @@ vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
 -- Delete buffer https://stackoverflow.com/questions/1444322
 vim.keymap.set("n", "<c-x>", ":<c-u>bp<bar>sp<bar>bn<bar>bd!<cr>", default)
 
+-- Close all buffers but this one https://stackoverflow.com/questions/4545275
+vim.keymap.set("n", "<c-d>", ":<c-u>%bd|e#<cr>", default)
+
 -- Remove c-c echo message
 vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
 
@@ -57,11 +60,19 @@ vim.keymap.del("s", "<c-s>")
 
 -- LSP
 vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
-vim.keymap.set("n", "<c-.>", vim.lsp.buf.code_action, default)
 
--- Diagnostics
+-- Toggle diagnostics
+local prev_win
 vim.keymap.set("n", "<c-m>", function()
-  vim.diagnostic.setloclist({ open = true })
+  if vim.fn.getloclist(0, { winid = 0 }).winid == 0 then
+    prev_win = vim.api.nvim_get_current_win()
+    vim.diagnostic.setloclist({ open = true })
+  else
+    vim.cmd("lclose")
+    if prev_win and vim.api.nvim_win_is_valid(prev_win) then
+      vim.api.nvim_set_current_win(prev_win)
+    end
+  end
 end, default)
 
 -- Find file

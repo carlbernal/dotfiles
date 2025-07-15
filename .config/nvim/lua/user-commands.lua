@@ -28,19 +28,7 @@ vim.api.nvim_create_user_command("Path", function()
   vim.fn.setreg("+", path)
 end, {})
 
--- Go commands
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    -- :A! creates alternate file if it's not found
-    vim.api.nvim_buf_create_user_command(0, "A", function(opts)
-      vim.fn["go#alternate#Switch"](opts.bang and 1 or 0, "edit")
-    end, { bang = true })
-    vim.api.nvim_buf_create_user_command(0, "AV", function(opts)
-      vim.fn["go#alternate#Switch"](opts.bang and 1 or 0, "vsplit")
-    end, { bang = true })
-    vim.api.nvim_buf_create_user_command(0, "AS", function(opts)
-      vim.fn["go#alternate#Switch"](opts.bang and 1 or 0, "split")
-    end, { bang = true })
-  end,
-})
+-- LSP code action
+vim.api.nvim_create_user_command("CodeAction", function()
+  vim.lsp.buf.code_action()
+end, {})
