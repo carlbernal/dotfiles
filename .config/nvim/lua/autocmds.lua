@@ -60,14 +60,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
   callback = function(args)
     local bufnr = args.buf
-    local filetype = vim.bo[bufnr].filetype
 
-    local excluded = {
-      sql = true,
-      mysql = true,
-      plsql = true,
-    }
-    if excluded[filetype] then
+    local filetype = vim.bo[bufnr].filetype
+    if filetype == "sql" then
+      vim.bo.omnifunc = "vim_dadbod_completion#omni"
       return
     end
 
@@ -77,12 +73,6 @@ vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
     else
       vim.bo[bufnr].omnifunc = "syntaxcomplete#Complete"
     end
-  end,
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "sql,mysql,plsql",
-  callback = function()
-    vim.bo.omnifunc = "vim_dadbod_completion#omni"
   end,
 })
 
