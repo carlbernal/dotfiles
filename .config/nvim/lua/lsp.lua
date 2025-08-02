@@ -25,14 +25,13 @@ vim.lsp.config["clangd"] = {
   },
   filetypes = {
     "c",
-    "cpp",
-    "proto"
+    "cpp"
   },
 }
 
 -- Python
 vim.lsp.config["pyright"] = {
-  cmd = { "pyright-langserver", "--stdio" },
+  cmd = { 'basedpyright-langserver', '--stdio' },
   root_markers = {
     "pyproject.toml",
     "setup.py",
@@ -43,13 +42,13 @@ vim.lsp.config["pyright"] = {
   },
   filetypes = { "python" },
   settings = {
-    python = {
+    basedpyright = {
       analysis = {
         autoSearchPaths = true,
-        diagnosticMode = "openFilesOnly",
-        useLibraryCodeForTypes = true
-      }
-    }
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'openFilesOnly',
+      },
+    },
   }
 }
 

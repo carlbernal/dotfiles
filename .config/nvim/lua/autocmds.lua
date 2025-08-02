@@ -58,6 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Set omnifunc source
 vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
+  group = my_autocmds,
   callback = function(args)
     local bufnr = args.buf
 
