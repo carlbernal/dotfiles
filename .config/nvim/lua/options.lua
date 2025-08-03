@@ -1,5 +1,5 @@
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
+vim.g["mapleader"] = ","
+vim.g["maplocalleader"] = ","
 
 -- Platform Settings
 vim.opt.mouse = "nvi"
@@ -26,7 +26,7 @@ vim.opt.pumheight = 11
 vim.opt.jumpoptions = "view"
 vim.opt.shortmess:append("WcCI")
 vim.opt.fillchars:append({ eob = " " })
-vim.g.netrw_banner = 0
+vim.g["netrw_banner"] = 0
 
 -- Search Settings
 vim.opt.hlsearch = true

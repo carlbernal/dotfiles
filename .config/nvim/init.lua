@@ -16,10 +16,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Disable unused providers
-vim.g.loaded_python3_provider = false
-vim.g.loaded_node_provider = false
-vim.g.loaded_ruby_provider = false
-vim.g.loaded_perl_provider = false
+vim.g["loaded_python3_provider"] = false
+vim.g["loaded_node_provider"] = false
+vim.g["loaded_ruby_provider"] = false
+vim.g["loaded_perl_provider"] = false
 
 -- Set vim options
 require("options")
@@ -50,13 +50,13 @@ require("lazy").setup({
       end,
     },
     {
-      'luochen1990/rainbow',
-      event = { 'BufReadPre', 'BufNewFile' },
+      "luochen1990/rainbow",
+      event = { "BufReadPre", "BufNewFile" },
       init = function()
-        vim.g.rainbow_active = 1
+        vim.g["rainbow_active"] = 1
       end,
       config = function()
-        vim.cmd('RainbowToggleOn')
+        vim.cmd("RainbowToggleOn")
       end,
     }
   },
