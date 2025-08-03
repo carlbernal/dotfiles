@@ -5,71 +5,224 @@
 # Takes a path to a markdown file as argument, transform it to html and
 # re-transform it everytime the file is updated
 
-# Check if dependencies are installed
+# ============================================================================
+# CONFIGURATION AND VARIABLES
+# ============================================================================
+
+# Dependencies
 dependencies=("pandoc" "fswatch" "wget")
-for i in "${dependencies[@]}"; do
-    if ! command -v "$i" &>/dev/null; then
-        echo "$i needs to be in path!"
-        exit 1
-    fi
-done
 
-invalid_command_msg="Invalid command: md-preview $*"
-usage_msg="Usage: md-preview file.md"
+# CSS theme definitions
+declare -A css_themes=(
+    ["github"]="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
+    ["github-dark"]="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-dark.css"
+    ["gfm"]="https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
+    ["minimal"]="https://raw.githubusercontent.com/markdowncss/modest/master/css/modest.css"
+)
 
-# Check if correct argument supplied
-if [ $# -ne 1 ]; then
-    echo "$invalid_command_msg"
-    echo "Error: wrong argument supplied"
-    echo "$usage_msg"
-    exit 1
-fi
+# Default settings
+default_theme="gfm"
+current_theme="$default_theme"
+css_cache_dir="$HOME/.cache/md-preview"
 
-# Check if argument is a markdown file
-if [[ ! -f "$1" || ! "$1" =~ \.md$ ]]; then
-    echo "$invalid_command_msg"
-    echo "Error: $1 is not a markdown file"
-    echo "$usage_msg"
-    exit 1
-fi
+# Messages
+help_text="
+Usage: md-preview [OPTIONS] file.md
 
-# Use temporary file for output html and delete it after the script exits
-input_file="$1"
-tempdir=$(mktemp -d)
-trap 'rm -rf "$tempdir"' EXIT
-output_file="$tempdir/output.html"
-css_file="$tempdir/styles.css"
+Options:
+  -t, --theme THEME    Set CSS theme
+  -c, --clear-cache    Clear CSS cache
+  -l, --list-themes    List available themes
+"
 
-# TODO maybe cache the css file?
+# ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
 
-# https://github.com/sindresorhus/github-markdown-css
-# wget -qO "$css_file" "https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
-
-# https://github.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS
-wget -qO "$css_file" "https://raw.githubusercontent.com/FabrizioMusacchio/GitHub_Flavor_Markdown_CSS/refs/heads/master/GitHub%20Flavor.css"
-
-convertToHtml() {
-    # Removed pandoc stderr checks for performance
-    pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
-        --embed-resources --standalone --css="$css_file"
-
-    # Add markdown-body class required by sindresorhus/githun-markdown-css
-    # sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file"
+check_dependencies() {
+    for i in "${dependencies[@]}"; do
+        if ! command -v "$i" &>/dev/null; then
+            echo "$i needs to be in path!"
+            exit 1
+        fi
+    done
 }
 
-# Initial trasnform
-convertToHtml
-if grep -qi "microsoft" /proc/version; then
-    # TODO find a way to open file in WSL
-    chrome="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
-    "$chrome" "$tempdir/output.html"
-else
-    open "$tempdir/output.html"
-fi
-echo "Built html in $output_file"
+show_help() {
+    echo "$help_text"
+}
 
-# Transform everytime the markdown file is updated
-fswatch -o --event Updated --latency=0.5 "$input_file" | while read -r; do
-    echo "File updated. Rebuilding HTML..."
-    convertToHtml
-done
+clear_cache() {
+    echo "Clearing CSS cache..."
+    rm -rf "$css_cache_dir"/*.css
+    echo "Cache cleared."
+}
+
+list_themes() {
+    echo "Available themes:"
+    for theme in "${!css_themes[@]}"; do
+        if [ "$theme" = "$default_theme" ]; then
+            echo "  - $theme (default)"
+        else
+            echo "  - $theme"
+        fi
+    done
+}
+
+validate_input() {
+    local file="$1"
+
+    if [[ -z "$file" ]]; then
+        echo "Error: No markdown file specified"
+        show_help
+        exit 1
+    fi
+
+    if [[ ! -f "$file" || ! "$file" =~ \.md$ ]]; then
+        echo "Error: $file is not a markdown file"
+        show_help
+        exit 1
+    fi
+}
+
+setup_temp_directory() {
+    if grep -qi "microsoft" /proc/version; then
+        tempdir="/tmp/md-preview-$$"
+        mkdir -p "$tempdir"
+    else
+        tempdir=$(mktemp -d)
+    fi
+    trap 'rm -rf "$tempdir"' EXIT
+
+    output_file="$tempdir/output.html"
+}
+
+# ============================================================================
+# CSS HANDLING
+# ============================================================================
+
+get_css() {
+    local theme="$1"
+    local css_url="${css_themes[$theme]}"
+    local cache_file="$css_cache_dir/${theme}.css"
+
+    mkdir -p "$css_cache_dir"
+
+    if [[ -f "$cache_file" ]]; then
+        cp "$cache_file" "$tempdir/styles.css"
+    else
+        echo "Downloading CSS for theme: $theme"
+        wget -qO "$cache_file" "$css_url"
+        cp "$cache_file" "$tempdir/styles.css"
+        echo "CSS cached and ready"
+    fi
+}
+
+# ============================================================================
+# HTML CONVERSION
+# ============================================================================
+
+convert_to_html() {
+    get_css "$current_theme"
+
+    pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
+        --self-contained --standalone --css="$tempdir/styles.css"
+
+    # Add theme-specific body class if needed
+    case "$current_theme" in
+        github|github-dark)
+            sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file" 2>/dev/null || \
+            sed -i 's/<body[^>]*>/<body class="markdown-body">/' "$output_file"
+            ;;
+    esac
+}
+
+open_html() {
+    if grep -qi "microsoft" /proc/version; then
+        windows_file=$(wslpath -w "$output_file")
+        chrome="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+        "$chrome" "$windows_file"
+    else
+        open "$output_file"
+    fi
+}
+
+watch_file() {
+    local rebuild_pid=""
+    fswatch -o --event Updated --latency=0.5 "$input_file" | while read -r; do
+        if [[ -n "$rebuild_pid" ]] && kill -0 "$rebuild_pid" 2>/dev/null; then
+            kill "$rebuild_pid" 2>/dev/null
+        fi
+
+        (
+            sleep 0.8
+            echo "File updated. Rebuilding HTML..."
+            convert_to_html
+        ) &
+        rebuild_pid=$!
+    done
+}
+
+# ============================================================================
+# ARGUMENT PARSING
+# ============================================================================
+
+parse_arguments() {
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -t|--theme)
+                if [[ -n "$2" && -n "${css_themes[$2]}" ]]; then
+                    current_theme="$2"
+                    shift 2
+                else
+                    echo "Error: Invalid theme '$2'"
+                    echo "Available themes: ${!css_themes[*]}"
+                    exit 1
+                fi
+                ;;
+            -c|--clear-cache)
+                clear_cache
+                exit 0
+                ;;
+            -l|--list-themes)
+                list_themes
+                exit 0
+                ;;
+            -*)
+                echo "Error: Unknown option $1"
+                show_help
+                exit 1
+                ;;
+            *)
+                if [[ -z "$input_file" ]]; then
+                    input_file="$1"
+                else
+                    echo "Error: Multiple files specified"
+                    show_help
+                    exit 1
+                fi
+                shift
+                ;;
+        esac
+    done
+}
+
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
+
+main() {
+    check_dependencies
+    parse_arguments "$@"
+    validate_input "$input_file"
+    setup_temp_directory
+
+    echo "Building HTML with theme: $current_theme"
+    convert_to_html
+    open_html
+    echo "Built HTML in $output_file"
+
+    watch_file
+}
+
+main "$@"
