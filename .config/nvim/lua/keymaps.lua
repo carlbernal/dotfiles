@@ -104,7 +104,7 @@ vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
 
 -- Slime
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme,lisp",
+  pattern = "python,scheme,lisp,lua",
   callback = function()
     local opts = {
       noremap = true,
@@ -122,6 +122,8 @@ vim.api.nvim_create_autocmd("FileType", {
         cmd = "%run -i " .. path .. "\n"
       elseif filetype == "scheme" or filetype =="lisp" then
         cmd = '(load "' .. path .. '")\n'
+      elseif filetype == "lua" then
+        cmd = 'dofile("' .. path .. '")\n'
       end
 
       vim.fn["slime#send"](cmd)

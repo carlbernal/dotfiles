@@ -36,6 +36,7 @@ require("lazy").setup({
     "michaeljsmith/vim-indent-object",
     "wellle/targets.vim",
     -- Utilities
+    "tpope/vim-fugitive",
     "mfussenegger/nvim-fzy",
     "romainl/vim-qf",
     { "lewis6991/gitsigns.nvim", opts = {} },
