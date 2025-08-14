@@ -1,6 +1,7 @@
 alias v="nvim"
 alias d="podman"
 alias pn="pnpm"
+alias lua="lua5.4"
 
 alias l="eza --color=auto --icons=never --sort=type"
 alias ll="l -T --git-ignore"
