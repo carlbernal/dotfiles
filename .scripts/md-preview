@@ -126,7 +126,7 @@ convert_to_html() {
     get_css "$current_theme"
 
     pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
-        --self-contained --standalone --css="$tempdir/styles.css"
+        --embed-resources --standalone --css="$tempdir/styles.css"
 
     # Add theme-specific body class if needed
     case "$current_theme" in
