@@ -45,13 +45,20 @@ require("lazy").setup({
       dir = "~/vim-soy",
       name = "vim-soy",
     },
+    {
+      "dart-lang/dart-vim-plugin",
+      init = function()
+        vim.g["dart_html_in_string"] = true
+        vim.g["dart_style_guide"] = 2
+      end
+    },
     -- Colorscheme
     {
       "tomasiser/vim-code-dark",
       lazy = false,
       priority = 1000,
       init = function()
-        vim.g["codedark_conservative"] = 1
+        vim.g["codedark_conservative"] = false
         vim.cmd("colorscheme codedark")
       end,
     },
@@ -59,7 +66,7 @@ require("lazy").setup({
       "luochen1990/rainbow",
       event = { "BufReadPre", "BufNewFile" },
       init = function()
-        vim.g["rainbow_active"] = 1
+        vim.g["rainbow_active"] = true
       end,
       config = function()
         vim.cmd("RainbowToggleOn")
