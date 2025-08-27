@@ -21,6 +21,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
     # Neovim
     export PATH="$PATH:/opt/nvim-linux-arm64/bin"
 
@@ -38,6 +39,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
         . "$HOME/google-cloud-sdk/completion.zsh.inc";
     fi
+
+    # Flutter
+    export CHROME_EXECUTABLE="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
+    export ANDROID_SDK_ROOT="$HOME/android"
+    export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools"
+    export PATH="$PATH:$HOME/flutter/bin"
 fi
 
 unalias -m "*"

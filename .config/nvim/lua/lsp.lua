@@ -1,12 +1,8 @@
 -- Global config
 vim.lsp.config("*", {
-  capabilities = {
-    textDocument = {
-      semanticTokens = {
-        multilineTokenSupport = true,
-      }
-    }
-  },
+  on_attach = function(client, _)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   root_markers = {
     '.git'
   },
@@ -68,8 +64,31 @@ vim.lsp.config["ts_ls"] = {
   }
 }
 
+-- Dart
+vim.lsp.config["dartls"] = {
+  cmd = { "dart", "language-server", "--protocol=lsp" },
+  root_markers = { "pubspec.yaml" },
+  filetypes = {
+    "dart",
+  },
+  init_options = {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true
+  },
+  settings = {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true
+    }
+  }
+}
+
 vim.lsp.enable({
   "clangd",
   "pyright",
-  "ts_ls"
+  "ts_ls",
+  "dartls"
 })

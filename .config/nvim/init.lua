@@ -40,6 +40,11 @@ require("lazy").setup({
     "mfussenegger/nvim-fzy",
     "romainl/vim-qf",
     { "lewis6991/gitsigns.nvim", opts = {} },
+    -- Syntax
+    {
+      dir = "~/vim-soy",
+      name = "vim-soy",
+    },
     -- Colorscheme
     {
       "tomasiser/vim-code-dark",

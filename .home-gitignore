@@ -3,7 +3,6 @@
 .cargo/
 .npm/
 .rustup/
-.xmake/
 .local/
 .ssh/
 
@@ -35,3 +34,11 @@
 # Third party builds
 google-cloud-sdk/
 quicklisp/
+flutter/
+android/
+
+# Language packages
+**/node_modules/
+**/.venv/
+**/__pycache__/
+package-lock.json
