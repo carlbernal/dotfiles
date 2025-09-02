@@ -10,7 +10,6 @@ return {
         css = { "prettier" },
         html = { "prettier" },
         json = { "jq" },
-        dart = { "dart_format" },
       },
     },
   },
