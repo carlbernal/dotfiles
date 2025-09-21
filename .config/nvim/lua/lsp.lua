@@ -67,6 +67,6 @@ vim.lsp.config["ts_ls"] = {
 
 vim.lsp.enable({
   "clangd",
-  "ruff",
+  "pylsp",
   "ts_ls",
 })
