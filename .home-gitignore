@@ -1,4 +1,4 @@
-# System/cache directories
+# System directories
 .cache/
 .cargo/
 .npm/
@@ -6,7 +6,7 @@
 .local/
 .ssh/
 
-# Shell & CLI tool configs/history
+# Shell
 .zsh_history
 .zshrc.backup
 .zshenv
@@ -18,14 +18,11 @@
 .lesshst
 .boto
 
-# Editor/REPL history
+# Editor/REPL
 .ipython/
-.sqlite_history
-.sqlite3_history
-.sbcl_history*
-.chibi-scheme_history*
+.*_history
 
-# VCS/tools
+# Tools
 .oh-my-zsh/
 .gitconfig
 .tags
@@ -34,7 +31,7 @@
 # Third party builds
 google-cloud-sdk/
 quicklisp/
-flutter/
+flatbuffers/
 android/
 
 # Language packages

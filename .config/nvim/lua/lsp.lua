@@ -26,25 +26,26 @@ vim.lsp.config["clangd"] = {
 }
 
 -- Python
-vim.lsp.config["pyright"] = {
-  cmd = { 'basedpyright-langserver', '--stdio' },
+vim.lsp.config["pylsp"] = {
+  cmd = { "pylsp" },
   root_markers = {
     "pyproject.toml",
     "setup.py",
     "setup.cfg",
     "requirements.txt",
     "Pipfile",
-    "pyrightconfig.json",
   },
   filetypes = { "python" },
   settings = {
-    basedpyright = {
-      analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = 'openFilesOnly',
-      },
-    },
+    pylsp = {
+      plugins = {
+        pycodestyle = { enabled = false },
+        pyflakes = { enabled = false },
+        mccabe = { enabled = false },
+        autopep8 = { enabled = false },
+        yapf = { enabled = false },
+      }
+    }
   }
 }
 
@@ -66,6 +67,6 @@ vim.lsp.config["ts_ls"] = {
 
 vim.lsp.enable({
   "clangd",
-  "pyright",
+  "ruff",
   "ts_ls",
 })

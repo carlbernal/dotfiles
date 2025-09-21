@@ -10,6 +10,11 @@ return {
         css = { "prettier" },
         html = { "prettier" },
         json = { "jq" },
+        python = {
+          "ruff_fix",
+          "ruff_format",
+          "ruff_organize_imports",
+        },
       },
     },
   },

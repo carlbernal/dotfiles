@@ -83,12 +83,6 @@ end, default)
 
 -- Format file
 vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.keymap.set("n", "==", "<cmd>GoFmt<cr>", default)
-  end,
-})
 
 -- Tagbar
 vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", default)
