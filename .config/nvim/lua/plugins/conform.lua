@@ -10,6 +10,7 @@ return {
         css = { "prettier" },
         html = { "prettier" },
         json = { "jq" },
+        proto = { "buf" },
         python = {
           "ruff_fix",
           "ruff_format",
