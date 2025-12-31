@@ -1,5 +1,9 @@
+-- ============================================================================
+-- Editing
+-- ============================================================================
+
 -- Conform format command
-vim.api.nvim_create_user_command("Format", function(args)
+vim.api.nvim_create_user_command("Conform", function(args)
   local range = nil
   if args.count ~= -1 then
     local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
@@ -15,6 +19,19 @@ vim.api.nvim_create_user_command("Format", function(args)
   })
 end, { range = true })
 
+-- ============================================================================
+-- LSP
+-- ============================================================================
+
+-- LSP code action
+vim.api.nvim_create_user_command("CodeAction", function()
+  vim.lsp.buf.code_action()
+end, {})
+
+-- ============================================================================
+-- Utilities
+-- ============================================================================
+
 -- Open todos
 vim.api.nvim_create_user_command("T", function()
   vim.cmd("cgetexpr system('todo')")
@@ -26,9 +43,4 @@ vim.api.nvim_create_user_command("Path", function()
   if path == "" then return end
   print(path)
   vim.fn.setreg("+", path)
-end, {})
-
--- LSP code action
-vim.api.nvim_create_user_command("CodeAction", function()
-  vim.lsp.buf.code_action()
 end, {})

@@ -1,65 +1,84 @@
-local default = {
+local opts = {
   noremap = true,
   silent = true,
 }
 
+-- ============================================================================
+-- General
+-- ============================================================================
+
 -- Swap zt and zz
-vim.keymap.set("n", "zz", "zt", default)
-vim.keymap.set("n", "zt", "zz", default)
+vim.keymap.set("n", "zz", "zt", opts)
+vim.keymap.set("n", "zt", "zz", opts)
 
--- Remap esc in terminal mode
-vim.keymap.set("t", "<esc>", "<c-\\><c-n>", default)
-
--- Delete buffer https://stackoverflow.com/questions/1444322
-vim.keymap.set("n", "<c-x>", ":<c-u>bp<bar>sp<bar>bn<bar>bd!<cr>", default)
-
--- Close all buffers but this one https://stackoverflow.com/questions/4545275
-vim.keymap.set("n", "<c-d>", ":<c-u>%bd|e#<cr>", default)
-
--- Remove c-c echo message
-vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
-
--- Clear
+-- Clear search, diff, and messages
 vim.keymap.set("n", "<c-l>", function()
   vim.cmd("nohlsearch")
   vim.cmd("diffupdate")
   vim.cmd('echo ""')
-end, default)
+end, opts)
 
--- Add InsertLeave event to various verbs
-vim.keymap.set("n", "x", "x:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "p", "p:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "u", "u:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "<c-r>", "<c-r>:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "~", "~:doautocmd InsertLeave<cr>", default)
-vim.keymap.set("n", "D", function()
-  vim.cmd("normal! D")
-  vim.cmd("doautocmd InsertLeave")
-end, { silent = true })
-vim.keymap.set("n", "dd", function()
-  vim.cmd("normal! dd")
-  vim.cmd("doautocmd InsertLeave")
-end, { silent = true })
-vim.keymap.set("v", "d", function()
-  vim.cmd('normal! d')
-  vim.cmd("doautocmd InsertLeave")
-end, { silent = true })
+-- Remove c-c echo message
+vim.keymap.set("n", "<c-c>", "<c-c>", { silent = true })
+
+-- Remap esc in terminal mode
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>", opts)
+
+-- Delete buffer
+vim.keymap.set("n", "<c-x>", function()
+  require('bufdelete').bufdelete(0, true)
+end, opts)
+
+-- Close all buffers but this one
+vim.keymap.set("n", "<c-d>", function()
+  local current = vim.api.nvim_get_current_buf()
+  local bd = require("bufdelete").bufdelete
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.bo[buf].buflisted then
+      bd(buf, true)
+    end
+  end
+end, opts)
+
+-- ============================================================================
+-- Editing
+-- ============================================================================
+
+-- Add InsertLeave event to verbs
+local function refresh(mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, function()
+    local count = vim.v.count > 0 and vim.v.count or ""
+    vim.cmd("silent! normal! " .. count .. rhs)
+    vim.cmd("silent! doautocmd InsertLeave")
+  end, opts)
+end
+for _, k in ipairs({ "x", "p", "u", "<c-r>", "~", "D", "dd" }) do
+  refresh("n", k, k)
+end
+refresh("v", "d", "d")
 
 -- Restore gq default behavior
-vim.keymap.set("n", "gq", "gq", default)
-vim.keymap.set("v", "gq", "gq", default)
+vim.keymap.set("n", "gq", "gq", opts)
+vim.keymap.set("v", "gq", "gq", opts)
 
--- Remove default LSP keymap
-vim.keymap.set("n", "<c-w>d", "<nop>", default)
-vim.keymap.set("n", "K", "<nop>", default)
-vim.keymap.del("n", "grn")
-vim.keymap.del("n", "gri")
-vim.keymap.del("n", "gO")
-vim.keymap.del("i", "<c-s>")
-vim.keymap.del("s", "<c-s>")
-
+-- ============================================================================
 -- LSP
-vim.keymap.set("n", "R", vim.lsp.buf.rename, default)
+-- ============================================================================
+
+-- Remove default LSP keymaps
+local del_map = {
+  n = { "grn", "gri", "gO", "<c-w>d", "K" },
+  i = { "<c-s>" },
+  s = { "<c-s>" }
+}
+for mode, keys in pairs(del_map) do
+  for _, key in ipairs(keys) do
+    pcall(vim.keymap.del, mode, key)
+  end
+end
+
+-- Remap R to lsp rename
+vim.keymap.set("n", "R", vim.lsp.buf.rename, opts)
 
 -- Toggle diagnostics
 local prev_win
@@ -73,19 +92,26 @@ vim.keymap.set("n", "<c-m>", function()
       vim.api.nvim_set_current_win(prev_win)
     end
   end
-end, default)
+end, opts)
+
+-- ============================================================================
+-- Plugins
+-- ============================================================================
 
 -- Find file
 vim.keymap.set("n", "<c-p>", function()
   local fzy = require("fzy")
   fzy.execute("fd --type f --strip-cwd-prefix", fzy.sinks.edit_file)
-end, default)
+end, opts)
 
 -- Format file
-vim.keymap.set("n", "==", "<cmd>Format<cr>", default)
+vim.keymap.set("n", "==", "<cmd>Conform<cr>", opts)
+
+-- Gitsigns textobject
+vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", opts)
 
 -- Tagbar
-vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", default)
+vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", opts)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tagbar",
   callback = function()
@@ -93,40 +119,30 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Gitsigns textobject
-vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", default)
-
--- Slime
+-- Slime (REPL Integration)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python,scheme,lisp,lua",
   callback = function()
-    local opts = {
+    local s_opts = {
       noremap = true,
       silent = true,
       buffer = true
     }
-
     -- Send file to repl
     vim.keymap.set("n", "<c-c><c-k>", function()
       local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-      local filetype = vim.bo.filetype
-      local cmd = nil
-
-      if filetype == "python" then
-        cmd = "%run -i " .. path .. "\n"
-      elseif filetype == "scheme" or filetype =="lisp" then
-        cmd = '(load "' .. path .. '")\n'
-      elseif filetype == "lua" then
-        cmd = 'dofile("' .. path .. '")\n'
-      end
-
-      vim.fn["slime#send"](cmd)
-    end, opts)
-
+      local ft = vim.bo.filetype
+      local cmd = {
+        python = "%run -i " .. path .. "\n",
+        lua = "dofile('" .. path .. "')\n",
+        lisp = "(load '" .. path .. "')\n",
+        scheme = "(load '" .. path.. "')\n"
+      }
+      vim.fn["slime#send"](cmd[ft])
+    end, s_opts)
     -- Clear screen
-    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', opts)
-
+    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', s_opts)
     -- Clear input
-    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', opts)
+    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', s_opts)
   end,
 })

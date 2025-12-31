@@ -1,4 +1,21 @@
+-- ============================================================================
+-- General
+-- ============================================================================
+
+-- Set leaders
+vim.g["mapleader"] = ","
+vim.g["maplocalleader"] = ","
+
+-- Disable unused providers to speed up startup
+vim.g["loaded_python3_provider"] = false
+vim.g["loaded_node_provider"] = false
+vim.g["loaded_ruby_provider"] = false
+vim.g["loaded_perl_provider"] = false
+
+-- ============================================================================
 -- Bootstrap lazy.nvim
+-- ============================================================================
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,36 +32,32 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Disable unused providers
-vim.g["loaded_python3_provider"] = false
-vim.g["loaded_node_provider"] = false
-vim.g["loaded_ruby_provider"] = false
-vim.g["loaded_perl_provider"] = false
+-- ============================================================================
+-- Core Config
+-- ============================================================================
 
--- Set vim options
 require("options")
+require("keymaps")
 
--- Set plugins
+-- ============================================================================
+-- Plugins
+-- ============================================================================
+
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    -- Verbs
+    -- Inline plugins
     "tpope/vim-repeat",
     "tpope/vim-surround",
     "vim-scripts/ReplaceWithRegister",
-    -- Objects
     "michaeljsmith/vim-indent-object",
     "wellle/targets.vim",
-    -- Utilities
+    "neovim/nvim-lspconfig",
     "tpope/vim-fugitive",
     "mfussenegger/nvim-fzy",
     "romainl/vim-qf",
+    "famiu/bufdelete.nvim",
     { "lewis6991/gitsigns.nvim", opts = {} },
-    -- Syntax
-    {
-      dir = "~/vim-soy",
-      name = "vim-soy",
-    },
     -- Colorscheme
     {
       "tomasiser/vim-code-dark",
@@ -72,9 +85,21 @@ require("lazy").setup({
   },
 })
 
--- Set other options
+-- ============================================================================
+-- Post-Plugin Config
+-- ============================================================================
+
 require("autocmds")
 require("user-commands")
-require("keymaps")
 require("highlights")
-require("lsp")
+
+-- ============================================================================
+-- LSP
+-- ============================================================================
+
+vim.lsp.enable({
+  "clangd",
+  "pylsp",
+  "ts_ls",
+  "lua_ls",
+})
