@@ -33,6 +33,7 @@ google-cloud-sdk/
 quicklisp/
 flatbuffers/
 android/
+lua-language-server/
 
 # Language packages
 **/node_modules/

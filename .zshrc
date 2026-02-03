@@ -13,7 +13,7 @@ source "$ZSH/oh-my-zsh.sh"
 
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
-export PATH="$PATH:$HOME/.local/bin/env"
+export PATH="$PATH:$HOME/.local/bin"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
