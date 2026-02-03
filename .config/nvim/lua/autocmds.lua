@@ -23,6 +23,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   command = "setfiletype html",
 })
 
+-- Highlight when copying text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = my_autocmds,
+  callback = function()
+    vim.highlight.on_yank()
+  end
+})
+
 -- https://vim.fandom.com/wiki/Avoid_scrolling_when_switch_buffers
 vim.cmd([[
 " Save current view settings on a per-window, per-buffer basis.
@@ -127,5 +135,16 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
   group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
   callback = function()
     require("lint").try_lint()
+  end,
+})
+
+-- Global LSP config
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    client.server_capabilities.semanticTokensProvider = nil
   end,
 })
