@@ -31,7 +31,7 @@ vim.keymap.set("n", "<c-x>", function()
 end, opts)
 
 -- Close all buffers but this one
-vim.keymap.set("n", "<leader>bo", function()
+vim.keymap.set("n", "<c-d>", function()
   local current = vim.api.nvim_get_current_buf()
   local bd = require("bufdelete").bufdelete
   local count = 0
@@ -49,7 +49,7 @@ vim.keymap.set("n", "<leader>bo", function()
   end
 
   if count > 0 then
-    local msg = "Closed " .. count .. " other buffers"
+    local msg = "Closed " .. count .. " other buffer"
     if failed > 0 then
       msg = msg .. " (" .. failed .. " failed)"
     end
