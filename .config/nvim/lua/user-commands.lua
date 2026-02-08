@@ -36,12 +36,12 @@ end, {})
 vim.api.nvim_create_user_command("T", function()
   local output = vim.fn.system('todo')
   if vim.v.shell_error ~= 0 then
-    print("Error running todo script")
+    vim.notify("Error running todo script", vim.log.levels.ERROR)
     return
   end
 
   if output == "" or output:match("^%s*$") then
-    print("No TODOs found!")
+    vim.notify("No TODOs found!", vim.log.levels.WARN)
     return
   end
 
@@ -51,7 +51,7 @@ vim.api.nvim_create_user_command("T", function()
   })
 
   if #vim.fn.getqflist() == 0 then
-    print("No TODOs found!")
+    vim.notify("No TODOs found!", vim.log.levels.WARN)
     return
   end
 
@@ -63,6 +63,6 @@ end, {})
 vim.api.nvim_create_user_command("Path", function()
   local path = vim.fn.expand("%:p")
   if path == "" then return end
-  print(path)
   vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, {})

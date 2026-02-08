@@ -88,6 +88,7 @@ require("highlights")
 -- ============================================================================
 
 vim.lsp.enable({
+  "buf_ls",
   "clangd",
   "gopls",
   "lua_ls",

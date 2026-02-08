@@ -27,16 +27,35 @@ vim.keymap.set("t", "<esc>", "<c-\\><c-n>", opts)
 -- Delete buffer
 vim.keymap.set("n", "<c-x>", function()
   require('bufdelete').bufdelete(0, true)
+  vim.notify("Buffer closed", vim.log.levels.INFO)
 end, opts)
 
 -- Close all buffers but this one
-vim.keymap.set("n", "<c-d>", function()
+vim.keymap.set("n", "<leader>bo", function()
   local current = vim.api.nvim_get_current_buf()
   local bd = require("bufdelete").bufdelete
+  local count = 0
+  local failed = 0
+
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if buf ~= current and vim.bo[buf].buflisted then
-      bd(buf, true)
+      local success = pcall(bd, buf, true)
+      if success then
+        count = count + 1
+      else
+        failed = failed + 1
+      end
     end
+  end
+
+  if count > 0 then
+    local msg = "Closed " .. count .. " other buffers"
+    if failed > 0 then
+      msg = msg .. " (" .. failed .. " failed)"
+    end
+    vim.notify(msg, vim.log.levels.INFO)
+  else
+    vim.notify("No other buffers to close", vim.log.levels.WARN)
   end
 end, opts)
 
@@ -126,7 +145,7 @@ vim.keymap.set("n", "<c-o>", function()
 
   local pattern = patterns[ft]
   if not pattern then
-    print("No pattern for " .. ft)
+    vim.notify("No outline pattern for " .. ft, vim.log.levels.WARN)
     return
   end
 
@@ -136,6 +155,6 @@ vim.keymap.set("n", "<c-o>", function()
     vim.fn.setloclist(0, {}, 'a', {title = ''})
     vim.cmd("lopen")
   else
-    print("No symbols found")
+    vim.notify("No symbols found", vim.log.levels.INFO)
   end
 end, opts)

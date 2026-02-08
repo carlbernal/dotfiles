@@ -11,7 +11,6 @@ return {
         go = { "goimports", "gofmt" },
         html = { "prettier" },
         json = { "jq" },
-        proto = { "buf" },
       },
     },
   },
