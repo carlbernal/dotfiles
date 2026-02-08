@@ -1,23 +1,57 @@
 #!/bin/bash
+# Display TODO, FIXME, BUG, and unchecked markdown tasks in source code
 
-# Wrapper script to display TODO, FIXME, BUG or other tags in source code
-# Note: rg skips hidden files and ignored files by default
+set -euo pipefail
 
+# Configuration
 TAGS="TODO|FIXME|BUG|\[ \]"
+PRIORITY_ORDER=("BUG" "FIXME" "TODO" "[ ]")
+REGEX="(//|#|<!--|--|;|/\*|'|\"|\%|^|^[ \t]*(-|\d+\.))\s*($TAGS)"
 
-# The regex matches a tag if the string preceeding it is a comment syntax, a
-# tab, a space, a list or if it's at start of the line
-#
-# List of comment syntax in the regex:
-#   // /* */ (C Style)
-#   # (Bash, Python)
-#   <!-- (HTML)
-#   -- (Lua)
-#   ; (Lisp)
-REGEX="(//|#|<!--|--|;|/\*|^|^[ \t]*(-|\d+.))\s*($TAGS)"
+# Find project root (git first, then fallback to current directory)
+find_root() {
+    if GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null); then
+        echo "$GIT_ROOT"
+    else
+        # Fallback: look for common project markers
+        local dir="$PWD"
+        while [[ "$dir" != "/" ]]; do
+            if [[ -f "$dir/package.json" ]] || \
+                [[ -f "$dir/Cargo.toml" ]] || \
+                [[ -f "$dir/go.mod" ]] || \
+                [[ -f "$dir/Makefile" ]]; then
+            echo "$dir"
+            return
+            fi
+            dir=$(dirname "$dir")
+        done
+        echo "$PWD"
+    fi
+}
 
-GIT_ROOT=$(git rev-parse --show-toplevel)
-rg --ignore-case --vimgrep "$REGEX" "$GIT_ROOT"
+# Assign priority to each tag
+get_priority() {
+    local tag="$1"
+    for i in "${!PRIORITY_ORDER[@]}"; do
+        if [[ "$tag" == "${PRIORITY_ORDER[$i]}" ]]; then
+            echo "$i"
+            return
+        fi
+    done
+    echo "99"
+}
 
-# TODO add sorting by priority
-# TODO add other root directory markers besides git
+ROOT=$(find_root)
+
+# Run ripgrep and sort by priority
+rg --ignore-case --vimgrep "$REGEX" "$ROOT" 2>/dev/null | while IFS=: read -r file line col content; do
+# Extract tag from content
+tag=$(echo "$content" | grep -oiE "$TAGS" | head -1 | tr '[:lower:]' '[:upper:]')
+priority=$(get_priority "$tag")
+
+  # Output with priority prefix for sorting
+  echo "${priority}:${file}:${line}:${col}:${content}"
+done | sort -t: -k1,1n -k2,2 -k3,3n | cut -d: -f2- || true
+
+# Exit 0 even if no matches
+exit 0

@@ -110,39 +110,32 @@ vim.keymap.set("n", "==", "<cmd>Conform<cr>", opts)
 -- Gitsigns textobject
 vim.keymap.set({ "o", "x" }, "ih", "<cmd>Gitsigns select_hunk<cr>", opts)
 
--- Tagbar
-vim.keymap.set("n", "<c-o>", "<cmd>TagbarToggle<cr>", opts)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "tagbar",
-  callback = function()
-    vim.keymap.set("n", "<esc>", "<c-w>c", { buffer = true })
-  end,
-})
+-- Code outline
+vim.keymap.set("n", "<c-o>", function()
+  local ft = vim.bo.filetype
+  local patterns = {
+    c        = [[^\w\+\s\+\**\w\+\s*(]],
+    cpp      = [[^\(class\|struct\|namespace\)\s\|^\w\+\s\+\**\w\+\s*(]],
+    go       = [[^\(func\|type\)\s]],
+    javascript = [[^\s*\(function\|class\|const\s\+\w\+\s*=\s*(\|export\)\s]],
+    lua      = [[^\s*\(local\s\+\)\?function\s]],
+    markdown = [[^#\+\s]],
+    python   = [[^\s*\(class\|def\)\s]],
+    sh       = [[^\s*\(function\s\+\)\?\w\+\s*()]],
+  }
 
--- Slime (REPL Integration)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme,lisp,lua",
-  callback = function()
-    local s_opts = {
-      noremap = true,
-      silent = true,
-      buffer = true
-    }
-    -- Send file to repl
-    vim.keymap.set("n", "<c-c><c-k>", function()
-      local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
-      local ft = vim.bo.filetype
-      local cmd = {
-        python = "%run -i " .. path .. "\n",
-        lua = "dofile('" .. path .. "')\n",
-        lisp = "(load '" .. path .. "')\n",
-        scheme = "(load '" .. path.. "')\n"
-      }
-      vim.fn["slime#send"](cmd[ft])
-    end, s_opts)
-    -- Clear screen
-    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', s_opts)
-    -- Clear input
-    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', s_opts)
-  end,
-})
+  local pattern = patterns[ft]
+  if not pattern then
+    print("No pattern for " .. ft)
+    return
+  end
+
+  vim.cmd(string.format("silent! lvimgrep /%s/j %%", pattern))
+
+  if #vim.fn.getloclist(0) > 0 then
+    vim.fn.setloclist(0, {}, 'a', {title = ''})
+    vim.cmd("lopen")
+  else
+    print("No symbols found")
+  end
+end, opts)

@@ -68,16 +68,6 @@ require("lazy").setup({
         vim.cmd("colorscheme codedark")
       end,
     },
-    {
-      "luochen1990/rainbow",
-      event = { "BufReadPre", "BufNewFile" },
-      init = function()
-        vim.g["rainbow_active"] = true
-      end,
-      config = function()
-        vim.cmd("RainbowToggleOn")
-      end,
-    }
   },
   change_detection = {
     enable = false,
@@ -99,7 +89,7 @@ require("highlights")
 
 vim.lsp.enable({
   "clangd",
-  "pylsp",
-  "ts_ls",
+  "gopls",
   "lua_ls",
+  "ts_ls",
 })

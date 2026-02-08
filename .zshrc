@@ -15,16 +15,15 @@ export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-    export PATH="$PATH:$(brew --prefix)/opt/libpq/bin/"
-fi
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     # Neovim
     export PATH="$PATH:/opt/nvim-linux-arm64/bin"
+
+    # Go
+    export GOROOT="/usr/lib/go"
+    export GOPATH="$HOME/go"
+    export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
     # Node
     export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -40,11 +39,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
         . "$HOME/google-cloud-sdk/completion.zsh.inc";
     fi
-
-    # Android
-    export CHROME_EXECUTABLE="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
-    export ANDROID_SDK_ROOT="$HOME/android"
-    export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools"
 fi
 
 unalias -m "*"

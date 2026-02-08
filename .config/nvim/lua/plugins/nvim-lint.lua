@@ -7,7 +7,6 @@ return {
         cpp = { "cppcheck" },
         javascript = { "eslint_d" },
         proto = { "buf_lint" },
-        python = { "ruff" },
         sh = { "shellcheck" },
         sql = { "sqlfluff" },
       }

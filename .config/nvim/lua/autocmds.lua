@@ -16,13 +16,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
   command = "silent! write",
 })
 
--- Template engine file types
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  group = my_autocmds,
-  pattern = "*.njk,*.jinja",
-  command = "setfiletype html",
-})
-
 -- Highlight when copying text
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = my_autocmds,
@@ -63,10 +56,10 @@ endif
 -- FileType Settings
 -- ============================================================================
 
--- Set 2 space indendation for some filetypes
+-- Set 2 space indentation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = my_autocmds,
-  pattern = "css,html,javascript,json,lisp,scheme,lua,soy",
+  pattern = "css,html,javascript,json,lua",
   callback = function()
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2
@@ -81,6 +74,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.signcolumn = "no"
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
+
+    -- Quickfix / locationlist keymaps
+    local map_opts = { buffer = true, silent = true }
+    vim.keymap.set("n", "<cr>", function()
+      local ok = pcall(function() vim.cmd(".ll") end)
+      if not ok then pcall(function() vim.cmd(".cc") end) end
+      vim.cmd("cclose | lclose")
+      vim.cmd("normal! zt")
+    end, map_opts)
+    vim.keymap.set("n", "<esc>", "<cmd>cclose | lclose<cr>", map_opts)
   end,
 })
 
@@ -95,37 +98,16 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- Set dbout options
-vim.api.nvim_create_autocmd("FileType", {
-  group = my_autocmds,
-  pattern = "dbout",
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-    vim.opt_local.scrolloff = 0
-  end,
-})
-
 -- ============================================================================
 -- LSP & Completion
 -- ============================================================================
 
--- Set omnifunc source
-vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach", "BufEnter" }, {
+-- Set omnifunc fallback
+vim.api.nvim_create_autocmd("LspAttach", {
   group = my_autocmds,
   callback = function(args)
-    local bufnr = args.buf
-    local filetype = vim.bo[bufnr].filetype
-    if filetype == "sql" then
-      vim.bo.omnifunc = "vim_dadbod_completion#omni"
-      return
-    end
-    local has_lsp = not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = bufnr }))
-    if has_lsp then
-      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-    else
-      vim.bo[bufnr].omnifunc = "syntaxcomplete#Complete"
+    if vim.bo[args.buf].omnifunc == "" then
+      vim.bo[args.buf].omnifunc = "syntaxcomplete#Complete"
     end
   end,
 })

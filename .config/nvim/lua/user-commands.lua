@@ -34,7 +34,29 @@ end, {})
 
 -- Open todos
 vim.api.nvim_create_user_command("T", function()
-  vim.cmd("cgetexpr system('todo')")
+  local output = vim.fn.system('todo')
+  if vim.v.shell_error ~= 0 then
+    print("Error running todo script")
+    return
+  end
+
+  if output == "" or output:match("^%s*$") then
+    print("No TODOs found!")
+    return
+  end
+
+  vim.fn.setqflist({}, 'r', {
+    title = 'TODOs',
+    lines = vim.split(output, '\n', { trimempty = true })
+  })
+
+  if #vim.fn.getqflist() == 0 then
+    print("No TODOs found!")
+    return
+  end
+
+  vim.cmd("copen")
+  vim.cmd("wincmd p")
 end, {})
 
 -- Print and copy file full path
