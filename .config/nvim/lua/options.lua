@@ -12,7 +12,7 @@ vim.opt.termguicolors = true
 vim.opt.hidden = true
 vim.opt.autoread = true
 vim.opt.autowriteall = true
-local tmpdir = vim.loop.os_getenv("TMPDIR") or "/tmp"
+local tmpdir = vim.uv.os_getenv("TMPDIR") or "/tmp"
 vim.opt.backupdir:prepend(tmpdir .. "//")
 vim.opt.directory:prepend(tmpdir .. "//")
 

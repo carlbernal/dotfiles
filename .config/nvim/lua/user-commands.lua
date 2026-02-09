@@ -66,3 +66,36 @@ vim.api.nvim_create_user_command("Path", function()
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path, vim.log.levels.INFO)
 end, {})
+
+-- Go tests
+vim.api.nvim_create_user_command("GoTest", function(opts)
+  vim.fn.setqflist({}, "r")
+  local save = vim.bo.makeprg
+  local args = opts.args ~= "" and opts.args or "./..."
+  vim.bo.makeprg = "go test " .. args
+  vim.cmd("make!")
+  vim.bo.makeprg = save
+end, { nargs = "*" })
+
+-- Cmake tests
+vim.api.nvim_create_user_command("CTest", function(opts)
+  vim.fn.setqflist({}, "r")
+  local utils = require("utils")
+  local git_root = utils.find_git_root()
+  if not git_root then
+    vim.notify("No git repo", vim.log.levels.ERROR)
+    return
+  end
+
+  local build_dir = git_root .. "/build"
+  if vim.fn.isdirectory(build_dir) == 0 then
+    vim.notify("No build dir: " .. build_dir, vim.log.levels.WARN)
+    return
+  end
+
+  local args = opts.args ~= "" and opts.args or "--output-on-failure"
+  local save = vim.bo.makeprg
+  vim.bo.makeprg = string.format("ctest --test-dir %q %s", build_dir, args)
+  vim.cmd("make")
+  vim.bo.makeprg = save
+end, { nargs = "*" })

@@ -13,7 +13,11 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Additional autowrite events
 vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
   group = my_autocmds,
-  command = "silent! write",
+  callback = function()
+    if vim.bo.modified and vim.bo.buftype == "" then
+      vim.cmd("silent! write")
+    end
+  end
 })
 
 -- Highlight when copying text
@@ -87,6 +91,33 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Filter quickfix to 1 row per valid item and manage window
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  group = my_autocmds,
+  pattern = "make",
+  callback = function()
+    local qf = vim.fn.getqflist()
+    local clean_qf = {}
+
+    for _, item in ipairs(qf) do
+      if item.valid == 1 then
+        table.insert(clean_qf, item)
+      end
+    end
+
+    vim.fn.setqflist(clean_qf, "r")
+
+    if #clean_qf > 0 then
+      vim.cmd("cwindow")
+    else
+      vim.cmd("cclose")
+      if vim.v.shell_error == 0 then
+        vim.notify("Success", vim.log.levels.INFO)
+      end
+    end
+  end,
+})
+
 -- Set terminal mode options
 vim.api.nvim_create_autocmd("TermOpen", {
   group = my_autocmds,
@@ -113,8 +144,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Set lint events
+local lint_group = vim.api.nvim_create_augroup("NvimLint", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
-  group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
+  group = lint_group,
   callback = function()
     require("lint").try_lint()
   end,
@@ -128,5 +160,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
     client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
+
+-- ============================================================================
+-- Makeprg Settings
+-- ============================================================================
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = my_autocmds,
+  pattern = "c,cpp",
+  callback = function()
+    local git_root = require("utils").find_git_root()
+    if not git_root then
+      return
+    end
+
+    if vim.uv.fs_stat(git_root .. "/build/Makefile") then
+      vim.opt_local.makeprg = string.format("make -C %q", git_root .. "/build")
+    elseif vim.uv.fs_stat(git_root .. "/Makefile") then
+      vim.opt_local.makeprg = string.format("make -C %q", git_root)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = my_autocmds,
+  pattern = "go",
+  callback = function()
+    vim.opt_local.makeprg = "go build"
   end,
 })

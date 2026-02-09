@@ -10,6 +10,7 @@ return {
         css = { "prettier" },
         go = { "goimports", "gofmt" },
         html = { "prettier" },
+        javascript = { "prettier" },
         json = { "jq" },
       },
     },
