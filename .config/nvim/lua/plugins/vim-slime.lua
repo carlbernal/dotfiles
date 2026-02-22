@@ -1,7 +1,7 @@
 return {
   {
     "jpalardy/vim-slime",
-    ft = "python,lua",
+    ft = "python,lua,sql",
     init = function()
       vim.g["slime_target"] = "neovim"
     end,

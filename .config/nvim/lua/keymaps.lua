@@ -161,7 +161,7 @@ end, opts)
 
 -- Slime (REPL Integration)
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme",
+  pattern = "python,scheme,sql",
   callback = function()
     local s_opts = {
       noremap = true,
@@ -175,6 +175,8 @@ vim.api.nvim_create_autocmd("FileType", {
       local cmd = {
         python = "%run -i " .. path .. "\n",
         lua = "dofile('" .. path .. "')\n",
+        -- Postresql
+        sql    = "\\i " .. path .. "\n",
       }
       vim.fn["slime#send"](cmd[ft])
     end, s_opts)
