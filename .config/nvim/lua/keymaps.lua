@@ -158,3 +158,29 @@ vim.keymap.set("n", "<c-o>", function()
     vim.notify("No symbols found", vim.log.levels.INFO)
   end
 end, opts)
+
+-- Slime (REPL Integration)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python,scheme",
+  callback = function()
+    local s_opts = {
+      noremap = true,
+      silent = true,
+      buffer = true
+    }
+    -- Send file to repl
+    vim.keymap.set("n", "<c-c><c-k>", function()
+      local path = vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+      local ft = vim.bo.filetype
+      local cmd = {
+        python = "%run -i " .. path .. "\n",
+        lua = "dofile('" .. path .. "')\n",
+      }
+      vim.fn["slime#send"](cmd[ft])
+    end, s_opts)
+    -- Clear screen
+    vim.keymap.set("n", "<c-c><c-l>", '<cmd>SlimeSend0 "\x0c"<cr>', s_opts)
+    -- Clear input
+    vim.keymap.set("n", "<c-c><c-u>", '<cmd>SlimeSend0 "\x15"<cr>', s_opts)
+  end,
+})

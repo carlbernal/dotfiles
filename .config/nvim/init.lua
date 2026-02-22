@@ -64,7 +64,8 @@ require("lazy").setup({
       lazy = false,
       priority = 1000,
       init = function()
-        vim.g["codedark_conservative"] = false
+        -- vim.g["codedark_conservative"] = false
+        vim.g["codedark_conservative"] = true
         vim.cmd("colorscheme codedark")
       end,
     },
@@ -92,5 +93,6 @@ vim.lsp.enable({
   "clangd",
   "gopls",
   "lua_ls",
+  "pyrefly",
   "ts_ls",
 })

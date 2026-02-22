@@ -4,7 +4,7 @@ alias pn="pnpm"
 alias lua="lua5.4"
 
 alias l="eza --color=auto --icons=never --sort=type"
-alias ll="l -T --git-ignore"
+alias ll="l -T --git-ignore -I 'build|node_modules|.venv|__pycache__'"
 
 alias rm="rm -i"
 alias md="mkdir -p"
