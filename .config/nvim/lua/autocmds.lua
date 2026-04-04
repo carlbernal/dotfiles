@@ -63,7 +63,7 @@ endif
 -- Set 2 space indentation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = my_autocmds,
-  pattern = "css,html,javascript,json,lua",
+  pattern = "css,html,javascript,json,lua,pbtxt",
   callback = function()
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2

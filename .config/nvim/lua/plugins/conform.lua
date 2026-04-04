@@ -12,6 +12,8 @@ return {
         html = { "prettier" },
         javascript = { "prettier" },
         json = { "jq" },
+        pbtxt = { "txtpbfmt" },
+        proto = { "buf" },
         python = {
           "ruff_fix",
           "ruff_format",
