@@ -38,7 +38,10 @@ vim.keymap.set("n", "<c-d>", function()
   local failed = 0
 
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if buf ~= current and vim.bo[buf].buflisted then
+    if buf ~= current
+      and vim.api.nvim_buf_is_loaded(buf)
+      and vim.bo[buf].buflisted
+    then
       local success = pcall(bd, buf, true)
       if success then
         count = count + 1
