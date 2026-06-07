@@ -10,16 +10,6 @@ vim.api.nvim_create_autocmd("VimResized", {
   command = "tabdo wincmd =",
 })
 
--- Additional autowrite events
-vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
-  group = my_autocmds,
-  callback = function()
-    if vim.bo.modified and vim.bo.buftype == "" then
-      vim.cmd("silent! write")
-    end
-  end
-})
-
 -- Highlight when copying text
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = my_autocmds,
@@ -63,7 +53,7 @@ endif
 -- Set 2 space indentation for some filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = my_autocmds,
-  pattern = "css,html,javascript,json,lua,pbtxt",
+  pattern = "css,html,javascript,json,lua,pbtxt,markdown",
   callback = function()
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2
@@ -94,7 +84,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Filter quickfix to 1 row per valid item and manage window
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   group = my_autocmds,
-  pattern = "make",
+  pattern = "make*",
   callback = function()
     local qf = vim.fn.getqflist()
     local clean_qf = {}
@@ -144,16 +134,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Set lint events
-local lint_group = vim.api.nvim_create_augroup("NvimLint", { clear = true })
-vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost", "InsertLeave" }, {
-  group = lint_group,
-  callback = function()
-    require("lint").try_lint()
-  end,
+vim.api.nvim_create_autocmd("BufWritePost", {
+ group = my_autocmds,
+ callback = function()
+   pcall(function() require("lint").try_lint() end)
+ end,
 })
 
 -- Global LSP config
 vim.api.nvim_create_autocmd("LspAttach", {
+  group = my_autocmds,
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then
@@ -171,7 +161,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = my_autocmds,
   pattern = "c,cpp",
   callback = function()
-    local git_root = require("utils").find_git_root()
+    local git_root = vim.fs.root(0, { ".git" })
     if not git_root then
       return
     end

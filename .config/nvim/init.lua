@@ -69,6 +69,16 @@ require("lazy").setup({
         vim.cmd("colorscheme codedark")
       end,
     },
+    {
+      "luochen1990/rainbow",
+      ft = "lisp",
+      init = function()
+        vim.g["rainbow_active"] = true
+      end,
+      config = function()
+        vim.cmd("RainbowToggleOn")
+      end,
+    }
   },
   change_detection = {
     enable = false,

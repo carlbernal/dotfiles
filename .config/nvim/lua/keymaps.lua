@@ -63,19 +63,6 @@ end, opts)
 -- Editing
 -- ============================================================================
 
--- Add InsertLeave event to verbs
-local function refresh(mode, lhs, rhs)
-  vim.keymap.set(mode, lhs, function()
-    local count = vim.v.count > 0 and vim.v.count or ""
-    vim.cmd("silent! normal! " .. count .. rhs)
-    vim.cmd("silent! doautocmd InsertLeave")
-  end, opts)
-end
-for _, k in ipairs({ "x", "p", "u", "<c-r>", "~", "D", "dd" }) do
-  refresh("n", k, k)
-end
-refresh("v", "d", "d")
-
 -- Restore gq default behavior
 vim.keymap.set("n", "gq", "gq", opts)
 vim.keymap.set("v", "gq", "gq", opts)
@@ -100,15 +87,15 @@ end
 vim.keymap.set("n", "R", vim.lsp.buf.rename, opts)
 
 -- Toggle diagnostics
-local prev_win
 vim.keymap.set("n", "<c-m>", function()
   if vim.fn.getloclist(0, { winid = 0 }).winid == 0 then
-    prev_win = vim.api.nvim_get_current_win()
+    vim.w.diag_prev_win = vim.api.nvim_get_current_win()
     vim.diagnostic.setloclist({ open = true })
   else
     vim.cmd("lclose")
-    if prev_win and vim.api.nvim_win_is_valid(prev_win) then
-      vim.api.nvim_set_current_win(prev_win)
+    local pw = vim.w.diag_prev_win
+     if pw and vim.api.nvim_win_is_valid(pw) then
+       vim.api.nvim_set_current_win(pw)
     end
   end
 end, opts)
@@ -141,6 +128,7 @@ vim.keymap.set("n", "<c-o>", function()
     markdown = [[^#\+\s]],
     python   = [[^\s*\(class\|def\)\s]],
     sh       = [[^\s*\(function\s\+\)\?\w\+\s*()]],
+    lisp       = [[^\s*(\(def\w\+\)\s\+]],
   }
 
   local pattern = patterns[ft]
@@ -161,7 +149,7 @@ end, opts)
 
 -- Slime (REPL Integration)
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "python,scheme,sql",
+  pattern = "python,lua,sql,lisp",
   callback = function()
     local s_opts = {
       noremap = true,
@@ -175,8 +163,8 @@ vim.api.nvim_create_autocmd("FileType", {
       local cmd = {
         python = "%run -i " .. path .. "\n",
         lua = "dofile('" .. path .. "')\n",
-        -- Postresql
-        sql    = "\\i " .. path .. "\n",
+        sql    = "\\i " .. path .. "\n", -- For postgress
+        lisp   = '(load "' .. path .. '")\n',
       }
       vim.fn["slime#send"](cmd[ft])
     end, s_opts)

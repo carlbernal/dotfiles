@@ -80,7 +80,7 @@ end, { nargs = "*" })
 -- Cmake tests
 vim.api.nvim_create_user_command("CTest", function(opts)
   vim.fn.setqflist({}, "r")
-  local git_root = require("utils").find_git_root()
+  local git_root = vim.fs.root(0, { ".git" })
   if not git_root then
     vim.notify("No git repo", vim.log.levels.ERROR)
     return

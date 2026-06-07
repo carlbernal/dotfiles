@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Set dir to the first argument passed to this script. But if no argument was
+# provided, fall back to the default Neovim configuration directory.”
+dir="${1:-$HOME/.config/nvim}"
+
+find -L "$dir" \
+  -type f \( -name '*.lua' -o -name '*.vim' \) |
+sort |
+while read -r file; do
+    printf '===== %s =====\n' "${file#"$dir"/}"
+    cat "$file"
+    printf '\n\n'
+done |
+clip.exe
+
+echo "Neovim config copied to clipboard."
