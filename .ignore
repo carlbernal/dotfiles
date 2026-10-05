@@ -1,0 +1,19 @@
+# Hide all hidden files and dotfolders
+.*/*
+
+# macOS default home directories to hide
+Library/
+Applications/
+System/
+Movies/
+Music/
+Pictures/
+Public/
+Documents/
+
+# Third-party / Language builds
+go/
+**/node_modules/
+**/.venv/
+**/__pycache__/
+package-lock.json

@@ -1,17 +1,15 @@
 [keyboard]
 bindings = [
-    # https://stackoverflow.com/a/42461580
-    { chars = "\u001B[13;2u", key = "Return", mods = "Shift" },
     { key = "t", mods = "Command", action = "None" },
     { key = "Minus", mods = "Control", action = "ReceiveChar" },
     { key = "Plus", mods = "Control", action = "ReceiveChar" },
 ]
 
 [font]
-normal = { family = "JetBrains Mono NL", style = "Regular" }
-bold = { family = "JetBrains Mono NL", style = "Bold" }
-italic = { family = "JetBrains Mono NL", style = "Italic" }
-bold_italic = { family = "JetBrains Mono NL", style = "Bold Italic" }
+normal = { family = "Hack", style = "Regular" }
+bold = { family = "Hack", style = "Bold" }
+italic = { family = "Hack", style = "Italic" }
+bold_italic = { family = "Hack", style = "Bold Italic" }
 size = 14
 offset.y = 2
 

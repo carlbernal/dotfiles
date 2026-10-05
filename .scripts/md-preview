@@ -1,18 +1,14 @@
 #!/bin/bash
 
 # Lightweight CLI version of vscode markdown preview
-#
-# Takes a path to a markdown file as argument, transform it to html and
-# re-transform it everytime the file is updated
+# Works on macOS (Safari/Default), Linux, and WSL
 
 # ============================================================================
 # CONFIGURATION AND VARIABLES
 # ============================================================================
 
-# Dependencies
 dependencies=("pandoc" "fswatch" "wget")
 
-# CSS theme definitions
 declare -A css_themes=(
     ["github"]="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-light.css"
     ["github-dark"]="https://raw.githubusercontent.com/sindresorhus/github-markdown-css/main/github-markdown-dark.css"
@@ -20,12 +16,10 @@ declare -A css_themes=(
     ["minimal"]="https://raw.githubusercontent.com/markdowncss/modest/master/css/modest.css"
 )
 
-# Default settings
 default_theme="gfm"
 current_theme="$default_theme"
 css_cache_dir="$HOME/.cache/md-preview"
 
-# Messages
 help_text="
 Usage: md-preview [OPTIONS] file.md
 
@@ -42,7 +36,7 @@ Options:
 check_dependencies() {
     for i in "${dependencies[@]}"; do
         if ! command -v "$i" &>/dev/null; then
-            echo "$i needs to be in path!"
+            echo "Error: $i needs to be installed and in PATH!"
             exit 1
         fi
     done
@@ -79,21 +73,15 @@ validate_input() {
     fi
 
     if [[ ! -f "$file" || ! "$file" =~ \.md$ ]]; then
-        echo "Error: $file is not a markdown file"
+        echo "Error: '$file' is not a valid .md file"
         show_help
         exit 1
     fi
 }
 
 setup_temp_directory() {
-    if grep -qi "microsoft" /proc/version; then
-        tempdir="/tmp/md-preview-$$"
-        mkdir -p "$tempdir"
-    else
-        tempdir=$(mktemp -d)
-    fi
+    tempdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'md-preview')
     trap 'rm -rf "$tempdir"' EXIT
-
     output_file="$tempdir/output.html"
 }
 
@@ -111,15 +99,15 @@ get_css() {
     if [[ -f "$cache_file" ]]; then
         cp "$cache_file" "$tempdir/styles.css"
     else
-        echo "Downloading CSS for theme: $theme"
+        echo "Downloading CSS for theme: $theme..."
         wget -qO "$cache_file" "$css_url"
         cp "$cache_file" "$tempdir/styles.css"
-        echo "CSS cached and ready"
+        echo "CSS cached."
     fi
 }
 
 # ============================================================================
-# HTML CONVERSION
+# HTML CONVERSION AND DISPATCH
 # ============================================================================
 
 convert_to_html() {
@@ -128,7 +116,6 @@ convert_to_html() {
     pandoc --quiet -f gfm -t html -o "$output_file" "$input_file" \
         --embed-resources --standalone --css="$tempdir/styles.css"
 
-    # Add theme-specific body class if needed
     case "$current_theme" in
         github|github-dark)
             sed -i.bak 's/<body[^>]*>/<body class="markdown-body">/' "$output_file" 2>/dev/null || \
@@ -138,12 +125,20 @@ convert_to_html() {
 }
 
 open_html() {
-    if grep -qi "microsoft" /proc/version; then
+    if [[ -f /proc/version ]] && grep -qi "microsoft" /proc/version; then
+        # WSL
         windows_file=$(wslpath -w "$output_file")
-        chrome="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe"
-        "$chrome" "$windows_file"
+        cmd.exe /c start "$windows_file" 2>/dev/null
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        open -a "Safari" "$output_file"
     else
-        open "$output_file"
+        # Linux / BSD
+        if command -v xdg-open &>/dev/null; then
+            xdg-open "$output_file" &>/dev/null
+        else
+            echo "HTML generated at: $output_file"
+        fi
     fi
 }
 
