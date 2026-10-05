@@ -18,6 +18,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 
 " Tools
+Plug 'bfrg/vim-c-cpp-modern'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'markonm/traces.vim'
@@ -232,16 +233,6 @@ augroup CustomAutocmds
   autocmd BufEnter * call AutoRestoreWinView()
 
   autocmd ColorScheme * call ApplyCustomHighlights()
-augroup END
-
-augroup TracesLargeFileGuard
-  autocmd!
-  autocmd BufEnter,BufReadPost *
-        \ if line('$') > 10000 |
-        \   let b:traces_enabled = 0 |
-        \ else |
-        \   let b:traces_enabled = 1 |
-        \ endif
 augroup END
 
 "" ============================================================================
