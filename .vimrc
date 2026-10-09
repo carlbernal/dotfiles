@@ -58,7 +58,6 @@ set tags=./tags;,tags
 set termguicolors
 set background=dark
 let g:codedark_conservative = v:true
-colorscheme codedark
 
 filetype plugin indent on
 syntax on
@@ -200,8 +199,6 @@ function! ApplyCustomHighlights() abort
   hi QuickFixLine  guibg=#264f78 guifg=NONE    ctermbg=24  ctermfg=NONE
 endfunction
 
-call ApplyCustomHighlights()
-
 "" ============================================================================
 "" Custom Functions
 "" ============================================================================
@@ -240,7 +237,7 @@ function! SendFileToSlime()
   let l:cmds = {
         \   'python': '%run -i ' . l:path . "\n",
         \   'lisp':   '(load "' . l:path . '")' . "\n",
-        \   'scheme':   '(load "' . l:path . '")' . "\n",
+        \   'scheme': '(load "' . l:path . '")' . "\n",
         \   'sql':    '\i ' . l:path . "\n",
         \   'sh':     'source ' . l:path . "\n",
         \   'markdown': 'agy "Process prompt from file: ' . l:path . '"' . "\n"
@@ -258,8 +255,8 @@ endfunction
 augroup CustomAutocmds
   autocmd!
   autocmd VimResized * tabdo wincmd =
-    autocmd FileType vim,css,html,javascript,json,pbtxt,markdown,c,cpp
-          \ setlocal ts=2 sts=2 sw=2
+  autocmd FileType vim,css,html,javascript,json,pbtxt,markdown,c,cpp
+        \ setlocal ts=2 sts=2 sw=2
 
   autocmd FileType qf setlocal cc= wrap linebreak
   autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose \| lclose<cr>
@@ -269,11 +266,9 @@ augroup CustomAutocmds
   autocmd BufEnter * call AutoRestoreWinView()
 
   autocmd ColorScheme * call ApplyCustomHighlights()
-
-  nnoremap <c-c><c-k> :call SendFileToSlime()<cr>
-  nnoremap <c-c><c-l> :call slime#send("\x0c")<cr>
-  nnoremap <c-c><c-u> :call slime#send("\x15")<cr>
 augroup END
+
+colorscheme codedark
 
 "" ============================================================================
 "" Key Mappings
@@ -291,3 +286,7 @@ tnoremap <esc> <c-\><c-n>
 nnoremap <c-p> :call FzyCommand("fd --type f", ":e")<cr>
 nnoremap == :ALEFix<cr>
 nnoremap <c-o> :TagbarToggle<cr>
+
+nnoremap <c-c><c-k> :call SendFileToSlime()<cr>
+nnoremap <c-c><c-l> :call slime#send("\x0c")<cr>
+nnoremap <c-c><c-u> :call slime#send("\x15")<cr>
