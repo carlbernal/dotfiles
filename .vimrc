@@ -20,6 +20,7 @@ Plug 'wellle/targets.vim'
 " Tools
 Plug 'bfrg/vim-c-cpp-modern'
 Plug 'tomasiser/vim-code-dark'
+Plug 'moll/vim-bbye'
 Plug 'tpope/vim-fugitive'
 Plug 'markonm/traces.vim'
 Plug 'dense-analysis/ale'
@@ -185,7 +186,7 @@ function! ApplyCustomHighlights() abort
   hi StatusLine    guibg=#1e1e1e guifg=#999999 ctermbg=234 ctermfg=246
   hi StatusLineNC  guibg=#121212 guifg=#4e4e4e ctermbg=233 ctermfg=239
 
-  hi StatusLineTerm    guibg=#0a4d8c guifg=#ffffff 
+  hi StatusLineTerm    guibg=#0a4d8c guifg=#ffffff
         \ ctermbg=24  ctermfg=15 gui=bold cterm=bold
   hi StatusLineTermNC  guibg=#121212 guifg=#4e4e4e ctermbg=233 ctermfg=239
 
@@ -248,6 +249,16 @@ function! SendFileToSlime()
   endif
 endfunction
 
+function! DeleteOtherBuffers() abort
+  let l:current = bufnr('%')
+  for l:buf in
+        \ filter(range(1, bufnr('$')), 'bufexists(v:val) && buflisted(v:val)')
+    if l:buf != l:current
+      execute 'Bdelete ' . l:buf
+    endif
+  endfor
+endfunction
+
 "" ============================================================================
 "" Autocommands
 "" ============================================================================
@@ -279,6 +290,11 @@ nnoremap zz zt
 nnoremap zt zz
 nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:echo ""<cr>
 nnoremap <c-c> <c-c>
+
+nnoremap <c-u> <nop>
+nnoremap <c-x> :Bdelete<cr>
+nnoremap <c-d> :call DeleteOtherBuffers()<cr>
+
 cnoreabbrev <expr> ter (getcmdtype() == ':' && getcmdline() == 'ter') ?
       \ 'leftabove vert ter' : 'ter'
 tnoremap <esc> <c-\><c-n>
@@ -287,6 +303,6 @@ nnoremap <c-p> :call FzyCommand("fd --type f", ":e")<cr>
 nnoremap == :ALEFix<cr>
 nnoremap <c-o> :TagbarToggle<cr>
 
-nnoremap <c-c><c-k> :call SendFileToSlime()<cr>
-nnoremap <c-c><c-l> :call slime#send("\x0c")<cr>
-nnoremap <c-c><c-u> :call slime#send("\x15")<cr>
+nnoremap <silent> <c-c><c-k> :call SendFileToSlime()<cr>
+nnoremap <silent> <c-c><c-l> :call slime#send("\x0c")<cr>
+nnoremap <silent> <c-c><c-u> :call slime#send("\x15")<cr>
