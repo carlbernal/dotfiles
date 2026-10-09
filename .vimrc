@@ -4,7 +4,7 @@
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -26,6 +26,11 @@ Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/tagbar'
 Plug 'romainl/vim-qf'
+Plug 'jpalardy/vim-slime'
+Plug 'eraserhd/parinfer-rust', {
+      \ 'do': 'cargo build --release',
+      \ 'for': ['lisp', 'scheme']
+      \ }
 call plug#end()
 
 "" ============================================================================
@@ -36,7 +41,6 @@ set mouse=nvi
 set ttymouse=sgr
 set clipboard=unnamed
 set backspace=2
-set noesckeys
 set timeoutlen=300
 set ttimeoutlen=50
 
@@ -53,7 +57,7 @@ set tags=./tags;,tags
 "" UI
 set termguicolors
 set background=dark
-let g:codedark_conservative = 1
+let g:codedark_conservative = v:true
 colorscheme codedark
 
 filetype plugin indent on
@@ -94,39 +98,39 @@ set omnifunc=syntaxcomplete#Complete
 "" Plugin Settings
 "" ============================================================================
 
-let g:netrw_banner = 0
+let g:netrw_banner = v:false
 
 " ALE
-let g:ale_disable_lsp = 1
+let g:ale_disable_lsp = v:true
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_insert_leave = v:false
+let g:ale_lint_on_enter = v:false
 
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+let g:ale_set_quickfix = v:true
+let g:ale_open_list = v:true
 let g:ale_loclist_msg_format = '[%linter%] %s (%code%)'
 
-let g:ale_virtualtext_cursor = 0
-let g:ale_set_signs = 0
-let g:ale_set_highlights = 0
+let g:ale_virtualtext_cursor = v:false
+let g:ale_set_signs = v:false
+let g:ale_set_highlights = v:false
 let g:ale_echo_msg_format = ''
 
 let g:ale_linters = {
-\   'c': ['cppcheck'],
-\   'cpp': ['cppcheck'],
-\   'python': ['ruff'],
-\   'sh': ['shellcheck'],
-\}
+      \   'c': ['cppcheck'],
+      \   'cpp': ['cppcheck'],
+      \   'python': ['ruff'],
+      \   'sh': ['shellcheck'],
+      \}
 
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = v:false
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'c': ['clang-format'],
-\   'cpp': ['clang-format'],
-\   'json': ['jq'],
-\   'python': ['ruff_format'],
-\   'sh': ['shfmt'],
-\}
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'c': ['clang-format'],
+      \   'cpp': ['clang-format'],
+      \   'json': ['jq'],
+      \   'python': ['ruff_format'],
+      \   'sh': ['shfmt'],
+      \}
 
 " Gutentags
 let g:gutentags_cache_dir = expand('~/.tags')
@@ -135,32 +139,42 @@ let g:gutentags_file_list_command = 'fd --type f --no-follow --exclude .git'
 
 " Tagbar
 let g:tagbar_position = 'botright horizontal'
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_sort = 0
-let g:tagbar_compact = 1
+let g:tagbar_autoclose = v:true
+let g:tagbar_autofocus = v:true
+let g:tagbar_sort = v:false
+let g:tagbar_compact = v:true
 let g:tagbar_indent = 2
 let g:tagbar_wrap = 2
 
-let g:tagbar_show_data_type = 1
-let g:tagbar_show_visibility = 1
-let g:tagbar_show_prefix = 1
-let g:tagbar_show_suffix = 1
-let g:tagbar_show_tag_count = 1
-let g:tagbar_ignore_anonymous = 1
+let g:tagbar_show_data_type = v:true
+let g:tagbar_show_visibility = v:true
+let g:tagbar_show_prefix = v:true
+let g:tagbar_show_suffix = v:true
+let g:tagbar_show_tag_count = v:true
+let g:tagbar_ignore_anonymous = v:true
+
+" Slime
+let g:slime_target = "vimterminal"
+let g:slime_python_ipython = v:true
+let g:slime_input_pid = v:false
+let g:slime_suggest_default = v:true
+let g:slime_menu_config = v:true
+
+" Parinfer
+let g:parinfer_mode = "smart"
 
 "" ============================================================================
 "" Statusline
 "" ============================================================================
 
 let s:mode_map = {
-\  'n': 'NORMAL', 'i': 'INSERT', 'ic': 'INSERT', 'ix': 'INSERT',
-\  'v': 'VISUAL', 'V': 'VISUAL', "\<C-v>": 'VISUAL',
-\  's': 'SELECT', 'S': 'SELECT', "\<C-s>": 'SELECT',
-\  'R': 'REPLACE', 'Rx': 'REPLACE', 'Rc': 'REPLACE', 'Rv': 'REPLACE',
-\  'c': 'COMMAND', 'cv': 'EX', 'ce': 'EX',
-\  'r': 'PROMPT', 'rm': 'PROMPT', 'r?': 'PROMPT', 't': 'TERMINAL'
-\}
+      \   'n': 'NORMAL', 'i': 'INSERT', 'ic': 'INSERT', 'ix': 'INSERT',
+      \   'v': 'VISUAL', 'V': 'VISUAL', "\<C-v>": 'VISUAL',
+      \   's': 'SELECT', 'S': 'SELECT', "\<C-s>": 'SELECT',
+      \   'R': 'REPLACE', 'Rx': 'REPLACE', 'Rc': 'REPLACE', 'Rv': 'REPLACE',
+      \   'c': 'COMMAND', 'cv': 'EX', 'ce': 'EX',
+      \   'r': 'PROMPT', 'rm': 'PROMPT', 'r?': 'PROMPT', 't': 'TERMINAL'
+      \}
 
 function! StatuslineMode() abort
   return get(s:mode_map, mode(), 'OTHER')
@@ -171,6 +185,11 @@ let &statusline = '%2* %{StatuslineMode()} %1* %f%m%r%=%*%2* %y '
 function! ApplyCustomHighlights() abort
   hi StatusLine    guibg=#1e1e1e guifg=#999999 ctermbg=234 ctermfg=246
   hi StatusLineNC  guibg=#121212 guifg=#4e4e4e ctermbg=233 ctermfg=239
+
+  hi StatusLineTerm    guibg=#0a4d8c guifg=#ffffff 
+        \ ctermbg=24  ctermfg=15 gui=bold cterm=bold
+  hi StatusLineTermNC  guibg=#121212 guifg=#4e4e4e ctermbg=233 ctermfg=239
+
   hi User1         guibg=#181818 guifg=#cccccc ctermbg=233 ctermfg=251
   hi User2         guibg=#0a4d8c guifg=#ffffff
         \ ctermbg=24  ctermfg=15 gui=bold cterm=bold
@@ -178,7 +197,6 @@ function! ApplyCustomHighlights() abort
   hi! MatchParen   guifg=#569cd6 guibg=NONE    ctermfg=75
         \ ctermbg=NONE gui=bold
   hi Search        guibg=#264f78 guifg=NONE    ctermbg=24  ctermfg=NONE
-  hi HiUnderCursor guibg=#333333 guifg=NONE    ctermbg=236 ctermfg=NONE
   hi QuickFixLine  guibg=#264f78 guifg=NONE    ctermbg=24  ctermfg=NONE
 endfunction
 
@@ -215,6 +233,24 @@ function! AutoRestoreWinView() abort
   endif
 endfunction
 
+function! SendFileToSlime()
+  let l:path = fnameescape(expand('%:p'))
+  let l:ft = &filetype
+
+  let l:cmds = {
+        \   'python': '%run -i ' . l:path . "\n",
+        \   'lisp':   '(load "' . l:path . '")' . "\n",
+        \   'scheme':   '(load "' . l:path . '")' . "\n",
+        \   'sql':    '\i ' . l:path . "\n",
+        \   'sh':     'source ' . l:path . "\n",
+        \   'markdown': 'agy "Process prompt from file: ' . l:path . '"' . "\n"
+        \ }
+
+  if has_key(l:cmds, l:ft)
+    call slime#send(l:cmds[l:ft])
+  endif
+endfunction
+
 "" ============================================================================
 "" Autocommands
 "" ============================================================================
@@ -222,8 +258,8 @@ endfunction
 augroup CustomAutocmds
   autocmd!
   autocmd VimResized * tabdo wincmd =
-  autocmd FileType vim,css,html,javascript,json,pbtxt,markdown,c,cpp
-        \ setlocal ts=2 sts=2 sw=2
+    autocmd FileType vim,css,html,javascript,json,pbtxt,markdown,c,cpp
+          \ setlocal ts=2 sts=2 sw=2
 
   autocmd FileType qf setlocal cc= wrap linebreak
   autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose \| lclose<cr>
@@ -233,6 +269,10 @@ augroup CustomAutocmds
   autocmd BufEnter * call AutoRestoreWinView()
 
   autocmd ColorScheme * call ApplyCustomHighlights()
+
+  nnoremap <c-c><c-k> :call SendFileToSlime()<cr>
+  nnoremap <c-c><c-l> :call slime#send("\x0c")<cr>
+  nnoremap <c-c><c-u> :call slime#send("\x15")<cr>
 augroup END
 
 "" ============================================================================
@@ -244,6 +284,8 @@ nnoremap zz zt
 nnoremap zt zz
 nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:echo ""<cr>
 nnoremap <c-c> <c-c>
+cnoreabbrev <expr> ter (getcmdtype() == ':' && getcmdline() == 'ter') ?
+      \ 'leftabove vert ter' : 'ter'
 tnoremap <esc> <c-\><c-n>
 
 nnoremap <c-p> :call FzyCommand("fd --type f", ":e")<cr>

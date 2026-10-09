@@ -14,3 +14,6 @@ alias rd="rmdir"
 alias -g ..="cd .."
 alias -g ...="cd ../.."
 alias -g ....="cd ../../.."
+
+alias sbcl="rlwrap sbcl"
+alias chez="rlwrap chez --eedisable"
