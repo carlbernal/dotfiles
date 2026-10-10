@@ -22,12 +22,12 @@ Plug 'bfrg/vim-c-cpp-modern'
 Plug 'tomasiser/vim-code-dark'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-fugitive'
-Plug 'markonm/traces.vim'
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', { 'on': ['ALEFix', 'ALELint', 'ALEToggle'] }
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'preservim/tagbar'
+Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'romainl/vim-qf'
 Plug 'jpalardy/vim-slime'
+Plug 'ojroques/vim-oscyank'
 Plug 'eraserhd/parinfer-rust', {
       \ 'do': 'cargo build --release',
       \ 'for': ['lisp', 'scheme']
@@ -35,40 +35,72 @@ Plug 'eraserhd/parinfer-rust', {
 call plug#end()
 
 "" ============================================================================
+"" Environment
+"" ============================================================================
+
+" Remote session: gates clipboard, key timeouts and the yank hook
+let s:ssh = !empty($SSH_TTY) || !empty($SSH_CONNECTION)
+
+let g:fd_cmd = executable('fd') ? 'fd' : executable('fdfind') ? 'fdfind' : ''
+let g:file_list_cmd = empty(g:fd_cmd)
+      \ ? "find . -type f -not -path '*/.git/*'"
+      \   . " -not -path '*/.hg/*' -not -path '*/.jj/*'"
+      \ : g:fd_cmd . ' --type f'
+
+let s:has_ctags = executable('ctags')
+      \ && system('ctags --version 2>&1') =~? 'universal\|exuberant'
+
+"" ============================================================================
 "" Options
 "" ============================================================================
 
 set mouse=nvi
 set ttymouse=sgr
-set clipboard=unnamed
 set backspace=2
 set timeoutlen=300
-set ttimeoutlen=50
+
+let &ttimeoutlen = s:ssh ? 100 : 50
+if s:ssh || !has('clipboard')
+  set clipboard=
+else
+  let &clipboard = has('macunix') ? 'unnamed' : 'unnamedplus'
+endif
 
 "" File Management
 set hidden
 set autoread
 set autowriteall
-set backupdir^=$TMPDIR//
-set directory^=$TMPDIR//
-set undodir^=$TMPDIR//
 set undofile
 set tags=./tags;,tags
+
+let s:state = expand('~/.vim/state')
+for s:d in ['swap', 'undo', 'backup']
+  silent! call mkdir(s:state . '/' . s:d, 'p', 0700)
+endfor
+let &directory = s:state . '/swap//'
+let &undodir   = s:state . '/undo'
+let &backupdir = s:state . '/backup//'
+
+set viminfo='100,<50,s10
+
+let g:bigfile_bytes = 5 * 1024 * 1024
+let g:bigfile_lines = 50000
 
 "" UI
 set termguicolors
 set background=dark
 let g:codedark_conservative = v:true
 
-filetype plugin indent on
-syntax on
 set noshowmode
+set noshowcmd
+set lazyredraw
 set number
 set scrolloff=4
 set colorcolumn=80,100
 set signcolumn=no
 set pumheight=6
 set laststatus=2
+set synmaxcol=200
 set shortmess+=WcCI
 let &fillchars .= ',eob: '
 
@@ -77,8 +109,13 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
-set grepformat=%f:%l:%c:%m
+if executable('rg')
+ let &grepprg = join([
+        \   'rg --vimgrep --smart-case --hidden',
+        \   '--glob=!.git --glob=!.hg --glob=!.jj',
+        \ ])
+  set grepformat=%f:%l:%c:%m
+endif
 
 "" Indentation
 set smarttab
@@ -93,6 +130,8 @@ set breakindent
 set wildmenu
 set completeopt=menuone,noinsert
 set omnifunc=syntaxcomplete#Complete
+set complete-=i
+set complete-=t
 
 "" ============================================================================
 "" Plugin Settings
@@ -102,6 +141,7 @@ let g:netrw_banner = v:false
 
 " ALE
 let g:ale_disable_lsp = v:true
+let g:ale_maximum_file_size = 2 * 1024 * 1024
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = v:false
 let g:ale_lint_on_enter = v:false
@@ -133,9 +173,22 @@ let g:ale_fixers = {
       \}
 
 " Gutentags
+let g:gutentags_enabled = s:has_ctags
 let g:gutentags_cache_dir = expand('~/.tags')
-let g:gutentags_ctags_extra_args = ['--options=' . expand('~/.ctags')]
-let g:gutentags_file_list_command = 'fd --type f --no-follow --exclude .git'
+let g:gutentags_project_root = ['.jj']
+let g:gutentags_generate_on_new = 0
+let g:gutentags_exclude_project_root = [$HOME, '/usr/local', '/opt/homebrew']
+let g:gutentags_exclude_filetypes = [
+      \   'text', 'markdown', 'gitcommit', 'log', 'qf', 'help'
+      \ ]
+let g:gutentags_ctags_extra_args =
+      \ filereadable(expand('~/.ctags'))
+      \ ? ['--options=' . expand('~/.ctags')] : []
+if !empty(g:fd_cmd)
+  let g:gutentags_file_list_command =
+        \ g:fd_cmd . ' --type f --no-follow --exclude .git'
+
+endif
 
 " Tagbar
 let g:tagbar_position = 'botright horizontal'
@@ -162,6 +215,9 @@ let g:slime_menu_config = v:true
 
 " Parinfer
 let g:parinfer_mode = "smart"
+
+" OSCYank
+let g:oscyank_max_length = 1000000
 
 "" ============================================================================
 "" Statusline
@@ -205,6 +261,7 @@ endfunction
 "" ============================================================================
 
 function! FzyCommand(choice_command, vim_command) abort
+  let output = ''
   try
     let output = system(a:choice_command . " | fzy")
   catch /Vim:Interrupt/
@@ -232,16 +289,16 @@ function! AutoRestoreWinView() abort
 endfunction
 
 function! SendFileToSlime()
-  let l:path = fnameescape(expand('%:p'))
+  let l:path = expand('%:p')
   let l:ft = &filetype
+  let l:lisp = '(load "' . escape(l:path, '\"') . '")' . "\n"
 
   let l:cmds = {
-        \   'python': '%run -i ' . l:path . "\n",
-        \   'lisp':   '(load "' . l:path . '")' . "\n",
-        \   'scheme': '(load "' . l:path . '")' . "\n",
-        \   'sql':    '\i ' . l:path . "\n",
-        \   'sh':     'source ' . l:path . "\n",
-        \   'markdown': 'agy "Process prompt from file: ' . l:path . '"' . "\n"
+        \   'python': '%run -i ' . shellescape(l:path) . "\n",
+        \   'lisp':   l:lisp,
+        \   'scheme': l:lisp,
+        \   'sql':    "\\i '" . substitute(l:path, "'", "''", 'g') . "'\n",
+        \   'sh':     'source ' . shellescape(l:path) . "\n",
         \ }
 
   if has_key(l:cmds, l:ft)
@@ -257,6 +314,32 @@ function! DeleteOtherBuffers() abort
       execute 'Bdelete ' . l:buf
     endif
   endfor
+endfunction
+
+function! s:BigFilePre(path) abort
+  unlet! b:bigfile
+  let l:size = getfsize(a:path)
+  if l:size > g:bigfile_bytes || l:size == -2
+    let b:bigfile = 1
+    setlocal noundofile
+  endif
+endfunction
+
+function! s:BigFilePost() abort
+  if get(b:, 'bigfile') || line('$') > g:bigfile_lines
+    let b:bigfile = 1
+    setlocal noundofile foldmethod=manual nocursorline norelativenumber
+    setlocal colorcolumn=
+    syntax clear
+  endif
+endfunction
+
+function! ToggleTagbarSafe() abort
+  if get(b:, 'bigfile')
+    echo 'bigfile: Tagbar skipped'
+  else
+    TagbarToggle
+  endif
 endfunction
 
 "" ============================================================================
@@ -276,7 +359,17 @@ augroup CustomAutocmds
   autocmd BufLeave * call AutoSaveWinView()
   autocmd BufEnter * call AutoRestoreWinView()
 
+  autocmd BufReadPre  * call s:BigFilePre(expand('<afile>'))
+  autocmd BufReadPost * call s:BigFilePost()
+
   autocmd ColorScheme * call ApplyCustomHighlights()
+
+  if s:ssh
+    autocmd TextYankPost *
+          \ if v:event.operator ==# 'y' && v:event.regname ==# ''
+          \ && exists(':OSCYankRegister')
+          \ | execute 'OSCYankRegister "' | endif
+  endif
 augroup END
 
 colorscheme codedark
@@ -299,9 +392,11 @@ cnoreabbrev <expr> ter (getcmdtype() == ':' && getcmdline() == 'ter') ?
       \ 'leftabove vert ter' : 'ter'
 tnoremap <esc> <c-\><c-n>
 
-nnoremap <c-p> :call FzyCommand("fd --type f", ":e")<cr>
+if executable('fzy')
+  nnoremap <c-p> :call FzyCommand(g:file_list_cmd, ":e")<cr>
+endif
 nnoremap == :ALEFix<cr>
-nnoremap <c-o> :TagbarToggle<cr>
+nnoremap <c-o> :call ToggleTagbarSafe()<cr>
 
 nnoremap <silent> <c-c><c-k> :call SendFileToSlime()<cr>
 nnoremap <silent> <c-c><c-l> :call slime#send("\x0c")<cr>
