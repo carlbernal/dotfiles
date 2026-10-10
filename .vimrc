@@ -83,8 +83,8 @@ let &backupdir = s:state . '/backup//'
 
 set viminfo='100,<50,s10
 
-let g:bigfile_bytes = 5 * 1024 * 1024
-let g:bigfile_lines = 50000
+let g:bigfile_bytes = 5 * 1024 * 1024 " 5 mb
+let g:bigfile_lines = 20000 " 20k lines
 
 "" UI
 set termguicolors
@@ -187,7 +187,6 @@ let g:gutentags_ctags_extra_args =
 if !empty(g:fd_cmd)
   let g:gutentags_file_list_command =
         \ g:fd_cmd . ' --type f --no-follow --exclude .git'
-
 endif
 
 " Tagbar
@@ -342,6 +341,14 @@ function! ToggleTagbarSafe() abort
   endif
 endfunction
 
+function! AleFixSafe() abort
+  if get(b:, 'bigfile')
+    echo 'bigfile: ALEFix skipped'
+  else
+    ALEFix
+  endif
+endfunction
+
 "" ============================================================================
 "" Autocommands
 "" ============================================================================
@@ -388,12 +395,11 @@ nnoremap <c-d> :call DeleteOtherBuffers()<cr>
 
 cnoreabbrev <expr> ter (getcmdtype() == ':' && getcmdline() == 'ter') ?
       \ 'leftabove vert ter' : 'ter'
-tnoremap <esc> <c-\><c-n>
 
 if executable('fzy')
   nnoremap <c-p> :call FzyCommand(g:file_list_cmd, ":e")<cr>
 endif
-nnoremap == :ALEFix<cr>
+nnoremap == :call AleFixSafe()<cr>
 nnoremap <c-o> :call ToggleTagbarSafe()<cr>
 
 nnoremap <silent> <c-c><c-k> :call SendFileToSlime()<cr>
