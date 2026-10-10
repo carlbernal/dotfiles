@@ -353,7 +353,7 @@ augroup CustomAutocmds
         \ setlocal ts=2 sts=2 sw=2
 
   autocmd FileType qf setlocal cc= wrap linebreak
-  autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose \| lclose<cr>
+  autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose <bar> lclose<cr>
   autocmd FileType tagbar nnoremap <buffer><silent> <esc> <c-w>c
 
   autocmd BufLeave * call AutoSaveWinView()
@@ -371,8 +371,6 @@ augroup CustomAutocmds
           \ | execute 'OSCYankRegister "' | endif
   endif
 augroup END
-
-colorscheme codedark
 
 "" ============================================================================
 "" Key Mappings
@@ -401,3 +399,6 @@ nnoremap <c-o> :call ToggleTagbarSafe()<cr>
 nnoremap <silent> <c-c><c-k> :call SendFileToSlime()<cr>
 nnoremap <silent> <c-c><c-l> :call slime#send("\x0c")<cr>
 nnoremap <silent> <c-c><c-u> :call slime#send("\x15")<cr>
+
+colorscheme codedark
+call ApplyCustomHighlights()
