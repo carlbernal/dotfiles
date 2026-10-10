@@ -23,7 +23,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'luochen1990/rainbow'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-fugitive'
-Plug 'dense-analysis/ale', { 'on': ['ALEFix', 'ALELint', 'ALEToggle'] }
+Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'romainl/vim-qf'
@@ -143,12 +143,14 @@ let g:rainbow_active = v:false
 
 " ALE
 let g:ale_disable_lsp = v:true
-let g:ale_maximum_file_size = 2 * 1024 * 1024
+let g:ale_maximum_file_size = 2 * 1024 * 1024 " 2 mb
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = v:false
-let g:ale_lint_on_enter = v:false
+let g:ale_lint_on_save = v:false
+let g:ale_lint_on_enter = v:true
 
-let g:ale_set_quickfix = v:true
+let g:ale_set_quickfix = v:false
+let g:ale_set_loclist = v:true
 let g:ale_open_list = v:true
 let g:ale_loclist_msg_format = '[%linter%] %s (%code%)'
 
@@ -363,9 +365,19 @@ augroup CustomAutocmds
 
   autocmd FileType qf setlocal cc= wrap linebreak
   autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose <bar> lclose<cr>
+  autocmd FileType qf exe 'resize ' . min([max([8, line('$')]), 8])
+
+  autocmd FileType c,cpp 
+        \ compiler gcc
+        \ | setlocal errorformat=%f:%l:%c:\ %trror:\ %m |
+        \ setlocal errorformat+=%f:%l:%c:\ %tarning:\ %m |
+        \ setlocal errorformat+=%f:%l:%c:\ %tote:\ %m |
+        \ setlocal errorformat+=%f:%l:\ %m |
+        \ setlocal errorformat+=%-G%.%#
+
   autocmd FileType tagbar nnoremap <buffer><silent> <esc> <c-w>c
 
-  autocmd FileType lisp,scheme,python,json 
+  autocmd FileType lisp,scheme,python,json
         \ let b:rainbow_active = 1 | RainbowToggleOn
 
   autocmd BufLeave * call AutoSaveWinView()
@@ -403,6 +415,7 @@ cnoreabbrev <expr> ter (getcmdtype() == ':' && getcmdline() == 'ter') ?
 if executable('fzy')
   nnoremap <c-p> :call FzyCommand(g:file_list_cmd, ":e")<cr>
 endif
+command! L ALELint
 nnoremap == :call AleFixSafe()<cr>
 nnoremap <c-o> :call ToggleTagbarSafe()<cr>
 
