@@ -20,6 +20,7 @@ Plug 'wellle/targets.vim'
 " Tools
 Plug 'bfrg/vim-c-cpp-modern'
 Plug 'tomasiser/vim-code-dark'
+Plug 'luochen1990/rainbow'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale', { 'on': ['ALEFix', 'ALELint', 'ALEToggle'] }
@@ -138,6 +139,7 @@ set complete-=t
 "" ============================================================================
 
 let g:netrw_banner = v:false
+let g:rainbow_active = v:false
 
 " ALE
 let g:ale_disable_lsp = v:true
@@ -363,6 +365,9 @@ augroup CustomAutocmds
   autocmd FileType qf nnoremap <buffer><silent> <esc> :cclose <bar> lclose<cr>
   autocmd FileType tagbar nnoremap <buffer><silent> <esc> <c-w>c
 
+  autocmd FileType lisp,scheme,python,json 
+        \ let b:rainbow_active = 1 | RainbowToggleOn
+
   autocmd BufLeave * call AutoSaveWinView()
   autocmd BufEnter * call AutoRestoreWinView()
 
@@ -387,7 +392,6 @@ nnoremap Y y$
 nnoremap zz zt
 nnoremap zt zz
 nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:echo ""<cr>
-nnoremap <c-c> <c-c>
 
 nnoremap <c-u> <nop>
 nnoremap <c-x> :Bdelete<cr>
