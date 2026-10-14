@@ -57,18 +57,7 @@ endif
 
 set hidden
 set autoread
-set autowriteall
-set undofile
-
-let s:state = expand('~/.vim/state')
-
-for s:dir in ['swap', 'undo', 'backup']
-  call mkdir(s:state . '/' . s:dir, 'p', 0700)
-endfor
-
-let &directory = s:state . '/swap//'
-let &undodir   = s:state . '/undo'
-let &backupdir = s:state . '/backup//'
+set noswapfile
 
 set termguicolors
 set background=dark
