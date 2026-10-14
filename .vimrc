@@ -143,7 +143,6 @@ let g:ale_fixers = {
 " Gutentags
 let g:gutentags_enabled = v:true
 let g:gutentags_cache_dir = expand('~/.tags')
-let g:gutentags_generate_on_new = 0
 let g:gutentags_exclude_project_root = [$HOME, '/usr/local', '/opt/homebrew']
 let g:gutentags_exclude_filetypes = [
       \ 'text', 'gitcommit', 'log', 'qf', 'help'
