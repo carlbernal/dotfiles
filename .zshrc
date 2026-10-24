@@ -12,6 +12,7 @@ plugins=( \
 source "$ZSH/oh-my-zsh.sh"
 
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.bin"
 

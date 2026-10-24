@@ -110,7 +110,7 @@ let g:rainbow_active = v:false
 let g:ale_disable_lsp = v:true
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = v:false
-let g:ale_lint_on_save = v:false
+let g:ale_lint_on_save = v:true
 let g:ale_lint_on_enter = v:true
 
 let g:ale_set_quickfix = v:false
@@ -277,6 +277,10 @@ augroup CustomAutocmds
 
   autocmd FileType lisp,scheme,python,json RainbowToggleOn
 
+  autocmd FocusGained * if getcmdwintype() == '' | checktime | endif
+  autocmd BufEnter * if &buftype == '' && !&modified && expand('%') != '' 
+        \ | execute 'checktime ' . expand('<abuf>') | endif
+
   autocmd BufLeave * call AutoSaveWinView()
   autocmd BufEnter * call AutoRestoreWinView()
 
@@ -304,10 +308,10 @@ if executable('fzy')
   nnoremap <c-p> :call FzyCommand(g:file_list_cmd, ':e')<cr>
 endif
 
-command! L ALELint
 nnoremap == :ALEFix<cr>
 nnoremap <c-o> :TagbarToggle<cr>
 
+nnoremap <c-c> <nop>
 nnoremap <silent> <c-c><c-k> :call SendFileToSlime()<cr>
 nnoremap <silent> <c-c><c-l> :call slime#send("\x0c")<cr>
 nnoremap <silent> <c-c><c-u> :call slime#send("\x15")<cr>
