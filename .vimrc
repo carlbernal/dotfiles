@@ -33,6 +33,10 @@ call plug#end()
 " Environment
 " ============================================================================
 
+if has('gui_running') && $PATH !~# '/opt/homebrew/bin'
+  let $PATH = '/opt/homebrew/bin:' . $PATH
+endif
+
 let g:fd_cmd = executable('fd') ? 'fd' : executable('fdfind') ? 'fdfind' : ''
 
 let g:file_list_cmd = empty(g:fd_cmd)
@@ -194,18 +198,43 @@ function! ApplyCustomHighlights() abort
 endfunction
 
 function! FzyCommand(choice_command, vim_command) abort
-  try
-    let l:output = system(a:choice_command . ' | fzy')
-  catch /Vim:Interrupt/
-    redraw!
-    return
-  endtry
+  let l:tmp = tempname()
+  let l:winid = 0
+  let l:buf = 0
 
-  redraw!
+  function! s:OnExit(job, status) abort closure
+    call popup_close(l:winid)
+    if bufexists(l:buf)
+      execute 'silent! bwipeout! ' . l:buf
+    endif
+    let l:f = (a:status == 0 && filereadable(l:tmp)) ? get(readfile(l:tmp, '', 1), 0, '') : ''
+    call delete(l:tmp)
+    if !empty(l:f)
+      call timer_start(0, {-> execute(a:vim_command . ' ' . fnameescape(l:f))})
+    endif
+  endfunction
 
-  if v:shell_error == 0 && !empty(trim(l:output))
-    execute a:vim_command . ' ' . fnameescape(trim(l:output))
-  endif
+  let l:buf = term_start(['/bin/sh', '-c',
+        \ a:choice_command . ' | fzy -l 10 > ' . shellescape(l:tmp)], {
+        \ 'hidden': 1,
+        \ 'norestore': 1,
+        \ 'term_rows': 11,
+        \ 'term_cols': &columns,
+        \ 'exit_cb': funcref('s:OnExit'),
+        \ })
+
+  call setbufvar(l:buf, '&buflisted', 0)
+
+  let l:winid = popup_create(l:buf, {
+        \ 'pos': 'botleft',
+        \ 'line': &lines,
+        \ 'col': 1,
+        \ 'minwidth': &columns,
+        \ 'maxwidth': &columns,
+        \ 'minheight': 11,
+        \ 'maxheight': 11,
+        \ 'highlight': 'Normal',
+        \ })
 endfunction
 
 function! AutoSaveWinView() abort
@@ -278,7 +307,7 @@ augroup CustomAutocmds
   autocmd FileType lisp,scheme,python,json RainbowToggleOn
 
   autocmd FocusGained * if getcmdwintype() == '' | checktime | endif
-  autocmd BufEnter * if &buftype == '' && !&modified && expand('%') != '' 
+  autocmd BufEnter * if &buftype == '' && !&modified && expand('%') != ''
         \ | execute 'checktime ' . expand('<abuf>') | endif
 
   autocmd BufLeave * call AutoSaveWinView()
@@ -286,6 +315,21 @@ augroup CustomAutocmds
 
   autocmd ColorScheme * call ApplyCustomHighlights()
 augroup END
+
+" ============================================================================
+" MacVim
+" ============================================================================
+
+if has('gui_running')
+  set belloff=all
+  set guicursor=a:blinkon0
+  set guifont=Hack:h15
+  set guioptions=egmt " Removes scrollbars
+  set linespace=3
+  set title
+  let &titlestring = '%{getcwd()}'
+  set transparency=5
+endif
 
 " ============================================================================
 " Custom Mappings
