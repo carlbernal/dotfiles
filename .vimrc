@@ -33,7 +33,7 @@ call plug#end()
 " Environment
 " ============================================================================
 
-if has('gui_running') && $PATH !~# '/opt/homebrew/bin'
+if has('gui_running')
   let $PATH = '/opt/homebrew/bin:' . $PATH
 endif
 
@@ -328,7 +328,6 @@ if has('gui_running')
   set linespace=3
   set title
   let &titlestring = '%{getcwd()}'
-  set transparency=5
 endif
 
 " ============================================================================
@@ -343,10 +342,6 @@ nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:echo ""<cr>
 nnoremap <c-u> <nop>
 nnoremap <c-x> :Bdelete<cr>
 nnoremap <c-d> :call DeleteOtherBuffers()<cr>
-
-cnoreabbrev <expr> ter
-      \ getcmdtype() == ':' && getcmdline() ==# 'ter'
-      \ ? 'leftabove vert ter' : 'ter'
 
 if executable('fzy')
   nnoremap <c-p> :call FzyCommand(g:file_list_cmd, ':e')<cr>
